@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels"
+             x:Class="EmployeeRecord.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModel:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
+                
+                <Path Grid.Row="0" Margin="-20,0" Data="m132.34,154.23002l209.00002,0l0,0.66666c-66.50001,28 -156.50001,72.87853 -209.00002,96.76573l0,-97.43239z"
+                      Stroke="#1C375C" Fill="#1C375C" HeightRequest="220" Aspect="Fill" ></Path>
+                <Image  Grid.Row="0" Margin="-18,-20,0,0" Source="" Aspect="AspectFit" HeightRequest="180" WidthRequest="150" VerticalOptions="Start" HorizontalOptions="Start" ></Image>
+                <Label Grid.Row="1"  Text="Welcome Back!" Margin="0,-50,0,0" FontSize="24" FontAttributes="Bold" TextColor="#1C375C" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Row="2" Margin="0,-15,0,0" Text="Login in to account" TextColor="#1C375C"  HorizontalOptions="CenterAndExpand"></Label>
+                
+                
+                <Entry Grid.Row="3" Placeholder="Username" Text="{Binding User.Email}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry Grid.Row="4" Placeholder="Password" Text="{Binding User.Password}" IsPassword="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Button Grid.Row="5" Text="Login" Command="{Binding LoginCommand}" BackgroundColor="#1C375C" CornerRadius="20"></Button>
+                
+                
+                
+                <Label Grid.Row="6" Text="or signin with" HorizontalOptions="CenterAndExpand"></Label>
+                <StackLayout Grid.Row="7" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="40">
+                    <Image Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo626DNKJxdHM-VNRD0m7x_8Jim-r9kRalJQ" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                    <Image Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnLfAn36-LTYNHjioWgvu-0KUTIDDrW5lX_g" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                    <Image Source="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                    <Image Source="https://cdn-icons-png.flaticon.com/512/174/174857.png" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                </StackLayout>
+
+                <Label Grid.Row="8" Text="Forget Password" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Row="9" Margin="0,-10,0,0" Text="Don't have an account? Sign up here" HorizontalOptions="CenterAndExpand"></Label>
+                <Path Grid.Row="10" Margin="-20,0" Data="m333.5114,204.27502l115.48359,-59l-0.00813,123.08816c-101.06176,0.76114 -113.03789,-0.51177 -246.99185,-0.49297l131.51639,-63.59519z"
+                      Stroke="#1C375C" Fill="#1C375C" HeightRequest="143" Aspect="Fill" ></Path>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
