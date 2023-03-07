@@ -58,10 +58,12 @@ namespace EmployeeRecord.ViewModels
         {
             #region Validate Remember
             var exist = Preferences.ContainsKey(nameof(User));
+            Remember = exist;
             if (exist)
             {
                 var user = JsonConvert.DeserializeObject<UserAutentication>(Preferences.Get(nameof(User), null));
                 User = user;
+
             }
             else
             {
@@ -83,17 +85,40 @@ namespace EmployeeRecord.ViewModels
         {
             IsLoading = true;
             #region Validationes
-            if(!ValidateEmail.IsValidateEmail(User.Email))
+            var valid = User.DataAnotationsValid();
+            if(valid != null)
             {
-                await App.Current.MainPage.DisplayAlert("Employee Record", "El correo ingresado no es valido.", "Ok");
-                return;
-            }
-            if(string.IsNullOrEmpty(User.Password) || User.Password.Length < 4) 
-            {
-                await App.Current.MainPage.DisplayAlert("Employee Record", "La contraseña ingresada no es valida.", "Ok");
-                return;
-            }
+                string errors = string.Empty;
 
+                valid.ForEach((it) =>
+                {
+                    if (string.IsNullOrEmpty(errors))
+                        errors = it;
+                    else
+                        errors += $"\n{it}";
+                });
+
+                //foreach (var it in valid)
+                //{
+                //    if (string.IsNullOrEmpty(errors))
+                //        errors = it;
+                //    else
+                //        errors += $"\n{it}";
+                //}
+                await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
+                return;
+            }
+            
+            if(Remember)
+            {
+                var user = JsonConvert.SerializeObject(User);
+                Preferences.Set(nameof(User), user);
+            }
+            else
+            {
+                if(Preferences.ContainsKey(nameof(User)))
+                    Preferences.Remove(nameof(User));
+            }
 
             #endregion
 
