@@ -5,8 +5,6 @@ namespace EmployeeRecord.Models.Employees
 {
     public class Employee
     {
-        [Required] // personalizar (ErrorMessage ="") de las tataAnnotations 
-        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
