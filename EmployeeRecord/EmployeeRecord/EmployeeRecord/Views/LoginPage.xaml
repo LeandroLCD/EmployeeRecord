@@ -21,7 +21,16 @@
                 
                 <Entry Grid.Row="3" Placeholder="Username" Text="{Binding User.Email}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
                 <Entry Grid.Row="4" Placeholder="Password" Text="{Binding User.Password}" IsPassword="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Button Grid.Row="5" Text="Login" Command="{Binding LoginCommand}" BackgroundColor="#1C375C" CornerRadius="20"></Button>
+                
+                <StackLayout Grid.Row="5" >
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Recordar Usuario"/>
+                        <CheckBox IsChecked="{Binding Remember}" />
+                    </StackLayout>
+                   <Button Text="Login" Command="{Binding LoginCommand}" BackgroundColor="#1C375C" CornerRadius="20"></Button>
+                 
+                </StackLayout>
                 
                 
                 
