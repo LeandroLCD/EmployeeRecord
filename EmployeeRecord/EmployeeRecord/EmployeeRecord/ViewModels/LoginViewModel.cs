@@ -14,6 +14,7 @@ namespace EmployeeRecord.ViewModels
         private UserAutentication _user;
         private bool _remember;
         private IAutenticationService _autenticationService;
+        private bool _isShowPrw;
         #endregion
 
         #region Contrunctor
@@ -33,6 +34,7 @@ namespace EmployeeRecord.ViewModels
 
         public Command SyncInCommand { get; set; }
 
+        public Command ShowPwdCommand { get; set; }
 
         #endregion
 
@@ -44,10 +46,15 @@ namespace EmployeeRecord.ViewModels
             set => SetProperty(ref _user, value);
         }
 
-        public bool Remember
+        public bool Remember 
         {
             get => _remember;
             set => SetProperty(ref _remember, value);
+        }
+        public bool IsShowPrw
+        {
+            get => _isShowPrw;
+            set => SetProperty(ref _isShowPrw, value);
         }
 
         #endregion
@@ -57,6 +64,7 @@ namespace EmployeeRecord.ViewModels
         private void InicializeProperty()
         {
             #region Validate Remember
+            IsShowPrw = true;
             var exist = Preferences.ContainsKey(nameof(User));
             Remember = exist;
             if (exist)
@@ -75,6 +83,8 @@ namespace EmployeeRecord.ViewModels
 
             #region SetCommand
             LoginCommand = new Command(LoginMethod);
+
+            ShowPwdCommand = new Command(()=> IsShowPrw = !IsShowPrw);
 
             //SyncInCommand = new Command(async()=> App.GlobalNavigation.PopAsync(new SyncPage));
             //ForogotCommand = new Command(async () => App.GlobalNavigation.PopAsync(new ForogotPage));

@@ -25,7 +25,15 @@ namespace EmployeeRecord
 
         private void RegisterServices()
         {
-            DependencyService.Register<IAutenticationService, AutenticationService>();
+            try
+            {
+                DependencyService.Register<IAutenticationService, AutenticationService>();
+            }
+            catch (Exception)
+            {
+
+            }
+            
         }
 
         protected override void OnStart()
