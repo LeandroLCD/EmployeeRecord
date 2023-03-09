@@ -32,11 +32,13 @@
                 
                 
                 <Label Text="Usuario"/>
-                <Entry Placeholder="Ingrese su Usuario" Text="{Binding User.Email}"/>
+                <Entry Placeholder="Ingrese su Usuario" Text="{Binding User.Email}" />
+                
                 <Label Text="Contraseña"/>
                 <Grid>
                     <Entry Placeholder="Ingrese su Contraseña" 
                        Text="{Binding User.Password}"
+                           MaxLength="10"
                        IsPassword="{Binding IsShowPrw}"/>
                     <ImageButton WidthRequest="40" 
                                  Padding="5"
@@ -52,9 +54,11 @@
                     <CheckBox Color="#2B78E4" IsChecked="{Binding Remember}"/>
                     <Label Text="Recordar Usuario" VerticalTextAlignment="Center"/>
                 </StackLayout>
-                <Button BackgroundColor="#2B78E4" 
+                <Button Text="Iniciar Sesión"
+                        Command="{Binding LoginCommand}"
+                        BackgroundColor="#2B78E4" 
                         CornerRadius="25"
-                        Text="Iniciar Sesión" TextColor="White"
+                        TextColor="White"
                         />
 
                 <Button Text="¿Has olvidado tu contraseña?" 
