@@ -1,6 +1,7 @@
 ﻿using EmployeeRecord.Models.Autentication;
 using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
+using EmployeeRecord.Views;
 using Newtonsoft.Json;
 using System;
 using Xamarin.Essentials;
@@ -86,7 +87,9 @@ namespace EmployeeRecord.ViewModels
 
             ShowPwdCommand = new Command(()=> IsShowPrw = !IsShowPrw);
 
-            //SyncInCommand = new Command(async()=> App.GlobalNavigation.PopAsync(new SyncPage));
+            SyncInCommand = new Command(async()=> {
+                await App.GlobalNavigation.PushAsync(new RegisterPage(), true);
+            });
             //ForogotCommand = new Command(async () => App.GlobalNavigation.PopAsync(new ForogotPage));
             #endregion
         }

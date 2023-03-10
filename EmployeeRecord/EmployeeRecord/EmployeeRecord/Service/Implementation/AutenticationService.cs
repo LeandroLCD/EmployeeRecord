@@ -19,15 +19,7 @@ namespace EmployeeRecord.Service.Implementation
         public AutenticationService()
         {
             _connection = new MySqlConnection(Properties.Resources.db_conexion);
-            try
-            {
-                _connection.Open();
-            }
-            catch (Exception ex)
-            {
-               App.Current.MainPage.DisplayAlert("Employee Record", ex.Message,"Ok" );
-            }
-            
+             _connection.Open();
             
         }
 
@@ -37,6 +29,7 @@ namespace EmployeeRecord.Service.Implementation
         {
             try
             {
+                var conec = _connection.State;
                 var cmd = new MySqlCommand(user.ToQuery());
                 var rd = cmd.ExecuteReaderAsync();
 
@@ -84,9 +77,10 @@ namespace EmployeeRecord.Service.Implementation
             try 
             {
 
-                var cmd = new MySqlCommand(user.ToQuery());
+                var cmd = _connection.CreateCommand(); 
+                cmd.CommandText = user.ToQuery(); 
                 var rd = cmd.ExecuteReaderAsync();
-                if(rd.IsCompleted)
+                if(rd.Status != TaskStatus.Faulted)
                 {
                     return  new response 
                     { 

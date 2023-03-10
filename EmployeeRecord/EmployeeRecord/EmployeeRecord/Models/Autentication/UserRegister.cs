@@ -16,8 +16,9 @@ namespace EmployeeRecord.Models.Autentication
         [EmailAddress(ErrorMessage = "El correo no tiene formato de correo")]
         [Compare("Email", ErrorMessage ="Los Correos no coinciden")]
         public string VerifieEmail { get; set; }
+
+
         [Required]
-        [EmailAddress(ErrorMessage = "El correo no tiene formato de correo")]
         [Compare("Password", ErrorMessage = "Las Contraseñas no coinciden")]
         public string VerifiePassword { get; set; }
 
@@ -25,7 +26,7 @@ namespace EmployeeRecord.Models.Autentication
 
         public string ToQuery()
         {
-            return string.Format("insert into empleado(nombre,apellidos,puesto,email,password values({'0'},{'1'},{'2'},{'3'},{'4'})", Name, LastName, Position, Email, Password);
+            return $"insert into empleado(nombre,apellidos,puesto,email,password,creation_date) values('{Name}','{LastName}','{Position}','{Email}','{Password}','{CreationDate}')";
         }
         //insert into empleado(nombre,apellidos,puesto,email,password) values('" + t_name.Text + "','" + t_lastname.Text + "','" + t_position.Text + "','" + t_email.Text + "','" + t_password.Text + "
     }

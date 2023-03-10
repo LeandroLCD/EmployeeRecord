@@ -2,9 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels"
-             xmlns:converter="clr-namespace:EmployeeRecord.Converter" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:converter="clr-namespace:EmployeeRecord.Converter" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              x:Class="EmployeeRecord.Views.LoginPage"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewModel:LoginViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:IconConverter x:Key="IconConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
  <ContentPage.Content>
     <StackLayout>
 
@@ -32,7 +42,7 @@
             <Label Grid.Row="1" Margin="0,-15,0,0" Text="Ingresa tus datos" TextColor="#1C375C"  HorizontalOptions="CenterAndExpand"></Label>
             <Entry Grid.Row="2" Placeholder="Usuario" TextColor="DarkBlue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding User.Email}"></Entry>
             <Grid>
-                    <Entry Grid.Row="3" Placeholder="Contraseña" TextColor="DarkBlue" IsPassword="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="10" Text="{Binding User.Password}" d:IsPassword="{Binding IsShowPrw}"/>
+                    <Entry Grid.Row="3" Placeholder="Contraseña" TextColor="DarkBlue" IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="10" Text="{Binding User.Password}" />
                     <ImageButton WidthRequest="40" 
                                  Padding="5"
                                  Margin="10,0"
@@ -50,8 +60,15 @@
                 </StackLayout>
             
             <Button Grid.Row="4" TextColor="WhiteSmoke" Text="Iniciar Sesion" BackgroundColor="#2AC600" CornerRadius="20" Command="{Binding LoginCommand}"></Button>
-            <Button Grid.Row="5"  x:Name="btnRegis"  Text="Registrarse" TextColor="#DEDEDE " FontAttributes="Bold" BackgroundColor="#0031FA" CornerRadius="20"></Button>
-            <Button Text="¿Has olvidado tu contraseña?" 
+                <Button Grid.Row="5"
+                    Command="{Binding SyncInCommand}"
+                    x:Name="btnRegis"  
+                    Text="Registrarse" 
+                    TextColor="#DEDEDE " 
+                    FontAttributes="Bold" 
+                    BackgroundColor="#0031FA" 
+                    CornerRadius="20"/>
+                <Button Text="¿Has olvidado tu contraseña?" 
                         TextTransform="None" Padding="0"
                         TextColor="#6AA0EC"
                         BackgroundColor="Transparent"/>
