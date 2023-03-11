@@ -148,7 +148,7 @@ namespace EmployeeRecord.ViewModels
             if(resp.Success)
             {
                 //navegar al Home
-                // App.Current.MainPage = new NavigationPage(new HomePage);
+                App.Current.MainPage = new ShellPage();
                 IsLoading = false;
             }
             else

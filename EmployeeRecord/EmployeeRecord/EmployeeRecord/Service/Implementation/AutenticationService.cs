@@ -1,19 +1,16 @@
-﻿using System;
+﻿using EmployeeRecord.Models.Autentication;
+using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Service.Interface;
+using EmployeeRecord.Utilities;
+using EmployeeRecord.Views;
+using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using EmployeeRecord.Models.Autentication;
-using EmployeeRecord.Models.Employees;
-using EmployeeRecord.Service.Interface;
-using EmployeeRecord.Utilities;
-using MySqlConnector;
-using Newtonsoft.Json.Linq;
-using Xamarin.Essentials;
-using Xamarin.Forms.PlatformConfiguration.GTKSpecific;
+using Xamarin.Forms;
 //SOLID
 namespace EmployeeRecord.Service.Implementation
 {
@@ -24,13 +21,10 @@ namespace EmployeeRecord.Service.Implementation
         public AutenticationService()
         {
             _connection = new MySqlConnection(Properties.Resources.db_conexion);
-             _connection.Open();
-            
+            _connection.Open();
+
         }
-
-        
-
-        public async Task<response> Login(UserAutentication user)
+        public Task<response> Login(UserAutentication user)
         {
             try
             {
@@ -38,125 +32,104 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-
-                    cmd.CommandText = user.ToQuery(); ; // "SELECT * FROM `empleado`";
+                    cmd.CommandText = user.ToQuery();  // "SELECT * FROM `empleado`";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        
                         var data = DataReaderMapToList<Employee>(reader);
                         if (data.Count > 0)
                         {
-                            return new response
+                            return Task.FromResult(new response
                             {
                                 Success = true,
                                 Status = 200,
                                 Message = $"Bienvenido al sistema ",
                                 Objet = data.FirstOrDefault(u => u.email == user.Email)
-
-                            };
+                            });
                         }
                         else
                         {
-                            return new response()
+                            return Task.FromResult(new response()
                             {
                                 Success = false,
                                 Message = $"Usuario o contraseña incorrecto.",
                                 Status = 300
-
-
-                            };
+                            });
                         }
-                        
                     }
                 }
-
-                
-                
             }
             catch (Exception ex)
             {
                 _connection.Close();
-                return new response()
+                return Task.FromResult(new response()
                 {
                     Success = false,
                     Message = $"Se produjo una excepción al intentar ingresar al sistema \nDetalles:{ex.Message}",
                     Status = ex.GetHashCode()
-
-
-                };
+                });
             }
         }
-
         public void Logout()
         {
             //Clear user.
-            //App.Current.MainPage = new NavigationPage(new Login);
+            var login = new NavigationPage(new LoginPage());
+            App.GlobalNavigation = login.Navigation;
+            App.Current.MainPage = login;
         }
-
-        public async Task<response> Register(UserRegister user)
+        public Task<response> Register(UserRegister user)
         {
-            try 
+            try
             {
-                
-                if(_connection.State != System.Data.ConnectionState.Open)
+                if (_connection.State != System.Data.ConnectionState.Open)
                     _connection.Open();
 
-                var cmd = _connection.CreateCommand(); 
-                cmd.CommandText = user.ToQuery(); 
+                var cmd = _connection.CreateCommand();
+                var ss = user.ToQuery();
+                cmd.CommandText = user.ToQuery();
                 var rd = cmd.ExecuteReader();
 
-                    return  new response 
-                    { 
-                        Success = true,
-                        Status = 200,
-                        Message = $"Bienvenido al sistema de registro {user.nombre}"
-                    };
+                return Task.FromResult(new response
+                {
+                    Success = true,
+                    Status = 200,
+                    Message = $"Bienvenido al sistema de registro {user.nombre}"
+                });
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 if (ex.Message.Contains("Connection reset by peer"))
                 {
-                    return new response()
+                    return Task.FromResult(new response()
                     {
                         Success = false,
                         Message = $"Se produjo una excepción al intentar registar un nuevo usuario, es probable que la base de datos este fuera de linea.\nDetalles:{ex.Message}",
                         Status = ex.GetHashCode()
-                    }; 
+                    });
                 }
-                else if(ex.Message.Contains("Duplicate entry"))
+                else if (ex.Message.Contains("Duplicate entry"))
                 {
-                    return new response()
+                    return Task.FromResult(new response()
                     {
                         Success = false,
                         Message = $"El correo ingresado ya se encuentra registrado, por favor recupere su contraseña.",
                         Status = ex.GetHashCode()
-                    };
-
+                    });
                 }
-
                 else
                 {
-                    return new response()
+                    return Task.FromResult(new response()
                     {
                         Success = false,
                         Message = $"Se produjo una excepción al intentar registar un nuevo empleado.\nDetalles:{ex.Message}",
-                        Status = ex.GetHashCode() 
-
-
-                    };
+                        Status = ex.GetHashCode()
+                    });
                 }
-                
             }
         }
-        //Que el server este off
-        //que la tabla no exista.
-        //Que el usuario ya exista
         public void Dispose()
         {
             _connection.Close();
         }
-
-
         public static List<T> DataReaderMapToList<T>(IDataReader reader)
         {
             List<T> list = new List<T>();
@@ -168,16 +141,14 @@ namespace EmployeeRecord.Service.Implementation
                 {
                     if (!object.Equals(reader[prop.Name], DBNull.Value))
                     {
-                        try 
+                        try
                         {
-                        prop.SetValue(obj, reader[prop.Name], null);
-                        } 
-                        catch 
+                            prop.SetValue(obj, reader[prop.Name], null);
+                        }
+                        catch
                         {
                             continue;
                         }
-
-                        
                     }
                 }
                 list.Add(obj);

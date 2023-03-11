@@ -5,6 +5,7 @@
              xmlns:converter="clr-namespace:EmployeeRecord.Converter" 
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              x:Class="EmployeeRecord.Views.LoginPage"
+             BackgroundColor="White"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <viewModel:LoginViewModel />
