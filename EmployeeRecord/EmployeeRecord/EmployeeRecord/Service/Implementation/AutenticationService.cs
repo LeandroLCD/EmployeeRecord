@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using EmployeeRecord.Models.Autentication;
+using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
 using MySqlConnector;
+using Newtonsoft.Json.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms.PlatformConfiguration.GTKSpecific;
 //SOLID
@@ -14,7 +19,7 @@ namespace EmployeeRecord.Service.Implementation
 {
     public class AutenticationService : IAutenticationService, IDisposable
     {
-        private MySqlConnection _connection;
+        private static MySqlConnection _connection;
 
         public AutenticationService()
         {
@@ -29,32 +34,48 @@ namespace EmployeeRecord.Service.Implementation
         {
             try
             {
-                var conec = _connection.State;
-                var cmd = new MySqlCommand(user.ToQuery());
-                var rd = cmd.ExecuteReaderAsync();
-
-                // TODO: revisar respuesta del server para almacenar los datos de user
-                if (rd.Status != TaskStatus.Faulted)//si trae o no trae datos
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
                 {
-                    return new response
+
+                    cmd.CommandText = user.ToQuery(); ; // "SELECT * FROM `empleado`";
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        Success = true,
-                        Status = 200,
-                        Message = $"Bienvenido al sistema "
-                        //retorar datos del user
-                    };
+                        
+                        var data = DataReaderMapToList<Employee>(reader);
+                        if (data.Count > 0)
+                        {
+                            return new response
+                            {
+                                Success = true,
+                                Status = 200,
+                                Message = $"Bienvenido al sistema ",
+                                Objet = data.FirstOrDefault(u => u.email == user.Email)
+
+                            };
+                        }
+                        else
+                        {
+                            return new response()
+                            {
+                                Success = false,
+                                Message = $"Usuario o contraseña incorrecto.",
+                                Status = 300
+
+
+                            };
+                        }
+                        
+                    }
                 }
 
-                return new response
-                {
-                    Success = false,
-                    Status = rd.GetHashCode(),
-                    Message = $"Correo o contraseña invalido"
-                };
+                
+                
             }
             catch (Exception ex)
             {
-
+                _connection.Close();
                 return new response()
                 {
                     Success = false,
@@ -76,41 +97,43 @@ namespace EmployeeRecord.Service.Implementation
         {
             try 
             {
+                
+                if(_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
 
                 var cmd = _connection.CreateCommand(); 
                 cmd.CommandText = user.ToQuery(); 
-                var rd = cmd.ExecuteReaderAsync();
-                if(rd.Status != TaskStatus.Faulted)
-                {
+                var rd = cmd.ExecuteReader();
+
                     return  new response 
                     { 
                         Success = true,
                         Status = 200,
-                        Message = $"Bienvenido al sistema de registro {user.Name}"
+                        Message = $"Bienvenido al sistema de registro {user.nombre}"
                     };
-                }
-
-                return new response 
-                { 
-                    Success= false,
-                    Status = rd.GetHashCode(),
-                    Message = $""
-                };
-                
             }
             catch(Exception ex) 
             {
-                if (ex.Message.Contains("server off"))
+                if (ex.Message.Contains("Connection reset by peer"))
                 {
                     return new response()
                     {
                         Success = false,
-                        Message = $"Se produjo una excepción al intentar registar un nuevo empleado.\nDetalles:{ex.Message}",
+                        Message = $"Se produjo una excepción al intentar registar un nuevo usuario, es probable que la base de datos este fuera de linea.\nDetalles:{ex.Message}",
                         Status = ex.GetHashCode()
-
-
                     }; 
                 }
+                else if(ex.Message.Contains("Duplicate entry"))
+                {
+                    return new response()
+                    {
+                        Success = false,
+                        Message = $"El correo ingresado ya se encuentra registrado, por favor recupere su contraseña.",
+                        Status = ex.GetHashCode()
+                    };
+
+                }
+
                 else
                 {
                     return new response()
@@ -131,6 +154,35 @@ namespace EmployeeRecord.Service.Implementation
         public void Dispose()
         {
             _connection.Close();
+        }
+
+
+        public static List<T> DataReaderMapToList<T>(IDataReader reader)
+        {
+            List<T> list = new List<T>();
+            T obj = default(T);
+            while (reader.Read())
+            {
+                obj = Activator.CreateInstance<T>();
+                foreach (PropertyInfo prop in obj.GetType().GetProperties())
+                {
+                    if (!object.Equals(reader[prop.Name], DBNull.Value))
+                    {
+                        try 
+                        {
+                        prop.SetValue(obj, reader[prop.Name], null);
+                        } 
+                        catch 
+                        {
+                            continue;
+                        }
+
+                        
+                    }
+                }
+                list.Add(obj);
+            }
+            return list;
         }
     }
 }

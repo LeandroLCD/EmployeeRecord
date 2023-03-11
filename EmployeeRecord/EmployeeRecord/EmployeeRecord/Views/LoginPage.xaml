@@ -68,15 +68,11 @@
                     FontAttributes="Bold" 
                     BackgroundColor="#0031FA" 
                     CornerRadius="20"/>
-                <Button Text="¿Has olvidado tu contraseña?" 
+                <Button Grid.Row="7"
+                        Command="{Binding ForogotCommand}"
+                        Text="¿Has olvidado tu contraseña?" 
                         TextTransform="None" Padding="0"
                         TextColor="#6AA0EC"
-                        BackgroundColor="Transparent"/>
-
-            <Button Text="Registrar Nuevo Usuario" 
-                        TextTransform="None"
-                        TextColor="#6AA0EC" Padding="0"
-                        Margin="0"
                         BackgroundColor="Transparent"/>
 
                 <StackLayout Grid.Row="6" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="40">

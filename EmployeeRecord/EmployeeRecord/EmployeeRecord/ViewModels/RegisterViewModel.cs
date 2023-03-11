@@ -20,12 +20,13 @@ namespace EmployeeRecord.ViewModels
         {
             GetUserRegister = new UserRegister()
             {
-                Name = "prueba",
-                LastName = "prueba",
-                CreationDate = DateTime.Now,
-                Email = "prueba@email.com",
+                nombre = "prueba",
+                apellidos = "prueba",
+                puesto = "prueba",
+                creation_date = DateTime.Now,
+                email = "prueba@email.com",
                 VerifieEmail = "prueba@email.com",
-                Password = "123456",
+                password = "123456",
                 VerifiePassword = "123456"
 
             }

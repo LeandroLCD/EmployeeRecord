@@ -79,8 +79,16 @@ namespace EmployeeRecord.ViewModels
                 User = new UserAutentication();
             }
             #endregion
+            try
+            {
+                _autenticationService = DependencyService.Get<IAutenticationService>();
+            }
+            catch (Exception)
+            {
 
-            _autenticationService = DependencyService.Get<IAutenticationService>();
+                
+            }
+            
 
             #region SetCommand
             LoginCommand = new Command(LoginMethod);
@@ -90,7 +98,7 @@ namespace EmployeeRecord.ViewModels
             SyncInCommand = new Command(async()=> {
                 await App.GlobalNavigation.PushAsync(new RegisterPage(), true);
             });
-            //ForogotCommand = new Command(async () => App.GlobalNavigation.PopAsync(new ForogotPage));
+            ForogotCommand = new Command(async () => App.GlobalNavigation.PushAsync(new ForgotPasswordPage()));
             #endregion
         }
 
