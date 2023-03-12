@@ -18,20 +18,22 @@ namespace EmployeeRecord
             InitializeComponent();
             RegisterServices();
 
-            _loginPage = new NavigationPage(new LoginPage());
-            GlobalNavigation = _loginPage.Navigation;
-            MainPage = _loginPage;
+            //_loginPage = new NavigationPage(new LoginPage());
+            //GlobalNavigation = _loginPage.Navigation;
+            //MainPage = _loginPage;
+
+            MainPage = new EntradasProvPage();
         }
 
-        private void RegisterServices()
+        private async void RegisterServices()
         {
             try
             {
                 DependencyService.Register<IAutenticationService, AutenticationService>();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                await App.Current.MainPage.DisplayAlert("Employee Record", $"Se ha producido un error al intentar iniciar sesión.\nPor favor contacte al administrador. Error Code:{ex.GetHashCode()}", "Ok");
             }
             
         }

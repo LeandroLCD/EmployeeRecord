@@ -98,14 +98,18 @@ namespace EmployeeRecord.ViewModels
             SyncInCommand = new Command(async()=> {
                 await App.GlobalNavigation.PushAsync(new RegisterPage(), true);
             });
-            ForogotCommand = new Command(async () => App.GlobalNavigation.PushAsync(new ForgotPasswordPage()));
+            ForogotCommand = new Command(async () => {
+                await App.GlobalNavigation.PushAsync(new ForgotPasswordPage());
+            });
             #endregion
         }
 
         private async void LoginMethod(object obj)
         {
-            IsLoading = true;
-            #region Validationes
+            try
+            {
+                   IsLoading = true;
+                   #region Validationes
             var valid = User.DataAnotationsValid();
             if(valid != null)
             {
@@ -143,13 +147,14 @@ namespace EmployeeRecord.ViewModels
 
             #endregion
 
-            #region Login
+                   #region Login
             var resp = await _autenticationService.Login(User);
             if(resp.Success)
             {
-                //navegar al Home
-                App.Current.MainPage = new ShellPage();
-                IsLoading = false;
+                    //navegar al Home
+                    App.Current.MainPage = new AdminShellPage();
+                    
+                    IsLoading = false;
             }
             else
             {
@@ -158,6 +163,14 @@ namespace EmployeeRecord.ViewModels
             }
 
             #endregion
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Employee Record", $"Se ha producido un error al intentar iniciar sesión.\nPor favor contacte al administrador. Error Code:{ex.GetHashCode()}", "Ok");
+                return;
+            }
+
+           
         }
 
         private void RememberMothod(bool _isRemember)

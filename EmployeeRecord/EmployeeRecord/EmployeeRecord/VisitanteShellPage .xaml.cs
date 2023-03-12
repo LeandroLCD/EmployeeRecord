@@ -12,11 +12,11 @@ using Xamarin.Forms.Xaml;
 namespace EmployeeRecord
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShellPage : Shell
+    public partial class VisitanteShellPage : Shell
     {
         private IAutenticationService _auteticationLogin;
 
-        public ShellPage()
+        public VisitanteShellPage()
         {
             InitializeComponent();
             InicialiceRoutes();

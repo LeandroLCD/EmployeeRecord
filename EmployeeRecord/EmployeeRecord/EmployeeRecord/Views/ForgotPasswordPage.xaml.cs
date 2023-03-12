@@ -16,5 +16,11 @@ namespace EmployeeRecord.Views
         {
             InitializeComponent();
         }
+        protected override bool OnBackButtonPressed()
+        {
+            App.GlobalNavigation.PopToRootAsync();
+            return true;
+        }
     }
+    
 }
