@@ -63,12 +63,13 @@
             <Button Grid.Row="4" TextColor="WhiteSmoke" Text="Iniciar Sesion" BackgroundColor="#2AC600" CornerRadius="20" Command="{Binding LoginCommand}"></Button>
                 <Button Grid.Row="5"
                     Command="{Binding SyncInCommand}"
-                    x:Name="btnRegis"  
+  
                     Text="Registrarse" 
                     TextColor="#DEDEDE " 
                     FontAttributes="Bold" 
                     BackgroundColor="#0031FA" 
                     CornerRadius="20"/>
+            
                 <Button Grid.Row="7"
                         Command="{Binding ForogotCommand}"
                         Text="¿Has olvidado tu contraseña?" 

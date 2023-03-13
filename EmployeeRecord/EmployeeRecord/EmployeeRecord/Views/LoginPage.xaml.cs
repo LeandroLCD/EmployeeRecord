@@ -16,5 +16,10 @@ namespace EmployeeRecord.Views
         {
             InitializeComponent();
         }
+
+        private async void btnRegis_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
+        }
     }
 }

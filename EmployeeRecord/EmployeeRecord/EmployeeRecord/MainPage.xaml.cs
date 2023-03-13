@@ -13,6 +13,7 @@ namespace EmployeeRecord
         public MainPage()
         {
             InitializeComponent();
+
         }
     }
 }

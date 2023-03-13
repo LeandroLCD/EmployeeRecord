@@ -20,8 +20,18 @@ namespace EmployeeRecord.Service.Implementation
 
         public AutenticationService()
         {
-            _connection = new MySqlConnection(Properties.Resources.db_conexion);
-            _connection.Open();
+            try
+            {
+                _connection = new MySqlConnection("Server=192.168.11.200;Database=zmsite;Uid=root;Pwd=admin246;");
+                _connection.Open();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+
+                App.Current.MainPage.DisplayAlert("Employee Record", ex.Message, "ok");
+            }
+            
 
         }
         public Task<response> Login(UserAutentication user)
@@ -80,7 +90,7 @@ namespace EmployeeRecord.Service.Implementation
         {
             try
             {
-                if (_connection.State != System.Data.ConnectionState.Open)
+                if (_connection.State != ConnectionState.Open)
                     _connection.Open();
 
                 var cmd = _connection.CreateCommand();

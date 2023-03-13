@@ -18,11 +18,11 @@ namespace EmployeeRecord
             InitializeComponent();
             RegisterServices();
 
-            //_loginPage = new NavigationPage(new LoginPage());
-            //GlobalNavigation = _loginPage.Navigation;
-            //MainPage = _loginPage;
+            _loginPage = new NavigationPage(new LoginPage());
+            GlobalNavigation = _loginPage.Navigation;
+            MainPage = _loginPage;
 
-            MainPage = new EntradasProvPage();
+            //MainPage = new EntradasProvPage();
         }
 
         private async void RegisterServices()
