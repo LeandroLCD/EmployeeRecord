@@ -29,7 +29,10 @@ namespace EmployeeRecord
         {
             try
             {
+                DependencyService.Register<IDataBaseConection, DataBaseConection>();
                 DependencyService.Register<IAutenticationService, AutenticationService>();
+                DependencyService.Register<IDataBaseService, DataBaseService>();
+                
             }
             catch (Exception ex)
             {

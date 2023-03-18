@@ -28,6 +28,12 @@ namespace EmployeeRecord
             //Aqui se registran todas las rutas de las paginas de app menos las de
             //login register ni forogot, solo las paginas de adentro de la app
             Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
+
+            #region Crew Entradas TI
+            Routing.RegisterRoute(nameof(EntradasTiPage), typeof(EntradasTiPage));
+
+            #endregion
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -16,14 +17,16 @@ namespace EmployeeRecord.Service.Implementation
 {
     public class AutenticationService : IAutenticationService, IDisposable
     {
-        private static MySqlConnection _connection;
+        private static IDataBaseConection _dataBaseConection;
+        private MySqlConnection _connection;
 
         public AutenticationService()
         {
             try
             {
-                _connection = new MySqlConnection("Server=192.168.11.200;Database=zmsite;Uid=root;Pwd=admin246;");
-                _connection.Open();
+                _dataBaseConection = DependencyService.Get<IDataBaseConection>();
+
+                _connection = _dataBaseConection.SqlConnection(Properties.Resources.db_conexion);
             }
             catch (Exception ex)
             {
@@ -45,7 +48,7 @@ namespace EmployeeRecord.Service.Implementation
                     cmd.CommandText = user.ToQuery();  // "SELECT * FROM `empleado`";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var data = DataReaderMapToList<Employee>(reader);
+                        var data = DataReader.MapToList<Employee>(reader);
                         if (data.Count > 0)
                         {
                             return Task.FromResult(new response
@@ -140,30 +143,6 @@ namespace EmployeeRecord.Service.Implementation
         {
             _connection.Close();
         }
-        public static List<T> DataReaderMapToList<T>(IDataReader reader)
-        {
-            List<T> list = new List<T>();
-            T obj = default(T);
-            while (reader.Read())
-            {
-                obj = Activator.CreateInstance<T>();
-                foreach (PropertyInfo prop in obj.GetType().GetProperties())
-                {
-                    if (!object.Equals(reader[prop.Name], DBNull.Value))
-                    {
-                        try
-                        {
-                            prop.SetValue(obj, reader[prop.Name], null);
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-                    }
-                }
-                list.Add(obj);
-            }
-            return list;
-        }
+        
     }
 }

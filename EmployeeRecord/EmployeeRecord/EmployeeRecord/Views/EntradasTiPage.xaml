@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeRecord.Views.EntradasTiPage">
+             x:Class="EmployeeRecord.Views.EntradasTiPage"
+             xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.EntradasTI"
+             Title="Entradas TI Z Motors">
+
+    <ContentPage.BindingContext>
+        <viewModel:EntradasTiPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
@@ -17,12 +23,49 @@
                 <Image Grid.Row="0" Source="entrada_tres.png" Aspect="AspectFit" HeightRequest="140" WidthRequest="40" VerticalOptions="CenterAndExpand"></Image>
             </StackLayout>
             <Label HeightRequest="40" Text="Entrada TI Z Motors"  FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
-            <Entry Grid.Row="3" Placeholder="Nombre" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-            <Entry Grid.Row="4" Placeholder="Puesto" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-            <Entry Grid.Row="5" Placeholder="Motivo" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+            <Frame Grid.Row="3" HeightRequest="55"
+                   Padding="0"
+                   BorderColor="Black"
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand">
+                <Picker Title="Empleado"
+                        FontSize="Medium"
+                        SelectedItem="{Binding EmployeeSelected}"
+                        ItemsSource="{Binding EmployeeList}"
+                        HorizontalTextAlignment="Center"/>
 
-            <Button Grid.Row="8" TextColor="WhiteSmoke" Text="Registrar" BackgroundColor="#1472FA" CornerRadius="20"></Button>
-            <Button Grid.Row="8" TextColor="WhiteSmoke" Text="Regresar" BackgroundColor="#FF0A0A" CornerRadius="20"></Button>
+            </Frame>
+            <Frame Grid.Row="4" HeightRequest="55"
+                   Padding="0"
+                   BorderColor="Black"
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand">
+                <Label Text="{Binding EmployeeSelected.puesto, FallbackValue='Puesto'}"
+                       VerticalOptions="CenterAndExpand"
+                       TextColor="Black"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="Medium"/>
+
+            </Frame>
+
+            <Frame Grid.Row="5" HeightRequest="55"
+                   Padding="0"
+                   BorderColor="Black"
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand">
+                <Picker Title="Motivo"
+                        FontSize="Medium"
+                        ItemsSource="{Binding ListTasks}"
+                        HorizontalTextAlignment="Center"/>
+
+            </Frame>
+
+            <Button Grid.Row="8"
+                    Command="{Binding RegisterCommand}"
+                    TextColor="WhiteSmoke" 
+                    Text="Registrar" 
+                    BackgroundColor="#1472FA" 
+                    CornerRadius="20"/>
 
         </Grid>
     </ContentPage.Content>

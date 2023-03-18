@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="db_conexion" xml:space="preserve">
-    <value>Server=192.168.11.200;Database=zmsite;Uid=root;Pwd=admin246;</value>
+    <value>Server=192.168.0.106;Database=zmsite;Uid=root;Pwd=admin246;</value>
     <comment>Conección a la base de datos</comment>
   </data>
 </root>

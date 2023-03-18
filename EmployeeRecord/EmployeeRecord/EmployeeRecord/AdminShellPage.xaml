@@ -90,6 +90,10 @@
     <FlyoutItem  Title="HomePage" Icon="">   
         <ShellContent Title="HomePage" Route="HomePage" ContentTemplate="{DataTemplate views:MenuPage}"/>
     </FlyoutItem>
+    
+    <FlyoutItem  Title="EntradasTI" Icon="">
+        <ShellContent Title="EntradasTI" Route="EntradasTiPage" ContentTemplate="{DataTemplate views:EntradasTiPage}"/>
+    </FlyoutItem>
 
 
     <!--#endregion-->
