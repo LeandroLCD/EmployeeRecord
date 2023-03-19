@@ -1,10 +1,10 @@
 ﻿using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.ViewModels.EntradasTI
@@ -16,6 +16,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         private EmployeeModel _employeeSelected;
         private ObservableCollection<TasksModel> _tasksList;
         private IDataBaseService _dataBaseService;
+        private TasksModel _getTasks;
 
         #endregion
 
@@ -29,7 +30,8 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         #region Properties
         /// <summary>
         /// Muestra la lista de los empleados en la vista (Picker)
-        /// </summary>
+        /// </summary> 
+
         public ObservableCollection<EmployeeModel> EmployeeList 
         {
             get => _employeeList;
@@ -49,13 +51,23 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         public EmployeeModel EmployeeSelected
         {
             get => _employeeSelected;
-            set => SetProperty(ref _employeeSelected, value);
+            set
+            {
+                //errorEmplead = string.Empty;
+                SetProperty(ref _employeeSelected, value);
+            }
+        }
+
+        public TasksModel GetTasks
+        {
+            get => _getTasks;
+            set => SetProperty(ref _getTasks, value);
         }
 
         #endregion
 
         #region Command
-
+        public Command RegisterCommand { get; set; }
         #endregion
 
         #region Methodos
@@ -66,31 +78,85 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         {
             _dataBaseService = DependencyService.Get<IDataBaseService>();
 
+
+            #region Set Command
+            RegisterCommand = new Command(Register);
+            #endregion
+
             #region Employees
-            var resp = await _dataBaseService.GetEmployeeList();
-            if(resp.Success)
+            var employees = await _dataBaseService.GetEmployeeList();
+            if(employees.Success)
             {
-                EmployeeList = new ObservableCollection<EmployeeModel>((List<EmployeeModel>)resp.Objet);
+                EmployeeList = new ObservableCollection<EmployeeModel>((List<EmployeeModel>)employees.Objet);
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Employee Record", resp.Message,"Ok");
+                await App.Current.MainPage.DisplayAlert("Employee Record", employees.Message,"Ok");
 
             }
             #endregion
 
             #region Tasks
-            //var resp2 = await _dataBaseService.GetTasksList();
-            //if (resp.Success)
-            //{
-            //    TasksList = new ObservableCollection<TasksModel>((List<TasksModel>)resp.Objet);
-            //}
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Employee Record", resp.Message, "Ok");
+            var tasks = await _dataBaseService.GetTasksList();
+            if (tasks.Success)
+            {
 
-            //}
+                TasksList = new ObservableCollection<TasksModel>((List<TasksModel>)tasks.Objet);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Employee Record", tasks.Message, "Ok");
+
+            }
             #endregion
+        }
+
+        private async void Register(object obj)
+        {
+            IsLoading = true;
+            #region Validations
+            if (EmployeeSelected == null) {
+                //Agregar el error a la vista DisplayAlert//Propiedad publica de tipo string
+                IsLoading = false;
+                return;
+            }
+            if(GetTasks == null) {
+                //Agregar el error a la vista
+                IsLoading = false;
+                return;
+            }
+            #endregion
+
+            #region Insertar a la BD
+
+            var employee = new EmployeeRegister()
+            {
+                hora_entra = DateTime.Now,
+                motivo = GetTasks.Name,
+                nombre = EmployeeSelected.nombre,
+                apellidos = EmployeeSelected.apellidos,
+                puesto = EmployeeSelected.puesto,
+                empresa = EmployeeSelected.organizacion
+
+            };
+            var register = await _dataBaseService.InsertRegisterIn(employee);
+
+
+
+            #endregion
+
+            if(register.Success)
+            {
+                GetTasks = new TasksModel();
+                EmployeeSelected = new EmployeeModel();
+                await App.Current.MainPage.DisplayAlert("Employee Record", register.Message, "OK");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Employee Record", register.Message, "OK");
+            }
+
+            IsLoading = false;
         }
 
         #endregion

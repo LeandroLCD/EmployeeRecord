@@ -1,5 +1,6 @@
 ﻿using EmployeeRecord.Models.Autentication;
 using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Utilities;
 using System;
@@ -11,9 +12,13 @@ namespace EmployeeRecord.Service.Interface
 {
     public interface IDataBaseService
     {
-       Task<response> GetEmployeeList();
+        Task<response> GetEmployeeList();
 
         Task<response> GetTasksList();
+
+        Task<response> InsertRegisterIn(EmployeeRegister employee);
+
+        Task<response> InsertRegisterOut(EmployeeRegister employee);
 
     }
 }

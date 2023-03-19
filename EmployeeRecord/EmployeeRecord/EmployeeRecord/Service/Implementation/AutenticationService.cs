@@ -41,22 +41,22 @@ namespace EmployeeRecord.Service.Implementation
         {
             try
             {
-                if (_connection.State != System.Data.ConnectionState.Open)
+                if (_connection.State != ConnectionState.Open)
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
                     cmd.CommandText = user.ToQuery();  // "SELECT * FROM `empleado`";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var data = DataReader.MapToList<Employee>(reader);
+                        var data = DataReader.MapToList<UserAutentication>(reader);
                         if (data.Count > 0)
                         {
                             return Task.FromResult(new response
                             {
                                 Success = true,
                                 Status = 200,
-                                Message = $"Bienvenido al sistema ",
-                                Objet = data.FirstOrDefault(u => u.email == user.Email)
+                                Message = $"Bienvenido al sistema",
+                                Objet = data.FirstOrDefault(u => u.email == user.email)
                             });
                         }
                         else
@@ -96,10 +96,21 @@ namespace EmployeeRecord.Service.Implementation
                 if (_connection.State != ConnectionState.Open)
                     _connection.Open();
 
-                var cmd = _connection.CreateCommand();
-                var ss = user.ToQuery();
-                cmd.CommandText = user.ToQuery();
-                var rd = cmd.ExecuteReader();
+                //registra el login
+                using (var cmd = _connection.CreateCommand())
+                {
+                    using(var transaction = _connection.BeginTransaction())
+                    {
+                        cmd.Transaction = transaction;
+                        var query = $"{user.ToQueryRegister()};\n{user.ToQueryRegisterLogin()};";
+
+                        cmd.CommandText = query;
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+
+                }
+                   
 
                 return Task.FromResult(new response
                 {

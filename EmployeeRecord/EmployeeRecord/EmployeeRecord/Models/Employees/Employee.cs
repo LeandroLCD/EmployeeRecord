@@ -6,7 +6,7 @@ namespace EmployeeRecord.Models.Employees
 {
     public class Employee
     {
-        public int idusuario { get; set; }
+        public int id { get; set; }
 
         [Required]
         public string nombre { get; set; }
@@ -16,15 +16,18 @@ namespace EmployeeRecord.Models.Employees
 
 
         [Required]
-        public string puesto { get; set; }
+        public string puesto { get; set; } 
+
+        [Required]
+        public string empresa { get; set; } 
+
+        public Rols rol { get; set; }
 
 
         [Required]
         [EmailAddress]
         public string email { get; set; }
 
-        [Required]
-        public string password { get; set; }
 
         public DateTime creation_date { get; set; }
     }

@@ -9,7 +9,9 @@ namespace EmployeeRecord.Models.Employees
     public class EmployeeModel
     {
         
-        public int idusuario { get; set; }
+        public int id { get; set; }
+
+        public string organizacion { get; set; }
 
         public string nombre { get; set; }
 

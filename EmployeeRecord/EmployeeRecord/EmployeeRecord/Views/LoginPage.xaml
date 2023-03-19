@@ -41,7 +41,7 @@
             <Image  Grid.Row="0" Margin="-18,-20,0,0" Source="usuario_cinco.png" Aspect="AspectFit" HeightRequest="180" WidthRequest="150" VerticalOptions="Start" HorizontalOptions="Start" ></Image>
             <Label Grid.Row="1"  Text="Bienvenido!" Margin="0,-50,0,0" FontSize="24" FontAttributes="Bold" TextColor="#1C375C" HorizontalOptions="CenterAndExpand"></Label>
             <Label Grid.Row="1" Margin="0,-15,0,0" Text="Ingresa tus datos" TextColor="#1C375C"  HorizontalOptions="CenterAndExpand"></Label>
-            <Entry Grid.Row="2" Placeholder="Usuario" TextColor="DarkBlue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding User.Email}"></Entry>
+            <Entry Grid.Row="2" Placeholder="Usuario" TextColor="DarkBlue" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Text="{Binding User.email}"></Entry>
             <Grid>
                     <Entry Grid.Row="3" Placeholder="Contraseña" TextColor="DarkBlue" IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MaxLength="10" Text="{Binding User.Password}" />
                     <ImageButton WidthRequest="40" 

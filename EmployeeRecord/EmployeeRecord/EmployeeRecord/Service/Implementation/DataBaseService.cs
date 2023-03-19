@@ -1,4 +1,5 @@
 ﻿using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
@@ -41,7 +42,7 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT `idusuario`, `nombre`, `apellidos`, `puesto`  FROM `empleado`";
+                    cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`  FROM `empleado` WHERE `empresa` != 'Z Motors'"; //ojito con esto
                     using (var reader =  cmd.ExecuteReader())
                     {
                         var data = DataReader.MapToList<EmployeeModel>(reader);
@@ -77,7 +78,7 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT *  FROM `tareas`"; 
+                    cmd.CommandText = "SELECT *  FROM `tasks`"; 
                     using (var reader = cmd.ExecuteReader())
                     {
                         var data = DataReader.MapToList<TasksModel>(reader);
@@ -103,6 +104,46 @@ namespace EmployeeRecord.Service.Implementation
                     Success = false
                 });
             }
+        }
+
+        public Task<response> InsertRegisterIn(EmployeeRegister employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = employee.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertRegisterOut(EmployeeRegister employee)
+        {
+            throw new NotImplementedException();
         }
     }
 }

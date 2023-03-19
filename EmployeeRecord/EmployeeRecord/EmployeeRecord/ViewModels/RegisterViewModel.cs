@@ -75,6 +75,7 @@ namespace EmployeeRecord.ViewModels
         private async void RegisterMethod(object obj)
         {
             #region Validaciones
+            IsLoading = true;
             var valid = GetUserRegister.DataAnotationsValid();
             if (valid != null)
             {
@@ -90,6 +91,7 @@ namespace EmployeeRecord.ViewModels
 
 
                 await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
+                IsLoading = false;
                 return;
             }
             #endregion
@@ -106,7 +108,7 @@ namespace EmployeeRecord.ViewModels
 
                 await App.Current.MainPage.DisplayAlert("Employee Record", response.Message, "Ok");
             }
-
+            IsLoading = false;
         }
         #endregion
     }

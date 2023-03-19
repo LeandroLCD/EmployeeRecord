@@ -5,9 +5,11 @@ namespace EmployeeRecord.Models.Autentication
 {
     public class UserAutentication 
     {
+        public Rols rol { get; set; }
+
         [Required]
         [EmailAddress]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Required]
         [MinLength(4)]
@@ -15,7 +17,7 @@ namespace EmployeeRecord.Models.Autentication
         public string Password { get; set; }
         public string ToQuery()
         {
-            return string.Format("SELECT * FROM `empleado` WHERE email = '{0}' AND password = '{1}'", Email, Password);
+            return string.Format("SELECT * FROM `login` WHERE email = '{0}' AND password = '{1}'", email, Password);
         }
     }
 }

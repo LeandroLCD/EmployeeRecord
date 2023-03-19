@@ -5,9 +5,14 @@
              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.EntradasTI"
              Title="Entradas TI Z Motors">
 
+
+    <!--#region Conecta el Viewmodel con la vista -->
     <ContentPage.BindingContext>
         <viewModel:EntradasTiPageViewModel />
     </ContentPage.BindingContext>
+    <!--#endregion-->
+
+
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
@@ -55,13 +60,16 @@
                    VerticalOptions="FillAndExpand">
                 <Picker Title="Motivo"
                         FontSize="Medium"
-                        ItemsSource="{Binding ListTasks}"
+                        ItemsSource="{Binding TasksList}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding GetTasks}"
                         HorizontalTextAlignment="Center"/>
 
             </Frame>
 
             <Button Grid.Row="8"
                     Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     TextColor="WhiteSmoke" 
                     Text="Registrar" 
                     BackgroundColor="#1472FA" 
