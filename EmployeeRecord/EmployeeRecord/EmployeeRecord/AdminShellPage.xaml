@@ -88,16 +88,21 @@
 
 
     <!--#region Menu Items-->
-    <FlyoutItem  Title="HomePage" Icon="">   
+    <FlyoutItem  Title="HomePage" Icon="ic_home.png">   
         <ShellContent Title="HomePage" Route="HomePage" ContentTemplate="{DataTemplate views:MenuPage}"/>
     </FlyoutItem>
     
-    <FlyoutItem  Title="EntradasTI" Icon="">
+    <FlyoutItem  Title="EntradasTI" Icon="ic_in.png">
         <ShellContent Title="EntradasTI" Route="EntradasTiPage" ContentTemplate="{DataTemplate views:EntradasTiPage}"/>
     </FlyoutItem>
 
+    <FlyoutItem  Title="Admin Usuarios" Icon="ic_user.png">
+        <ShellContent Title="Usuarios" Route="UserListPage" ContentTemplate="{DataTemplate views:UserListPage}"/>
+    </FlyoutItem>
 
-    <!--#endregion-->
+
+
+    <!--#endregion  UserListPage-->
 
     <!--#region Pie de Pagina -->
     <Shell.FlyoutFooterTemplate>

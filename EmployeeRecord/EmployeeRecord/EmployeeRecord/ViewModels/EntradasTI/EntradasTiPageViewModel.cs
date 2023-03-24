@@ -136,7 +136,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
                 nombre = EmployeeSelected.nombre,
                 apellidos = EmployeeSelected.apellidos,
                 puesto = EmployeeSelected.puesto,
-                empresa = EmployeeSelected.organizacion
+                empresa = EmployeeSelected.empresa
 
             };
             var register = await _dataBaseService.InsertRegisterIn(employee);

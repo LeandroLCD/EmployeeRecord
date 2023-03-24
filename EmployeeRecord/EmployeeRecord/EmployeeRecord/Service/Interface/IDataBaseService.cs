@@ -14,11 +14,15 @@ namespace EmployeeRecord.Service.Interface
     {
         Task<response> GetEmployeeList();
 
+        Task<response> GetEmployeeAllList();
+
         Task<response> GetTasksList();
 
         Task<response> InsertRegisterIn(EmployeeRegister employee);
 
-        Task<response> InsertRegisterOut(EmployeeRegister employee);
+        Task<response> UpdateRegisterOut(UserRegister employee);
 
+        Task<response> DeleteEmployee(Employee employee);
+        Task<response> UpdateEmployee(Employee employee);
     }
 }

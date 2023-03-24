@@ -21,7 +21,6 @@ namespace EmployeeRecord.Models.Employees
         [Required]
         public string empresa { get; set; } 
 
-        public Rols rol { get; set; }
 
 
         [Required]
@@ -30,5 +29,15 @@ namespace EmployeeRecord.Models.Employees
 
 
         public DateTime creation_date { get; set; }
+
+        public string ToQueryUpdate()
+        {
+            return $"UPDATE `empleado` SET `nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`email`='{email}',`empresa`='{empresa}' WHERE `id`='{id}'";
+        }
+
+        public override string ToString()
+        {
+            return $"{nombre} {apellidos}";
+        }
     }
 }

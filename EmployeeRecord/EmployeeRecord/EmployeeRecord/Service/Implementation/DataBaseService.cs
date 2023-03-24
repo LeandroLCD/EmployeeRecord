@@ -1,4 +1,5 @@
-﻿using EmployeeRecord.Models.Employees;
+﻿using EmployeeRecord.Models.Autentication;
+using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Service.Interface;
@@ -34,6 +35,43 @@ namespace EmployeeRecord.Service.Implementation
 
         }
 
+        public Task<response> GetEmployeeAllList()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM `empleado`"; 
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<Employee>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+    
+
         public Task<response> GetEmployeeList()
         {
             try
@@ -42,7 +80,7 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`  FROM `empleado` WHERE `empresa` != 'Z Motors'"; //ojito con esto
+                    cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`, `email`   FROM `empleado` WHERE `empresa` != 'Z Motors'"; //ojito con esto
                     using (var reader =  cmd.ExecuteReader())
                     {
                         var data = DataReader.MapToList<EmployeeModel>(reader);
@@ -141,9 +179,86 @@ namespace EmployeeRecord.Service.Implementation
             }
         }
 
-        public Task<response> InsertRegisterOut(EmployeeRegister employee)
+        public Task<response> DeleteEmployee(Employee employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = $"DELETE FROM `empleado` WHERE id = {employee.id} && email = '{employee.email}'";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        
+                        return Task.FromResult(new response
+                        {
+                            Message = "Employee Eliminado Exitosamente",
+                            Objet = employee,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> UpdateRegisterOut(EmployeeRegister employee)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<response> UpdateRegisterOut(UserRegister employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<response> UpdateEmployee(Employee employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = employee.ToQueryUpdate();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Employee Actualizado Exitosamente",
+                            Objet = employee,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
         }
     }
 }

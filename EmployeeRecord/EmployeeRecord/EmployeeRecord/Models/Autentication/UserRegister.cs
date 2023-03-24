@@ -7,6 +7,8 @@ namespace EmployeeRecord.Models.Autentication
     public class UserRegister : Employee
     {
 
+        public Rols rol { get; set; }
+
         [Required]
         public string password { get; set; }
 
@@ -24,11 +26,12 @@ namespace EmployeeRecord.Models.Autentication
 
         public string ToQueryRegister()
         {
-            return $"insert into `empleado`(nombre,apellidos,puesto,email,organizacion,creation_date) values('{nombre}','{apellidos}','{puesto}','{email}','{organizacion}','{creation_date.ToString("yyyy-MM-dd HH:mm:ss")}')";
+            return $"INSERT INTO `empleado`(nombre,apellidos,puesto,email,empresa,creation_date) values('{nombre}','{apellidos}','{puesto}','{email}','{empresa}','{creation_date.ToString("yyyy-MM-dd HH:mm:ss")}')";
         }
+       
         public string ToQueryRegisterLogin()
         {
-            return $"insert into `login`(email,password,rol) values('{email}','{password}','{rol}')";
+            return $"iNSERT INTO `login`(email,password,rol) values('{email}','{password}','{rol}')";
         }
         //insert into empleado(nombre,apellidos,puesto,email,password) values('" + t_name.Text + "','" + t_lastname.Text + "','" + t_position.Text + "','" + t_email.Text + "','" + t_password.Text + "
     }

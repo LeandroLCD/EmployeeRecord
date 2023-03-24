@@ -24,7 +24,7 @@
             <StackLayout Grid.Row="2">
                 <Entry  Placeholder="Ingresa tu nombre" Text="{Binding GetUserRegister.nombre}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
                 <Entry  Placeholder="Ingresa tus apellidos" Text="{Binding GetUserRegister.apellidos}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tu Organización" Text="{Binding GetUserRegister.organizacion}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="Ingresa tu Organización" Text="{Binding GetUserRegister.empresa}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
                 <Entry  Placeholder="Ingresa tu puesto" Text="{Binding GetUserRegister.puesto}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
                 <Entry  Placeholder="Ingresa tu correo" Text="{Binding GetUserRegister.email}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
                 <Entry  Placeholder="Confirma tu correo" Text="{Binding GetUserRegister.VerifieEmail}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>

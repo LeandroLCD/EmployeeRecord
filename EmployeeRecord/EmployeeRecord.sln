@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecord.Android", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecord.iOS", "EmployeeRecord\EmployeeRecord.iOS\EmployeeRecord.iOS.csproj", "{C49AA6A8-FD7F-4A8B-B221-C7092AF39F92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeRecord", "EmployeeRecord\EmployeeRecord\EmployeeRecord.csproj", "{6843743A-1428-42A5-8C29-617E59525537}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeRecord", "EmployeeRecord\EmployeeRecord\EmployeeRecord.csproj", "{6843743A-1428-42A5-8C29-617E59525537}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

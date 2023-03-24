@@ -29,9 +29,14 @@ namespace EmployeeRecord
             //login register ni forogot, solo las paginas de adentro de la app
             Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
 
-            #region Crew Entradas TI
+            #region Crews Entradas TI
             Routing.RegisterRoute(nameof(EntradasTiPage), typeof(EntradasTiPage));
 
+            #endregion
+
+            #region Crews Usuarios
+            Routing.RegisterRoute(nameof(UserListPage), typeof(UserListPage));
+            Routing.RegisterRoute(nameof(UserDetailPage), typeof(UserDetailPage));
             #endregion
 
         }
@@ -41,5 +46,25 @@ namespace EmployeeRecord
             
             _auteticationLogin.Logout();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+
+            return OnBackButton();
+        }
+        public static bool OnBackButton()
+        {
+            var uriOriginal = Shell.Current.CurrentState.Location.OriginalString;
+            var array = uriOriginal.Split('/');
+            if (array.Length > 3)
+            {
+                var curren = array[array.Length - 1];
+                var BackUry = uriOriginal.Remove(uriOriginal.Length - curren.Length, curren.Length);
+                Shell.Current.GoToAsync(BackUry);
+                return true;
+            }
+            return false;
+        }
+
     }
 }

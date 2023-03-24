@@ -20,9 +20,9 @@ namespace EmployeeRecord.ViewModels
         {
             GetUserRegister = new UserRegister()
             {
-                nombre = "prueba",
-                apellidos = "prueba",
-                puesto = "prueba",
+                nombre = "Pablo",
+                apellidos = "Perez",
+                puesto = "Administrador",
                 creation_date = DateTime.Now,
                 email = "prueba@email.com",
                 VerifieEmail = "prueba@email.com",
@@ -52,7 +52,7 @@ namespace EmployeeRecord.ViewModels
             get 
             {
                 if(_getUser == null)
-                    _getUser = new UserRegister();
+                    _getUser = new UserRegister() { rol = Models.Rols.Visitor};
                 return _getUser;
             }
             set => SetProperty(ref _getUser, value);

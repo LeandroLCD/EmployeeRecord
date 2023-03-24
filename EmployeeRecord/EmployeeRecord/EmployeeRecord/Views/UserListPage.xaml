@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.Usuarios" 
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
+             x:Class="EmployeeRecord.Views.UserListPage"
+             Title="Lista de Empleados">
+    <ContentPage.BindingContext>
+        <viewModel:UserListPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="80,*">
+            <Frame Padding="0" Margin="10,12"
+                   BorderColor="Black" 
+                   CornerRadius="16">
+                <SearchBar HorizontalOptions="FillAndExpand">
+                    <SearchBar.Behaviors>
+                        <behaviorsPack:EventToCommandBehavior Command="{Binding SearchBarCommand}"
+                                                                      EventArgsPropertyPath="NewTextValue"
+                                                                      EventName="TextChanged"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </Frame>
+            <CollectionView x:Name="employeeList" 
+                            Margin="10,0" Grid.Row="1" 
+                            ItemsSource="{Binding EmployeeList}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding EmployeeDetailCommand}"
+                            SelectionChangedCommandParameter="{Binding Source={x:Reference employeeList}, Path=SelectedItem}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10,5" 
+                               BorderColor="Black" 
+                               CornerRadius="16">
+                            <Grid>
+                                <StackLayout>
+                                    <Label Text="{Binding ., StringFormat='Nombres: {0}'}"/>
+                                    <Label Text="{Binding puesto, StringFormat='Puesto: {0}'}"/>
+                                    <Label Text="{Binding empresa, StringFormat='Empresa: {0}'}"/>
+                                </StackLayout>
+                                <ImageButton Source="ic_clear.png"
+                                    WidthRequest="30"
+                                    HeightRequest="30" 
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="EndAndExpand"
+                                    Command="{Binding Source={x:Reference employeeList}, Path=BindingContext.DeleteEmployeeCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+       
+    </ContentPage.Content>
+</ContentPage>
