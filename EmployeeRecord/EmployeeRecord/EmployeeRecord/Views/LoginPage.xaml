@@ -32,6 +32,7 @@
                 <BoxView Margin="0,0,0,-10" VerticalOptions="FillAndExpand" 
                          HorizontalOptions="FillAndExpand" 
                          BackgroundColor="#1C375C"/>
+            
                 <Label Grid.Row="0"
                    Margin="10,0"
                    Text="Iniciar Sesión"
