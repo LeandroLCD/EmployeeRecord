@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels"
+             xmlns:converter="clr-namespace:EmployeeRecord.Converter" 
+             x:Class="EmployeeRecord.Views.LoginPage"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.BindingContext>
+        <viewModel:LoginViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:IconConverter x:Key="IconConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+ <ContentPage.Content>
+    <StackLayout>
+
+
+        <Grid VerticalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="130"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <BoxView Margin="0,0,0,-10" VerticalOptions="FillAndExpand" 
+                         HorizontalOptions="FillAndExpand" 
+                         BackgroundColor="#1C375C"/>
+            
+                <Label Grid.Row="0"
+                   Margin="10,0"
+                   Text="Iniciar Sesión"
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="White" 
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="Start"/>
+                <Path Grid.Row="1" 
+                      Data="m132.34,154.23002l209.00002,0l0,0.66666c-66.50001,28 -156.50001,72.87853 -209.00002,96.76573l0,-97.43239z"
+                      Stroke="#1C375C" 
+                      Fill="#1C375C" HeightRequest="100" Aspect="Fill"/>
+
+                <Image  Grid.Row="1"  
+                       Margin="15,0"
+                        Source="usuario_cinco.png" 
+                        Aspect="AspectFit" HeightRequest="180" 
+                        WidthRequest="150" VerticalOptions="Start" 
+                        HorizontalOptions="Start"/>
+
+                <Label Grid.Row="1"  
+                   Text="Bienvenido!"
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="#1C375C" 
+                   VerticalOptions="EndAndExpand"
+                   HorizontalOptions="Center"/>
+
+                <ScrollView Grid.Row="2">
+                    <StackLayout  Margin="30,0" VerticalOptions="FillAndExpand" >
+                        <Label Text="Ingresa tus datos" Margin="0,0,0,30"
+                       TextColor="#1C375C"  
+                       HorizontalOptions="CenterAndExpand"/>
+
+                        <Entry Placeholder="Usuario" 
+                               
+                                 VerticalOptions="EndAndExpand"
+                       TextColor="DarkBlue" 
+                       HorizontalOptions="FillAndExpand" 
+                       Text="{Binding User.email}"/>
+
+
+                        <Grid HeightRequest="60">
+                            <Entry Placeholder="Contraseña" 
+                                   TextColor="DarkBlue" 
+                                   IsPassword="{Binding IsShowPrw}" 
+                                   HorizontalOptions="FillAndExpand"
+                                   MaxLength="10" Text="{Binding User.Password}" />
+                            
+                            <ImageButton WidthRequest="40"
+                                     Margin="10"
+                                 Padding="5"
+                                 Command="{Binding ShowPwdCommand}"
+                                 Source="{Binding IsShowPrw, Converter={x:StaticResource IconConverter}}"
+                                 HeightRequest="40" 
+                                 BackgroundColor="Transparent"
+                                     HorizontalOptions="EndAndExpand"/>
+                        </Grid>
+
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox Color="#2B78E4" IsChecked="{Binding Remember}"/>
+                            <Label Text="Recordar Usuario" VerticalTextAlignment="Center"/>
+                        </StackLayout>
+
+                        <Button  TextColor="WhiteSmoke"
+                             Margin="0,10"
+                             Text="Iniciar Sesion" 
+                             BackgroundColor="#2AC600" 
+                             CornerRadius="20" 
+                             Command="{Binding LoginCommand}"/>
+
+
+                        <Button Margin="0,10"
+                    Command="{Binding SyncInCommand}"
+                    Text="Registrarse" 
+                    TextColor="#DEDEDE " 
+                    FontAttributes="Bold" 
+                    BackgroundColor="#0031FA" 
+                    CornerRadius="20"/>
+
+                        <Button 
+                        Command="{Binding ForogotCommand}"
+                        Margin="0,10"
+                        Text="¿Has olvidado tu contraseña?" 
+                        TextTransform="None" Padding="0"
+                        TextColor="#6AA0EC"
+                        BackgroundColor="Transparent"/>
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="40" Margin="0,0,0,10">
+                            <Image Source="logo_cholula.jpg" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                            <Image Source="logoVw.png" WidthRequest="30"
+                               HeightRequest="30" Aspect="AspectFit"></Image>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
