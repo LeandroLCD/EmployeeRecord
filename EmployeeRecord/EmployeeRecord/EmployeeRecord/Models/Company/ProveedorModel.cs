@@ -6,6 +6,8 @@ namespace EmployeeRecord.Models.Company
 {
     public class ProveedorModel
     {
+        private object idProveedor;
+
         public int id { get; set; }
 
         public string nombre { get; set; }
@@ -26,10 +28,10 @@ namespace EmployeeRecord.Models.Company
         {
             if (IsExcited)
             {
-                return $"UPDATE `regis_bita` SET `hora_sali`='{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}',`IsExcited`='1' WHERE id='{id}'";
+                return $"UPDATE `regis_prov` SET `hora_sali`='{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}',`IsExcited`='1' WHERE id='{id}'";
                 //`id`='{id}',`idEmpleado`='{idEmpleado}',`nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`empresa`='{empresa}',
             }
-            return $"insert into `regis_bita`(id,idEmpleado,nombre,apellidos,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{idEmpleado}','{nombre}','{apellidos}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
+            return $"insert into `regis_prov`(id,idProveedor,nombre,apellidos,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{idProveedor}','{nombre}','{apellidos}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
 
         }
     }
