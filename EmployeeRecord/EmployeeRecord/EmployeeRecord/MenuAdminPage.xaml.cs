@@ -12,17 +12,15 @@ using Xamarin.Forms.Xaml;
 namespace EmployeeRecord
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdminShellPage : Shell
+    public partial class MenuAdminPage : Shell
     {
         private IAutenticationService _auteticationLogin;
-
-        public AdminShellPage()
+        public MenuAdminPage()
         {
             InitializeComponent();
             InicialiceRoutes();
             _auteticationLogin = DependencyService.Get<IAutenticationService>();
         }
-
         private void InicialiceRoutes()
         {
             //Aqui se registran todas las rutas de las paginas de app menos las de
@@ -44,7 +42,7 @@ namespace EmployeeRecord
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            
+
             _auteticationLogin.Logout();
         }
 
@@ -66,6 +64,5 @@ namespace EmployeeRecord
             }
             return false;
         }
-
     }
 }

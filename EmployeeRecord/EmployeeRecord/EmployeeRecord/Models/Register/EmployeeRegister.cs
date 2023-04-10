@@ -9,9 +9,11 @@ namespace EmployeeRecord.Models.Register
     {
         public EmployeeRegister()
         {
-            IsExist = false;
+            IsExcited = false;
         }
         public int id { get; set; }
+
+        public int idEmpleado { get; set; }
 
         public string nombre { get; set; }
 
@@ -27,16 +29,16 @@ namespace EmployeeRecord.Models.Register
 
         public DateTime hora_sali { get; set; }
 
-        public bool IsExist { get; set; }
+        public bool IsExcited { get; set; }
 
         public string ToQuery()
         {
-            if(IsExist)
+            if (IsExcited)
             {
-                return $"insert into `regis_bita`(id,nombre,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombre}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")},'1')";
-
+                return $"UPDATE `regis_bita` SET `hora_sali`='{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}',`IsExcited`='1' WHERE id='{id}'";
+                //`id`='{id}',`idEmpleado`='{idEmpleado}',`nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`empresa`='{empresa}',
             }
-            return $"insert into `regis_bita`(id,nombre,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombre}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
+            return $"insert into `regis_bita`(id,idEmpleado,nombre,apellidos,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{idEmpleado}','{nombre}','{apellidos}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
 
         }
     }

@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace EmployeeRecord.ViewModels.EntradasTI
 {
-    public class EntradasTiPageViewModel: BaseViewModel
+    public class EntradasTiPageViewModel : BaseViewModel
     {
         #region Fields
         private ObservableCollection<EmployeeModel> _employeeList;
@@ -32,7 +32,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         /// Muestra la lista de los empleados en la vista (Picker)
         /// </summary> 
 
-        public ObservableCollection<EmployeeModel> EmployeeList 
+        public ObservableCollection<EmployeeModel> EmployeeList
         {
             get => _employeeList;
             set => SetProperty(ref _employeeList, value);
@@ -40,7 +40,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         /// <summary>
         /// Muestra la lista de tareas en la vista (Picker)
         /// </summary>
-        public ObservableCollection<TasksModel> TasksList 
+        public ObservableCollection<TasksModel> TasksList
         {
             get => _tasksList;
             set => SetProperty(ref _tasksList, value);
@@ -85,13 +85,13 @@ namespace EmployeeRecord.ViewModels.EntradasTI
 
             #region Employees
             var employees = await _dataBaseService.GetEmployeeList();
-            if(employees.Success)
+            if (employees.Success)
             {
                 EmployeeList = new ObservableCollection<EmployeeModel>((List<EmployeeModel>)employees.Objet);
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Employee Record", employees.Message,"Ok");
+                await App.Current.MainPage.DisplayAlert("Employee Record", employees.Message, "Ok");
 
             }
             #endregion
@@ -115,12 +115,14 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         {
             IsLoading = true;
             #region Validations
-            if (EmployeeSelected == null) {
+            if (EmployeeSelected == null)
+            {
                 //Agregar el error a la vista DisplayAlert//Propiedad publica de tipo string
                 IsLoading = false;
                 return;
             }
-            if(GetTasks == null) {
+            if (GetTasks == null)
+            {
                 //Agregar el error a la vista
                 IsLoading = false;
                 return;
@@ -136,7 +138,8 @@ namespace EmployeeRecord.ViewModels.EntradasTI
                 nombre = EmployeeSelected.nombre,
                 apellidos = EmployeeSelected.apellidos,
                 puesto = EmployeeSelected.puesto,
-                empresa = EmployeeSelected.empresa
+                empresa = EmployeeSelected.empresa,
+                idEmpleado = EmployeeSelected.id
 
             };
             var register = await _dataBaseService.InsertRegisterIn(employee);
@@ -145,7 +148,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
 
             #endregion
 
-            if(register.Success)
+            if (register.Success)
             {
                 GetTasks = new TasksModel();
                 EmployeeSelected = new EmployeeModel();
@@ -162,3 +165,4 @@ namespace EmployeeRecord.ViewModels.EntradasTI
         #endregion
     }
 }
+

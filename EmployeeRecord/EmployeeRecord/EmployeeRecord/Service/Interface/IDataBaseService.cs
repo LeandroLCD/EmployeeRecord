@@ -20,9 +20,12 @@ namespace EmployeeRecord.Service.Interface
 
         Task<response> InsertRegisterIn(EmployeeRegister employee);
 
-        Task<response> UpdateRegisterOut(UserRegister employee);
+        Task<response> UpdateRegisterOut(EmployeeRegister employee);
 
         Task<response> DeleteEmployee(Employee employee);
+
         Task<response> UpdateEmployee(Employee employee);
+
+        Task<response> GetRegisterIn(string id);
     }
 }
