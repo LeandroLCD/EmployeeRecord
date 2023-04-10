@@ -6,9 +6,9 @@ namespace EmployeeRecord.Models.Company
 {
     public class ProveedorModel
     {
-        private object idProveedor;
-
         public int id { get; set; }
+
+        public int idProveedor { get; set; }
 
         public string nombre { get; set; }
 
