@@ -84,7 +84,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
             #endregion
 
             #region Employees
-            var employees = await _dataBaseService.GetEmployeeList();
+            var employees = await _dataBaseService.GetEmployeeZmotors();
             if (employees.Success)
             {
                 EmployeeList = new ObservableCollection<EmployeeModel>((List<EmployeeModel>)employees.Objet);
@@ -134,7 +134,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
             var employee = new EmployeeRegister()
             {
                 hora_entra = DateTime.Now,
-                motivo = GetTasks.Name,
+                motivo = GetTasks.name,
                 nombre = EmployeeSelected.nombre,
                 apellidos = EmployeeSelected.apellidos,
                 puesto = EmployeeSelected.puesto,

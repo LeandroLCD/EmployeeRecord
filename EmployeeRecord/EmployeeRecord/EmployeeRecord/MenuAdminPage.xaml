@@ -90,17 +90,23 @@
     <FlyoutItem  Title="HomePage" Icon="ic_home.png">
         <ShellContent Title="HomePage" Route="HomePage" ContentTemplate="{DataTemplate views:MenuPage}"/>
     </FlyoutItem>
-
+    <FlyoutItem  Title="Admin Usuarios" Icon="ic_user.png">
+        <ShellContent Title="Usuarios" Route="UserListPage" ContentTemplate="{DataTemplate views:UserListPage}"/>
+    </FlyoutItem>
+    
     <FlyoutItem  Title="EntradasTI" Icon="ic_in.png">
         <ShellContent Title="EntradasTI" Route="EntradasTiPage" ContentTemplate="{DataTemplate views:EntradasTiPage}"/>
     </FlyoutItem>
+    
     <FlyoutItem  Title="SalidasTI" Icon="ic_in.png">
         <ShellContent Title="SalidasTI" Route="SalidasTIPage" ContentTemplate="{DataTemplate views:SalidasTiPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem  Title="Admin Usuarios" Icon="ic_user.png">
-        <ShellContent Title="Usuarios" Route="UserListPage" ContentTemplate="{DataTemplate views:UserListPage}"/>
+    <FlyoutItem  Title="EntradasProv" Icon="ic_in.png">
+        <ShellContent Title="EntradasProv" Route="EntradasProvPage" ContentTemplate="{DataTemplate views:EntradasProvPage}"/>
     </FlyoutItem>
+
+
 
 
 

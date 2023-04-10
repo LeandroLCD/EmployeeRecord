@@ -1,4 +1,5 @@
 ﻿using EmployeeRecord.Models.Autentication;
+using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
@@ -37,7 +38,7 @@ namespace EmployeeRecord.Service.Implementation
 
             }
 
-            public Task<response> GetEmployeeAllList()
+            public Task<response> GetEmployeeProv()
             {
                 try
                 {
@@ -74,7 +75,7 @@ namespace EmployeeRecord.Service.Implementation
             }
 
 
-            public Task<response> GetEmployeeList()
+            public Task<response> GetEmployeeZmotors()
             {
                 try
                 {
@@ -82,7 +83,7 @@ namespace EmployeeRecord.Service.Implementation
                         _connection.Open();
                     using (var cmd = _connection.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`, `email` FROM `empleado`"; //ojito con esto
+                        cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`, `email` FROM `empleado` WHERE !='Z Motors'"; //ojito con esto
                         using (var reader = cmd.ExecuteReader())
                         {
                             var data = DataReader.MapToList<EmployeeModel>(reader);
@@ -336,6 +337,112 @@ namespace EmployeeRecord.Service.Implementation
                     });
                 }
             }
+
+            public Task<response> GetCompanyList()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT *  FROM `empresa`";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<Company>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener las empresas.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
         }
+
+            public Task<response> InsertTask(TasksModel task)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = task.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de insertar nueva tarea.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+            public Task<response> InsertCompany(Company company)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = company.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de insertar la empresa.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+         }
     
 }
