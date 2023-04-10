@@ -152,7 +152,7 @@ namespace EmployeeRecord.ViewModels
             if(resp.Success)
             {
                     //navegar al Home
-                    App.Current.MainPage = new AdminShellPage();
+                    App.Current.MainPage = new MenuAdminPage();
                     
                     IsLoading = false;
             }

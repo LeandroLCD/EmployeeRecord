@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:EmployeeRecord.Views"
-             x:Class="EmployeeRecord.VisitanteShellPage">
-    
+       xmlns:views="clr-namespace:EmployeeRecord.Views"
+             x:Class="EmployeeRecord.MenuAdminPage">
     <!--#region Recursos Visuales del Menu -->
     <Shell.Resources>
         <ResourceDictionary>
@@ -69,6 +68,7 @@
 
 
         </ResourceDictionary>
+
     </Shell.Resources>
     <!--#endregion-->
 
@@ -87,12 +87,24 @@
 
 
     <!--#region Menu Items-->
-    <FlyoutItem  Title="HomePage" Icon="">   
+    <FlyoutItem  Title="HomePage" Icon="ic_home.png">
         <ShellContent Title="HomePage" Route="HomePage" ContentTemplate="{DataTemplate views:MenuPage}"/>
     </FlyoutItem>
 
+    <FlyoutItem  Title="EntradasTI" Icon="ic_in.png">
+        <ShellContent Title="EntradasTI" Route="EntradasTiPage" ContentTemplate="{DataTemplate views:EntradasTiPage}"/>
+    </FlyoutItem>
+    <FlyoutItem  Title="SalidasTI" Icon="ic_in.png">
+        <ShellContent Title="SalidasTI" Route="SalidasTIPage" ContentTemplate="{DataTemplate views:SalidasTiPage}"/>
+    </FlyoutItem>
 
-    <!--#endregion-->
+    <FlyoutItem  Title="Admin Usuarios" Icon="ic_user.png">
+        <ShellContent Title="Usuarios" Route="UserListPage" ContentTemplate="{DataTemplate views:UserListPage}"/>
+    </FlyoutItem>
+
+
+
+    <!--#endregion  UserListPage-->
 
     <!--#region Pie de Pagina -->
     <Shell.FlyoutFooterTemplate>
@@ -110,6 +122,5 @@
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
     <!--#endregion-->
-
 
 </Shell>
