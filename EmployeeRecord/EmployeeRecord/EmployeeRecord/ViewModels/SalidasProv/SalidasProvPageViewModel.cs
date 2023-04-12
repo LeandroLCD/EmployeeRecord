@@ -109,7 +109,9 @@ namespace EmployeeRecord.ViewModels.SalidasProv
             ExitCommand = new Command(ExitMethod);
             #endregion
 
+            #region Proveedores
             _id = -1;
+            #endregion
 
 
         }
