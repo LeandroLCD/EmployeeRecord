@@ -74,7 +74,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             #endregion
 
             #region Employees
-            var employees = await _dataBaseService.GetEmployeeAllList();
+            var employees = await _dataBaseService.GetEmployeeZmotors();
             if (employees.Success)
             {
                 GetEmployees = (List<Employee>)employees.Objet;
@@ -138,7 +138,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             if (IsCompletet)
             {
                 IsCompletet = false;
-                var employees = await _dataBaseService.GetEmployeeAllList();
+                var employees = await _dataBaseService.GetEmployeeZmotors();
                 if (employees.Success)
                 {
                     GetEmployees = (List<Employee>)employees.Objet;

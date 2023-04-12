@@ -1,5 +1,6 @@
 ﻿using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Service.Interface;
 using System;
@@ -20,6 +21,7 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         private ObservableCollection<Company> _companyList;
         private TasksModel _taskSelected;
         private Company _companySelected;
+        private string _lastNameProv;
         private string _nameProv;
         #endregion
 
@@ -47,6 +49,12 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         {
             get => _nameProv;
             set => SetProperty(ref _nameProv, value);
+        }
+
+        public string LastNameProv
+        {
+            get => _lastNameProv;
+            set => SetProperty(ref _lastNameProv, value);
         }
 
         public Company CompanySelected
@@ -78,18 +86,20 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         #region Command
         public Command RegisterCommand { get; set; }
 
-        public Command<string> CreateTaskCommand { get; set; }
-
-        public Command<string> CreateCompanyCommand { get; set; }
+        public Command CreateTaskCommand { get; set; }
+               
+        public Command CreateCompanyCommand { get; set; }
         #endregion
 
         #region Methods
         private async void  InicializeProperties()
         {
+            _dataBaseService = DependencyService.Get<IDataBaseService>();
+
             #region Set Command
             RegisterCommand = new Command(Register);
-            CreateTaskCommand = new Command<string>(CreateTask);
-            CreateCompanyCommand = new Command<string>(CreateCompany);
+            CreateTaskCommand = new Command(CreateTask);
+            CreateCompanyCommand = new Command(CreateCompany);
             #endregion
 
             GetCompany();
@@ -99,8 +109,10 @@ namespace EmployeeRecord.ViewModels.EntradasProv
             
         }
 
-        private async void CreateCompany(string name)
+        private async void CreateCompany(object obj)
         {
+            var name = await App.Current.MainPage.DisplayPromptAsync("Crear nueva Empresa", "Ingrese el nombre de la empresa", "Crear", "Cancelar");
+
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name))
             {
                 var company = await _dataBaseService.InsertCompany(new Company { name = name });
@@ -116,8 +128,10 @@ namespace EmployeeRecord.ViewModels.EntradasProv
             }
         }
 
-        private async void CreateTask(string name)
+        private async void CreateTask(object obj)
         {
+            var name = await App.Current.MainPage.DisplayPromptAsync("Crear nueva Tarea", "Ingrese el nombre de tarea", "Crear", "Cancelar");
+
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name))
             {
                 var task = await _dataBaseService.InsertTask(new TasksModel { name = name });
@@ -140,6 +154,11 @@ namespace EmployeeRecord.ViewModels.EntradasProv
                 await App.Current.MainPage.DisplayAlert("Employee Record", "Nombre de proveedor requerido", "Ok");
                 return;
             }
+            if (string.IsNullOrEmpty(LastNameProv) && string.IsNullOrWhiteSpace(LastNameProv))
+            {
+                await App.Current.MainPage.DisplayAlert("Employee Record", "Apellido de proveedor requerido", "Ok");
+                return;
+            }
 
             if (string.IsNullOrEmpty(TaskSelected.name))
             {
@@ -154,7 +173,32 @@ namespace EmployeeRecord.ViewModels.EntradasProv
             }
             #endregion
 
-            var 
+            var proveedor = new ProveedorModel
+            {
+                nombre = NameProv,
+                apellidos = LastNameProv,
+                motivo = TaskSelected.name,
+                empresa = CompanySelected.name,
+                hora_entra = DateTime.Now,
+            };
+
+            var register = await _dataBaseService.InsertRegisterProvIn(proveedor);
+            if (register.Success)
+            {
+                NameProv = LastNameProv = string.Empty;
+                TaskSelected = new TasksModel();
+                CompanySelected = new Company();
+
+
+                await App.Current.MainPage.DisplayAlert("Employee Record", register.Message, "OK");
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Employee Record", register.Message, "OK");
+            }
+
+            
         }
         #endregion
 

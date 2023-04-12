@@ -34,5 +34,6 @@ namespace EmployeeRecord.Service.Interface
         Task<response> UpdateEmployee(Employee employee);
 
         Task<response> GetRegisterIn(string id);
+        Task<response> InsertRegisterProvIn(ProveedorModel proveedor);
     }
 }

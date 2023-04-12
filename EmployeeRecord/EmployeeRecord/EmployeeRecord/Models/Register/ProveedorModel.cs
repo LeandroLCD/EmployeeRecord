@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmployeeRecord.Models.Company
+namespace EmployeeRecord.Models.Register
 {
     public class ProveedorModel
     {
         public int id { get; set; }
-
-        public int idProveedor { get; set; }
 
         public string nombre { get; set; }
 
@@ -29,9 +27,8 @@ namespace EmployeeRecord.Models.Company
             if (IsExcited)
             {
                 return $"UPDATE `regis_prov` SET `hora_sali`='{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}',`IsExcited`='1' WHERE id='{id}'";
-                //`id`='{id}',`idEmpleado`='{idEmpleado}',`nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`empresa`='{empresa}',
-            }
-            return $"insert into `regis_prov`(id,idProveedor,nombre,apellidos,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{idProveedor}','{nombre}','{apellidos}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
+                 }
+            return $"insert into `regis_prov`(id,nombre,apellidos,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombre}','{apellidos}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
 
         }
     }
