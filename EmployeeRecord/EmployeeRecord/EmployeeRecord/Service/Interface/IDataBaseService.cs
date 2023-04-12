@@ -1,4 +1,5 @@
 ﻿using EmployeeRecord.Models.Autentication;
+using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
@@ -12,11 +13,17 @@ namespace EmployeeRecord.Service.Interface
 {
     public interface IDataBaseService
     {
-        Task<response> GetEmployeeList();
+        Task<response> GetEmployeeZmotors();
 
-        Task<response> GetEmployeeAllList();
+        Task<response> GetEmployeeProv();
 
         Task<response> GetTasksList();
+
+        Task<response> InsertTask(TasksModel task);
+
+        Task<response> GetCompanyList();
+
+        Task<response> InsertCompany(Company company);
 
         Task<response> InsertRegisterIn(EmployeeRegister employee);
 
@@ -27,5 +34,6 @@ namespace EmployeeRecord.Service.Interface
         Task<response> UpdateEmployee(Employee employee);
 
         Task<response> GetRegisterIn(string id);
+        Task<response> InsertRegisterProvIn(ProveedorModel proveedor);
     }
 }
