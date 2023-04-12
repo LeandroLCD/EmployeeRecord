@@ -35,7 +35,7 @@ namespace EmployeeRecord.Service.Implementation
 
         }
 
-        public Task<response> GetEmployeeProv()
+        public Task<response> GetProveedorIn()
         {
             try
             {
@@ -43,10 +43,10 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM `empleado`";
+                    cmd.CommandText = "SELECT * FROM `regis_prov` WHERE IsExcited = 0";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var data = DataReader.MapToList<Employee>(reader);
+                        var data = DataReader.MapToList<ProveedorModel>(reader);
                         return Task.FromResult(new response
                         {
                             Message = "Datos Cargados",
@@ -80,10 +80,10 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`, `email` FROM `empleado` WHERE !='Z Motors'"; //ojito con esto
+                    cmd.CommandText = "SELECT * FROM `empleado`";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var data = DataReader.MapToList<EmployeeModel>(reader);
+                        var data = DataReader.MapToList<Employee>(reader);
                         return Task.FromResult(new response
                         {
                             Message = "Datos Cargados",
@@ -100,13 +100,14 @@ namespace EmployeeRecord.Service.Implementation
             {
                 return Task.FromResult(new response
                 {
-                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Message = $"Se produjo un error al tratar de obtener la lista empleados.\nDetalles:{ex.Message}",
                     Objet = ex,
                     Status = ex.GetHashCode(),
                     Success = false
                 });
             }
-        }
+        
+    }
 
         public Task<response> GetTasksList()
         {
@@ -468,6 +469,42 @@ namespace EmployeeRecord.Service.Implementation
                 return Task.FromResult(new response
                 {
                     Message = $"Se produjo un error al tratar de registrar el proveedor.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> UpdateProvedorOut(ProveedorModel getProveedor)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = getProveedor.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Actualizado Exitosamente",
+                            Objet = getProveedor,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de actualizar el proveedor.\nDetalles:{ex.Message}",
                     Objet = ex,
                     Status = ex.GetHashCode(),
                     Success = false
