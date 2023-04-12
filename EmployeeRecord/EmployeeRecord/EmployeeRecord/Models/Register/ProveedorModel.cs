@@ -31,5 +31,10 @@ namespace EmployeeRecord.Models.Register
             return $"insert into `regis_prov`(id,nombre,apellidos,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombre}','{apellidos}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
 
         }
+
+        public override string ToString()
+        {
+            return $"{nombre} {apellidos}";
+        }
     }
 }

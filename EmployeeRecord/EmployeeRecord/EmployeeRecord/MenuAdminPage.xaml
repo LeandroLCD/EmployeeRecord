@@ -106,7 +106,9 @@
         <ShellContent Title="EntradasProv" Route="EntradasProvPage" ContentTemplate="{DataTemplate views:EntradasProvPage}"/>
     </FlyoutItem>
 
-
+    <FlyoutItem  Title="SalidasProv" Icon="ic_in.png">
+        <ShellContent Title="SalidasProv" Route="SalidasProvPage" ContentTemplate="{DataTemplate views:SalidasProvPage}"/>
+    </FlyoutItem>
 
 
 

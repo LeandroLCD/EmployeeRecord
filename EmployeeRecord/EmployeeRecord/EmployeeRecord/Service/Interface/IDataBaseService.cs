@@ -15,7 +15,7 @@ namespace EmployeeRecord.Service.Interface
     {
         Task<response> GetEmployeeZmotors();
 
-        Task<response> GetEmployeeProv();
+        Task<response> GetProveedorIn();
 
         Task<response> GetTasksList();
 
@@ -35,5 +35,6 @@ namespace EmployeeRecord.Service.Interface
 
         Task<response> GetRegisterIn(string id);
         Task<response> InsertRegisterProvIn(ProveedorModel proveedor);
+        Task<response> UpdateProvedorOut(ProveedorModel getProveedor);
     }
 }

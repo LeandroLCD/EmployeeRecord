@@ -27,9 +27,15 @@ namespace EmployeeRecord
             //login register ni forogot, solo las paginas de adentro de la app
             Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
 
-            #region Crews Entradas TI
+            #region Crews TI
             Routing.RegisterRoute(nameof(EntradasTiPage), typeof(EntradasTiPage));
             Routing.RegisterRoute(nameof(SalidasTiPage), typeof(SalidasTiPage));
+
+            #endregion
+
+            #region Crews Prov
+            Routing.RegisterRoute(nameof(EntradasProvPage), typeof(EntradasProvPage));
+            Routing.RegisterRoute(nameof(SalidasProvPage), typeof(SalidasProvPage));
 
             #endregion
 
