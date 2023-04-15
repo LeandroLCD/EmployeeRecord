@@ -4,9 +4,9 @@
              x:Class="EmployeeRecord.Views.MenuPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Aqui Va Mi Imagen"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="menu_boro.jpg"
+                HeightRequest="400"
+                HorizontalOptions="Center"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
