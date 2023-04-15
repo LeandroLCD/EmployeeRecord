@@ -1,12 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeRecord.Views.SearchPage">
+             x:Class="EmployeeRecord.Views.SearchPage"
+             Title="Buscar Evento">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Aqui estaran los eventos registrados  obviamente el buscador para buscarlo por fecha"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" HeightRequest="50" Margin="-20,0" Padding="20" BackgroundColor="#1C375C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Image Grid.Row="0" Source="planificacion.png" Aspect="AspectFit" HeightRequest="140" WidthRequest="40" VerticalOptions="CenterAndExpand"></Image>
+            </StackLayout>
+            <Label HeightRequest="40" FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
+            <Entry Grid.Row="2" Placeholder="Ingresa fecha de inicio" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+
+            <Entry Grid.Row="3" Placeholder="Ingresa fecha de termino" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+
+
+            <Button Grid.Row="6" TextColor="WhiteSmoke" Text="Iniciar Busqueda" BackgroundColor="#1472FA" CornerRadius="20"></Button>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

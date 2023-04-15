@@ -61,7 +61,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=192.168.0.108;Database=zmsite;Uid=root;Pwd=admin246;.
+        ///   Looks up a localized string similar to Server=192.168.100.10;Database=zmsite;Uid=root;Pwd=;.
         /// </summary>
         internal static string db_conexion {
             get {
