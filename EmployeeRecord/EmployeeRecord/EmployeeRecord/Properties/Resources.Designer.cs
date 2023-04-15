@@ -61,11 +61,20 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=192.168.0.108;Database=zmsite;Uid=root;Pwd=admin246;.
+        ///   Looks up a localized string similar to Server=192.168.0.106;Database=zmsite;Uid=root;Pwd=admin246;ConvertZeroDateTime=True;.
         /// </summary>
         internal static string db_conexion {
             get {
                 return ResourceManager.GetString("db_conexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server=192.168.0.106;Database=zmsite;Uid=root;Pwd=admin246;ConvertZeroDateTime=True;.
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }
