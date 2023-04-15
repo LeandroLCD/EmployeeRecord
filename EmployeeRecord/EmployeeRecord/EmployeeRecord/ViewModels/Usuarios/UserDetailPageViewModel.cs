@@ -14,8 +14,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
     public class UserDetailPageViewModel: BaseViewModel
     {
         #region Fields
-        private Employee _employeeSelected;
-        public static Employee GetEmployee { get; set; }
+        private EmployeeModel _employeeSelected;
+        public static EmployeeModel GetEmployee { get; set; }
         private IDataBaseService _dataBaseService;
 
         #endregion
@@ -30,7 +30,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             }
             else
             {
-                EmployeeSelected = new Employee();
+                EmployeeSelected = new EmployeeModel();
             }
             InicializeProperties();
         }
@@ -41,7 +41,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
         /// Muestra la lista de los empleados en la vista (Picker)
         /// </summary> 
 
-        public Employee EmployeeSelected
+        public EmployeeModel EmployeeSelected
         {
             get => _employeeSelected;
             set => SetProperty(ref _employeeSelected, value);
@@ -51,7 +51,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
 
         #region Command
 
-        public Command<Employee> UpDateEmployeeCommand { get; set; }
+        public Command<EmployeeModel> UpDateEmployeeCommand { get; set; }
 
         #endregion
 
@@ -64,11 +64,11 @@ namespace EmployeeRecord.ViewModels.Usuarios
             _dataBaseService = DependencyService.Get<IDataBaseService>();
 
             #region Set Command
-            UpDateEmployeeCommand = new Command<Employee>(UpDateEmployee);
+            UpDateEmployeeCommand = new Command<EmployeeModel>(UpDateEmployee);
             #endregion
         }
 
-        private async void UpDateEmployee(Employee employee)
+        private async void UpDateEmployee(EmployeeModel employee)
         {
             IsLoading = true;
             var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de adtualizar la información el usuario {employee}?", "Aceptar", "Cancelar");
@@ -78,7 +78,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
                 if (response.Success)
                 {
                     IsCompletet = true;
-                    AdminShellPage.OnBackButton();
+                    MenuAdminPage.OnBackButton();
                     return;
                 }
             }

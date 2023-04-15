@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeRecord.Views.SearchPage"
+              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.SearchPage"
              Title="Buscar Evento">
-
+    <!--#region Conecta el Viewmodel con la vista -->
+    <ContentPage.BindingContext>
+        <viewModel:SearchPageViewModel/>
+    </ContentPage.BindingContext>
+    <!--#endregion-->
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
@@ -19,17 +24,24 @@
             <Label HeightRequest="40" FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
 
             <DatePicker Grid.Row="2" 
+                        Date="{Binding GetFecha_ini}"
                         TextColor="#0C0C0C" 
                         HorizontalOptions="FillAndExpand" 
                         VerticalOptions="FillAndExpand"/>
 
             <DatePicker Grid.Row="3" 
+                        Date="{Binding GetFecha_fin}"
                         TextColor="#0C0C0C" 
                         HorizontalOptions="FillAndExpand" 
                         VerticalOptions="FillAndExpand"/>
 
 
-            <Button Grid.Row="6" TextColor="WhiteSmoke" Text="Iniciar Busqueda" BackgroundColor="#1472FA" CornerRadius="20"></Button>
+            <Button Command="{Binding SearchCommand}"
+                    IsEnabled="{Binding IsEnabledButton}"
+                Grid.Row="6" 
+                    TextColor="WhiteSmoke" 
+                    Text="Iniciar Busqueda" 
+                    BackgroundColor="#1472FA" CornerRadius="20"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

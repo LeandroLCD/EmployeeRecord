@@ -6,6 +6,8 @@ using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
 using MySqlConnector;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -180,7 +182,7 @@ namespace EmployeeRecord.Service.Implementation
             }
         }
 
-        public Task<response> DeleteEmployee(Employee employee)
+        public Task<response> DeleteEmployee(EmployeeModel employee)
         {
             try
             {
@@ -253,7 +255,7 @@ namespace EmployeeRecord.Service.Implementation
             }
         }
 
-        public Task<response> UpdateEmployee(Employee employee)
+        public Task<response> UpdateEmployee(EmployeeModel employee)
         {
             try
             {
@@ -505,6 +507,50 @@ namespace EmployeeRecord.Service.Implementation
                 return Task.FromResult(new response
                 {
                     Message = $"Se produjo un error al tratar de actualizar el proveedor.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> SearchRegister(DateTime fecha_ini, DateTime fecha_fin)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = $@"SELECT `nombre`, `apellidos`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited`
+                                        FROM (
+                                            SELECT `nombre`, `apellidos`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_prov`
+                                            UNION ALL
+                                            SELECT `nombre`, `apellidos`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_bita`
+                                        ) as combined_data
+                                        WHERE `hora_entra` BETWEEN '{fecha_ini.Date.ToString("yyyy-MM-dd HH:mm:ss")}' AND '{fecha_fin.Date.ToString("yyyy-MM-dd")} 23:59:59';
+
+                                        ";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<RegisterEventModel>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los registros.\nDetalles:{ex.Message}",
                     Objet = ex,
                     Status = ex.GetHashCode(),
                     Success = false

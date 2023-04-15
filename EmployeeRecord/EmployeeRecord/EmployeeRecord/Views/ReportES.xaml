@@ -1,12 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeRecord.Views.ReportES">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.ReportES"
+             x:Class="EmployeeRecord.Views.ReportES"
+             Title="Reporte de Eventos">
+    <!--#region Conecta el Viewmodel con la vista -->
+    <ContentPage.BindingContext>
+        <viewModel:ReportESViewModel/>
+    </ContentPage.BindingContext>
+    <!--#endregion-->
+    
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid Padding="10">
+                <ListView ItemsSource="{Binding GetEvents}" SelectionMode="None">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="200">
+                                <Grid>
+                                    <ScrollView Orientation="Horizontal">
+                                       <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        <Label Text="{Binding nombre}"/>
+                                        <Label Text="{Binding apellidos}"/>
+                                        <Label Text="{Binding motivo}" WidthRequest="150" HorizontalOptions="EndAndExpand"/>
+                                        <Label Text="{Binding hora_entra}"/>
+                                        </StackLayout> 
+                                    </ScrollView>
+                                    
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Grid>
+            <Button Text="Report" 
+                    Background="Red" 
+                    HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

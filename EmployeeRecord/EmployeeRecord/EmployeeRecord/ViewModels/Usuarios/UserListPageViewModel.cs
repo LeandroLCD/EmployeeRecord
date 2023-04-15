@@ -15,8 +15,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
     public class UserListPageViewModel: BaseViewModel
     {
         #region Fields
-        private ObservableCollection<Employee> _employeeList;
-        private List<Employee> GetEmployees { get; set; }
+        private ObservableCollection<EmployeeModel> _employeeList;
+        private List<EmployeeModel> GetEmployees { get; set; }
         private Employee _employeeSelected;
         private IDataBaseService _dataBaseService;
 
@@ -34,7 +34,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
         /// Muestra la lista de los empleados en la vista (Picker)
         /// </summary> 
 
-        public ObservableCollection<Employee> EmployeeList
+        public ObservableCollection<EmployeeModel> EmployeeList
         {
             get => _employeeList;
             set => SetProperty(ref _employeeList, value);
@@ -43,9 +43,9 @@ namespace EmployeeRecord.ViewModels.Usuarios
         #endregion
 
         #region Command
-        public Command<Employee> EmployeeDetailCommand { get; set; }
+        public Command<EmployeeModel> EmployeeDetailCommand { get; set; }
 
-        public Command<Employee> DeleteEmployeeCommand { get; set; }
+        public Command<EmployeeModel> DeleteEmployeeCommand { get; set; }
 
         public Command<string> SearchBarCommand { get; set; }
         #endregion
@@ -60,7 +60,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
 
 
             #region Set Command
-            EmployeeDetailCommand = new Command<Employee>(async (employee) => {
+            EmployeeDetailCommand = new Command<EmployeeModel>(async (employee) => {
                 if(employee != null)
                 {
                     UserDetailPageViewModel.GetEmployee = employee;
@@ -69,7 +69,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             });
             SearchBarCommand = new Command<string>(SearchBarChanged);
 
-            DeleteEmployeeCommand = new Command<Employee>(DeleteEmployee);
+            DeleteEmployeeCommand = new Command<EmployeeModel>(DeleteEmployee);
 
             #endregion
 
@@ -77,8 +77,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
             var employees = await _dataBaseService.GetEmployeeZmotors();
             if (employees.Success)
             {
-                GetEmployees = (List<Employee>)employees.Objet;
-                EmployeeList = new ObservableCollection<Employee>(GetEmployees);
+                GetEmployees = (List<EmployeeModel>)employees.Objet;
+                EmployeeList = new ObservableCollection<EmployeeModel>(GetEmployees);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
 
                 if (!string.IsNullOrEmpty(txt))
                 {
-                    EmployeeList = new ObservableCollection<Employee>(GetEmployees.Where(c => c.nombre.ToLowerInvariant().Contains(txt.ToLowerInvariant())
+                    EmployeeList = new ObservableCollection<EmployeeModel>(GetEmployees.Where(c => c.nombre.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.apellidos.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.puesto.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.empresa.ToLowerInvariant().Contains(txt.ToLowerInvariant())
@@ -106,7 +106,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
                     ));
                     return;
                 }
-                EmployeeList = new ObservableCollection<Employee>(GetEmployees);
+                EmployeeList = new ObservableCollection<EmployeeModel>(GetEmployees);
             }
             catch (Exception)
             {
@@ -115,7 +115,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             }
         }
 
-        private async void DeleteEmployee(Employee employee)
+        private async void DeleteEmployee(EmployeeModel employee)
         {
             var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de eliminar el usuario {employee}?", "Aceptar", "Cancelar");
             if (resp)
@@ -125,7 +125,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
                 {
 
                     GetEmployees.Remove(employee);
-                    EmployeeList = new ObservableCollection<Employee>(GetEmployees);
+                    EmployeeList = new ObservableCollection<EmployeeModel>(GetEmployees);
                 }
             }
 
@@ -141,8 +141,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
                 var employees = await _dataBaseService.GetEmployeeZmotors();
                 if (employees.Success)
                 {
-                    GetEmployees = (List<Employee>)employees.Objet;
-                    EmployeeList = new ObservableCollection<Employee>(GetEmployees);
+                    GetEmployees = (List<EmployeeModel>)employees.Objet;
+                    EmployeeList = new ObservableCollection<EmployeeModel>(GetEmployees);
                 }
                 else
                 {

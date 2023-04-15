@@ -9,8 +9,10 @@
     <ContentPage.BindingContext>
         <viewModel:EntradasProvPageViewModel/>
     </ContentPage.BindingContext>
+    
+  <!--#endregion-->  
     <ContentPage.Content>
-<!--#endregion-->
+
 
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>

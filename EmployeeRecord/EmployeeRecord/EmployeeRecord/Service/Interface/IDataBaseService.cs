@@ -29,12 +29,16 @@ namespace EmployeeRecord.Service.Interface
 
         Task<response> UpdateRegisterOut(EmployeeRegister employee);
 
-        Task<response> DeleteEmployee(Employee employee);
+        Task<response> DeleteEmployee(EmployeeModel employee);
 
-        Task<response> UpdateEmployee(Employee employee);
+        Task<response> UpdateEmployee(EmployeeModel employee);
 
         Task<response> GetRegisterIn(string id);
+
         Task<response> InsertRegisterProvIn(ProveedorModel proveedor);
+
         Task<response> UpdateProvedorOut(ProveedorModel getProveedor);
+
+        Task<response> SearchRegister(DateTime fecha_ini, DateTime fecha_fin);
     }
 }
