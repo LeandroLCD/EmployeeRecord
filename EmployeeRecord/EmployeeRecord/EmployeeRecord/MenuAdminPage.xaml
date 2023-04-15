@@ -87,27 +87,31 @@
 
 
     <!--#region Menu Items-->
-    <FlyoutItem  Title="HomePage" Icon="ic_home.png">
+    <FlyoutItem  Title="HomePage" Icon="home.png">
         <ShellContent Title="HomePage" Route="HomePage" ContentTemplate="{DataTemplate views:MenuPage}"/>
     </FlyoutItem>
-    <FlyoutItem  Title="Admin Usuarios" Icon="ic_user.png">
+    <FlyoutItem  Title="Admin Usuarios" Icon="group.png">
         <ShellContent Title="Usuarios" Route="UserListPage" ContentTemplate="{DataTemplate views:UserListPage}"/>
     </FlyoutItem>
     
-    <FlyoutItem  Title="EntradasTI" Icon="ic_in.png">
+    <FlyoutItem  Title="EntradasTI" Icon="entradas.png">
         <ShellContent Title="EntradasTI" Route="EntradasTiPage" ContentTemplate="{DataTemplate views:EntradasTiPage}"/>
     </FlyoutItem>
     
-    <FlyoutItem  Title="SalidasTI" Icon="ic_in.png">
+    <FlyoutItem  Title="SalidasTI" Icon="salidas.png">
         <ShellContent Title="SalidasTI" Route="SalidasTIPage" ContentTemplate="{DataTemplate views:SalidasTiPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem  Title="EntradasProv" Icon="ic_in.png">
+    <FlyoutItem  Title="EntradasProv" Icon="entradas.png">
         <ShellContent Title="EntradasProv" Route="EntradasProvPage" ContentTemplate="{DataTemplate views:EntradasProvPage}"/>
     </FlyoutItem>
-
-    <FlyoutItem  Title="SalidasProv" Icon="ic_in.png">
+    
+    <FlyoutItem  Title="SalidasProv" Icon="salidas.png">
         <ShellContent Title="SalidasProv" Route="SalidasProvPage" ContentTemplate="{DataTemplate views:SalidasProvPage}"/>
+    </FlyoutItem>
+
+    <FlyoutItem  Title="Buscar Evento" Icon="lupa.png">
+        <ShellContent Title="Buscar Evento" Route="SearchPage" ContentTemplate="{DataTemplate views:SearchPage}"/>
     </FlyoutItem>
 
 
