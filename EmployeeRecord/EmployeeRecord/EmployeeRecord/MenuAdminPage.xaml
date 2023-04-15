@@ -105,7 +105,7 @@
     <FlyoutItem  Title="EntradasProv" Icon="entradas.png">
         <ShellContent Title="EntradasProv" Route="EntradasProvPage" ContentTemplate="{DataTemplate views:EntradasProvPage}"/>
     </FlyoutItem>
-
+    
     <FlyoutItem  Title="SalidasProv" Icon="salidas.png">
         <ShellContent Title="SalidasProv" Route="SalidasProvPage" ContentTemplate="{DataTemplate views:SalidasProvPage}"/>
     </FlyoutItem>
@@ -113,6 +113,7 @@
     <FlyoutItem  Title="Buscar Evento" Icon="lupa.png">
         <ShellContent Title="Buscar Evento" Route="SearchPage" ContentTemplate="{DataTemplate views:SearchPage}"/>
     </FlyoutItem>
+
 
 
 

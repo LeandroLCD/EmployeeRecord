@@ -41,10 +41,11 @@ namespace EmployeeRecord
             Routing.RegisterRoute(nameof(EntradasProvPage), typeof(EntradasProvPage));
             Routing.RegisterRoute(nameof(SalidasProvPage), typeof(SalidasProvPage));
             #endregion
-
+           
             #region Crews Busqueda y Reportes
             Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
             Routing.RegisterRoute(nameof(ReportES), typeof(ReportES));
+
             #endregion
 
 
