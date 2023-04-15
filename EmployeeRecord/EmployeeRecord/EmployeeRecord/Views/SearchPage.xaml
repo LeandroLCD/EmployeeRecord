@@ -17,9 +17,16 @@
                 <Image Grid.Row="0" Source="planificacion.png" Aspect="AspectFit" HeightRequest="140" WidthRequest="40" VerticalOptions="CenterAndExpand"></Image>
             </StackLayout>
             <Label HeightRequest="40" FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
-            <Entry Grid.Row="2" Placeholder="Ingresa fecha de inicio" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
 
-            <Entry Grid.Row="3" Placeholder="Ingresa fecha de termino" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+            <DatePicker Grid.Row="2" 
+                        TextColor="#0C0C0C" 
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"/>
+
+            <DatePicker Grid.Row="3" 
+                        TextColor="#0C0C0C" 
+                        HorizontalOptions="FillAndExpand" 
+                        VerticalOptions="FillAndExpand"/>
 
 
             <Button Grid.Row="6" TextColor="WhiteSmoke" Text="Iniciar Busqueda" BackgroundColor="#1472FA" CornerRadius="20"></Button>

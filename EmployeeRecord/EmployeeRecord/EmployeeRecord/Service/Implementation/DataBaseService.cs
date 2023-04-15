@@ -83,7 +83,7 @@ namespace EmployeeRecord.Service.Implementation
                     cmd.CommandText = "SELECT * FROM `empleado`";
                     using (var reader = cmd.ExecuteReader())
                     {
-                        var data = DataReader.MapToList<Employee>(reader);
+                        var data = DataReader.MapToList<EmployeeModel>(reader);
                         return Task.FromResult(new response
                         {
                             Message = "Datos Cargados",
