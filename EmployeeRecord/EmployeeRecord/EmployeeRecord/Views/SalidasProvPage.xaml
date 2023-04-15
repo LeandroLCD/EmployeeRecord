@@ -22,7 +22,7 @@
 
             <StackLayout Grid.Row="2" VerticalOptions="StartAndExpand">
 
-                <Picker Title="Proveedores"
+                <Picker Title="Proveedores" 
                         FontSize="Medium"
                         SelectedIndex="{Binding Id}"
                         ItemsSource="{Binding GetProveedorsList}"
