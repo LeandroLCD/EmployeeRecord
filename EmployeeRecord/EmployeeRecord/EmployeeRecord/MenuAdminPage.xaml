@@ -110,6 +110,11 @@
         <ShellContent Title="SalidasProv" Route="SalidasProvPage" ContentTemplate="{DataTemplate views:SalidasProvPage}"/>
     </FlyoutItem>
 
+    <FlyoutItem  Title="Buscar Evento" Icon="lupa.png">
+        <ShellContent Title="Buscar Evento" Route="SearchPage" ContentTemplate="{DataTemplate views:SearchPage}"/>
+    </FlyoutItem>
+
+
 
 
     <!--#endregion  UserListPage-->
