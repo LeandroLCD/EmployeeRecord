@@ -84,7 +84,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
             #endregion
 
             #region Employees
-            var employees = await _dataBaseService.GetEmployeeList();
+            var employees = await _dataBaseService.GetEmployeeZmotors();
             if (employees.Success)
             {
                 EmployeeList = new ObservableCollection<EmployeeModel>((List<EmployeeModel>)employees.Objet);
@@ -117,13 +117,13 @@ namespace EmployeeRecord.ViewModels.EntradasTI
             #region Validations
             if (EmployeeSelected == null)
             {
-                //Agregar el error a la vista DisplayAlert//Propiedad publica de tipo string
+                await App.Current.MainPage.DisplayAlert("Employee Record", "Error Al Seleccionar Al Empleado", "Ok");
                 IsLoading = false;
                 return;
             }
             if (GetTasks == null)
             {
-                //Agregar el error a la vista
+                await App.Current.MainPage.DisplayAlert("Employee Record", "Error Al Seleccionar La Tarea", "Ok");
                 IsLoading = false;
                 return;
             }
@@ -134,7 +134,7 @@ namespace EmployeeRecord.ViewModels.EntradasTI
             var employee = new EmployeeRegister()
             {
                 hora_entra = DateTime.Now,
-                motivo = GetTasks.Name,
+                motivo = GetTasks.name,
                 nombre = EmployeeSelected.nombre,
                 apellidos = EmployeeSelected.apellidos,
                 puesto = EmployeeSelected.puesto,

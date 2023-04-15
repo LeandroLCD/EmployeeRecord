@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeRecord.ViewModels.SalidasProv;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,18 @@ namespace EmployeeRecord.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SalidasProvPage : ContentPage
     {
+        private SalidasProvPageViewModel _viewModels;
+
         public SalidasProvPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            _viewModels = (SalidasProvPageViewModel)BindingContext;
+            _viewModels.Actualizate();
+            base.OnAppearing();
         }
     }
 }

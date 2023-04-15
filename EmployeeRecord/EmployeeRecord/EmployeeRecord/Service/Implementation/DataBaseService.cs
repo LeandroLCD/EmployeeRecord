@@ -1,4 +1,4 @@
-﻿using EmployeeRecord.Models.Autentication;
+﻿using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
@@ -6,336 +6,511 @@ using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
 using MySqlConnector;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.Service.Implementation
 {
-  
-        public class DataBaseService : IDataBaseService
+
+    public class DataBaseService : IDataBaseService
+    {
+        private static IDataBaseConection _dataBaseConection;
+        private MySqlConnection _connection;
+
+        public DataBaseService()
         {
-            private static IDataBaseConection _dataBaseConection;
-            private MySqlConnection _connection;
-
-            public DataBaseService()
+            try
             {
-                try
-                {
-                    _dataBaseConection = DependencyService.Get<IDataBaseConection>();
+                _dataBaseConection = DependencyService.Get<IDataBaseConection>();
 
-                    _connection = _dataBaseConection.SqlConnection(Properties.Resources.db_conexion);
-                }
-                catch (Exception ex)
-                {
-
-                    App.Current.MainPage.DisplayAlert("Employee Record", ex.Message, "ok");
-                }
-
-
+                _connection = _dataBaseConection.SqlConnection(Properties.Resources.db_conexion);
             }
-
-            public Task<response> GetEmployeeAllList()
+            catch (Exception ex)
             {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = "SELECT * FROM `empleado`";
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            var data = DataReader.MapToList<Employee>(reader);
-                            return Task.FromResult(new response
-                            {
-                                Message = "Datos Cargados",
-                                Objet = data,
-                                Status = 200,
-                                Success = true
-                            });
 
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de obtener la lista empleados.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
+                App.Current.MainPage.DisplayAlert("Employee Record", ex.Message, "ok");
             }
 
 
-            public Task<response> GetEmployeeList()
+        }
+
+        public Task<response> GetProveedorIn()
+        {
+            try
             {
-                try
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
                 {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
+                    cmd.CommandText = "SELECT * FROM `regis_prov` WHERE IsExcited = 0";
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        cmd.CommandText = "SELECT `id`, `nombre`, `apellidos`, `empresa`, `puesto`, `email` FROM `empleado`"; //ojito con esto
-                        using (var reader = cmd.ExecuteReader())
+                        var data = DataReader.MapToList<ProveedorModel>(reader);
+                        return Task.FromResult(new response
                         {
-                            var data = DataReader.MapToList<EmployeeModel>(reader);
-                            return Task.FromResult(new response
-                            {
-                                Message = "Datos Cargados",
-                                Objet = data,
-                                Status = 200,
-                                Success = true
-                            });
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
 
-                        }
                     }
+                }
 
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
             }
-
-            public Task<response> GetTasksList()
+            catch (Exception ex)
             {
-                try
+                return Task.FromResult(new response
                 {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = "SELECT *  FROM `tasks`";
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            var data = DataReader.MapToList<TasksModel>(reader);
-                            return Task.FromResult(new response
-                            {
-                                Message = "Datos Cargados",
-                                Objet = data,
-                                Status = 200,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
-            }
-
-            public Task<response> InsertRegisterIn(EmployeeRegister employee)
-            {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = employee.ToQuery();
-                        using (var reader = cmd.ExecuteReader())
-                        {
-
-                            return Task.FromResult(new response
-                            {
-                                Message = "Datos Registrados Exitosamente",
-                                Status = 200,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
-            }
-
-            public Task<response> DeleteEmployee(Employee employee)
-            {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = $"DELETE FROM `empleado` WHERE id = {employee.id} && email = '{employee.email}'";
-                        using (var reader = cmd.ExecuteReader())
-                        {
-
-                            return Task.FromResult(new response
-                            {
-                                Message = "Employee Eliminado Exitosamente",
-                                Objet = employee,
-                                Status = 200,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
-            }
-
-            public Task<response> UpdateRegisterOut(EmployeeRegister employee)
-            {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-
-                        cmd.CommandText = employee.ToQuery();
-                        using (var reader = cmd.ExecuteReader())
-                        {
-
-                            return Task.FromResult(new response
-                            {
-                                Message = "Employee Actualizado Exitosamente",
-                                Objet = employee,
-                                Status = 200,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
-            }
-
-
-            public Task<response> UpdateEmployee(Employee employee)
-            {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = employee.ToQueryUpdate();
-                        using (var reader = cmd.ExecuteReader())
-                        {
-
-                            return Task.FromResult(new response
-                            {
-                                Message = "Employee Actualizado Exitosamente",
-                                Objet = employee,
-                                Status = 200,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
-            }
-
-            public Task<response> GetRegisterIn(string id)
-            {
-                try
-                {
-                    if (_connection.State != System.Data.ConnectionState.Open)
-                        _connection.Open();
-                    using (var cmd = _connection.CreateCommand())
-                    {
-                        cmd.CommandText = $"SELECT *  FROM `regis_bita`  WHERE idEmpleado = '{id}' & IsExcited = '0'";
-                        using (var reader = cmd.ExecuteReader())
-                        {
-                            var data = DataReader.MapToList<EmployeeRegister>(reader);
-                            if (data.FirstOrDefault() != null)
-                            {
-                                return Task.FromResult(new response
-                                {
-                                    Message = "Datos Cargados",
-                                    Objet = data.FirstOrDefault(),
-                                    Status = 200,
-                                    Success = true
-                                });
-                            }
-                            return Task.FromResult(new response
-                            {
-                                Message = $"No se encontraron datos para el id del empleado {id}",
-                                Objet = id,
-                                Status = 201,
-                                Success = true
-                            });
-
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    return Task.FromResult(new response
-                    {
-                        Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
-                        Objet = ex,
-                        Status = ex.GetHashCode(),
-                        Success = false
-                    });
-                }
+                    Message = $"Se produjo un error al tratar de obtener la lista empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
             }
         }
-    
+
+
+        public Task<response> GetEmployeeZmotors()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM `empleado`";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<EmployeeModel>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener la lista empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        
+    }
+
+        public Task<response> GetTasksList()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT *  FROM `tasks`";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<TasksModel>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertRegisterIn(EmployeeRegister employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = employee.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> DeleteEmployee(Employee employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = $"DELETE FROM `empleado` WHERE id = {employee.id} && email = '{employee.email}'";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Employee Eliminado Exitosamente",
+                            Objet = employee,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> UpdateRegisterOut(EmployeeRegister employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+
+                    cmd.CommandText = employee.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Employee Actualizado Exitosamente",
+                            Objet = employee,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> UpdateEmployee(Employee employee)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = employee.ToQueryUpdate();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Employee Actualizado Exitosamente",
+                            Objet = employee,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de eliminar el empleado.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> GetRegisterIn(string id)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT *  FROM `regis_bita`  WHERE idEmpleado = '{id}' & IsExcited = '0'";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<EmployeeRegister>(reader);
+                        if (data.FirstOrDefault() != null)
+                        {
+                            return Task.FromResult(new response
+                            {
+                                Message = "Datos Cargados",
+                                Objet = data.FirstOrDefault(),
+                                Status = 200,
+                                Success = true
+                            });
+                        }
+                        return Task.FromResult(new response
+                        {
+                            Message = $"No se encontraron datos para el id del empleado {id}",
+                            Objet = id,
+                            Status = 201,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener los empleados.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> GetCompanyList()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT *  FROM `empresa`";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<Company>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener las empresas.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertTask(TasksModel task)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = task.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de insertar nueva tarea.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertCompany(Company company)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = company.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de insertar la empresa.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertRegisterProvIn(ProveedorModel proveedor)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = proveedor.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de registrar el proveedor.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> UpdateProvedorOut(ProveedorModel getProveedor)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = getProveedor.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Actualizado Exitosamente",
+                            Objet = getProveedor,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de actualizar el proveedor.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+    }
+
 }
