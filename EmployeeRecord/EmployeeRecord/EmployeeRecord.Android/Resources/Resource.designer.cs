@@ -16487,64 +16487,64 @@ namespace EmployeeRecord.Droid
 			public const int abc_vector_test = 2131165268;
 			
 			// aapt resource value: 0x7F070055
-			public const int avd_hide_password = 2131165269;
+			public const int abierto = 2131165269;
 			
 			// aapt resource value: 0x7F070056
-			public const int avd_show_password = 2131165270;
+			public const int avd_hide_password = 2131165270;
 			
 			// aapt resource value: 0x7F070057
-			public const int btn_checkbox_checked_mtrl = 2131165271;
+			public const int avd_show_password = 2131165271;
 			
 			// aapt resource value: 0x7F070058
-			public const int btn_checkbox_checked_to_unchecked_mtrl_animation = 2131165272;
+			public const int btn_checkbox_checked_mtrl = 2131165272;
 			
 			// aapt resource value: 0x7F070059
-			public const int btn_checkbox_unchecked_mtrl = 2131165273;
+			public const int btn_checkbox_checked_to_unchecked_mtrl_animation = 2131165273;
 			
 			// aapt resource value: 0x7F07005A
-			public const int btn_checkbox_unchecked_to_checked_mtrl_animation = 2131165274;
+			public const int btn_checkbox_unchecked_mtrl = 2131165274;
 			
 			// aapt resource value: 0x7F07005B
-			public const int btn_radio_off_mtrl = 2131165275;
+			public const int btn_checkbox_unchecked_to_checked_mtrl_animation = 2131165275;
 			
 			// aapt resource value: 0x7F07005C
-			public const int btn_radio_off_to_on_mtrl_animation = 2131165276;
+			public const int btn_radio_off_mtrl = 2131165276;
 			
 			// aapt resource value: 0x7F07005D
-			public const int btn_radio_on_mtrl = 2131165277;
+			public const int btn_radio_off_to_on_mtrl_animation = 2131165277;
 			
 			// aapt resource value: 0x7F07005E
-			public const int btn_radio_on_to_off_mtrl_animation = 2131165278;
+			public const int btn_radio_on_mtrl = 2131165278;
 			
 			// aapt resource value: 0x7F07005F
-			public const int design_fab_background = 2131165279;
+			public const int btn_radio_on_to_off_mtrl_animation = 2131165279;
 			
 			// aapt resource value: 0x7F070060
-			public const int design_ic_visibility = 2131165280;
+			public const int design_fab_background = 2131165280;
 			
 			// aapt resource value: 0x7F070061
-			public const int design_ic_visibility_off = 2131165281;
+			public const int design_ic_visibility = 2131165281;
 			
 			// aapt resource value: 0x7F070062
-			public const int design_password_eye = 2131165282;
+			public const int design_ic_visibility_off = 2131165282;
 			
 			// aapt resource value: 0x7F070063
-			public const int design_snackbar_background = 2131165283;
-			
-			// aapt resource value: 0x7F070066
-			public const int entradas = 2131165286;
+			public const int design_password_eye = 2131165283;
 			
 			// aapt resource value: 0x7F070064
-			public const int entrada_cuatro = 2131165284;
+			public const int design_snackbar_background = 2131165284;
 			
 			// aapt resource value: 0x7F070065
-			public const int entrada_tres = 2131165285;
+			public const int entrada_cuatro = 2131165285;
+			
+			// aapt resource value: 0x7F070066
+			public const int entrada_tres = 2131165286;
 			
 			// aapt resource value: 0x7F070067
-			public const int forgor_password = 2131165287;
+			public const int exit = 2131165287;
 			
 			// aapt resource value: 0x7F070068
-			public const int group = 2131165288;
+			public const int forgor_password = 2131165288;
 			
 			// aapt resource value: 0x7F070069
 			public const int home = 2131165289;
@@ -16712,34 +16712,46 @@ namespace EmployeeRecord.Droid
 			public const int notify_panel_notification_icon_bg = 2131165343;
 			
 			// aapt resource value: 0x7F0700A0
-			public const int planificacion = 2131165344;
+			public const int pdf = 2131165344;
 			
 			// aapt resource value: 0x7F0700A1
-			public const int preference_list_divider_material = 2131165345;
+			public const int pdf2 = 2131165345;
 			
 			// aapt resource value: 0x7F0700A2
-			public const int registro = 2131165346;
-			
-			// aapt resource value: 0x7F0700A5
-			public const int salidas = 2131165349;
+			public const int planificacion = 2131165346;
 			
 			// aapt resource value: 0x7F0700A3
-			public const int salida_dos = 2131165347;
+			public const int preference_list_divider_material = 2131165347;
 			
 			// aapt resource value: 0x7F0700A4
-			public const int salida_uno = 2131165348;
-			
-			// aapt resource value: 0x7F0700A6
-			public const int test_custom_background = 2131165350;
+			public const int registro = 2131165348;
 			
 			// aapt resource value: 0x7F0700A7
-			public const int tooltip_frame_dark = 2131165351;
+			public const int salidas = 2131165351;
+			
+			// aapt resource value: 0x7F0700A5
+			public const int salida_dos = 2131165349;
+			
+			// aapt resource value: 0x7F0700A6
+			public const int salida_uno = 2131165350;
 			
 			// aapt resource value: 0x7F0700A8
-			public const int tooltip_frame_light = 2131165352;
+			public const int test_custom_background = 2131165352;
 			
 			// aapt resource value: 0x7F0700A9
-			public const int usuario_cinco = 2131165353;
+			public const int tooltip_frame_dark = 2131165353;
+			
+			// aapt resource value: 0x7F0700AA
+			public const int tooltip_frame_light = 2131165354;
+			
+			// aapt resource value: 0x7F0700AB
+			public const int users = 2131165355;
+			
+			// aapt resource value: 0x7F0700AC
+			public const int usuario_cinco = 2131165356;
+			
+			// aapt resource value: 0x7F0700AD
+			public const int usuario_verde = 2131165357;
 			
 			static Drawable()
 			{

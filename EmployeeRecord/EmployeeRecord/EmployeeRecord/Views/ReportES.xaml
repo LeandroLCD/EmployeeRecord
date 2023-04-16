@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
-              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.ReportES"
+              xmlns:viewModel="clr-namespace:EmployeeRecord.ViewModels.ReportES" xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              x:Class="EmployeeRecord.Views.ReportES"
              Title="Reporte de Eventos">
     <!--#region Conecta el Viewmodel con la vista -->
@@ -9,37 +9,53 @@
         <viewModel:ReportESViewModel/>
     </ContentPage.BindingContext>
     <!--#endregion-->
-    
-    
     <ContentPage.Content>
-        <Grid>
-            <Grid Padding="10">
-                <ListView ItemsSource="{Binding GetEvents}" SelectionMode="None">
-
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell Height="200">
-                                <Grid>
-                                    <ScrollView Orientation="Horizontal">
-                                       <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                        <Label Text="{Binding nombre}"/>
-                                        <Label Text="{Binding apellidos}"/>
-                                        <Label Text="{Binding motivo}" WidthRequest="150" HorizontalOptions="EndAndExpand"/>
-                                        <Label Text="{Binding hora_entra}"/>
-                                        </StackLayout> 
-                                    </ScrollView>
-                                    
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-
-                </ListView>
-            </Grid>
-            <Button Text="Report" 
-                    Background="Red" 
-                    HorizontalOptions="EndAndExpand"
-                    VerticalOptions="EndAndExpand"/>
+        <Grid RowDefinitions="80,*">
+            <Frame Padding="0" Margin="10,12"
+                   BorderColor="Black" 
+                   CornerRadius="16">
+                <SearchBar HorizontalOptions="FillAndExpand">
+                    <SearchBar.Behaviors>
+                        <behaviorsPack:EventToCommandBehavior Command="{Binding SearchBarCommand}"
+                                                                      EventArgsPropertyPath="NewTextValue"
+                                                                      EventName="TextChanged"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </Frame>
+            <CollectionView x:Name="employeeList" 
+                            Margin="10,0" Grid.Row="1" 
+                            ItemsSource="{Binding GetEvents}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10,5" 
+                               BorderColor="DarkBlue" 
+                               CornerRadius="16">
+                            <Grid>
+                                <StackLayout>
+                                    <Label Text="{Binding nombre,StringFormat='Nombre: {0}'}"/>
+                                    <Label Text="{Binding apellidos, StringFormat='Apellidos: {0}'}"/>
+                                    <Label Text="{Binding motivo, StringFormat='Motivo de la entrada: {0}'}"/>
+                                    <Label Text="{Binding empresa, StringFormat='Empresa: {0}'}"/>
+                                    <Label Text="{Binding hora_entra, StringFormat='Entrada: {0}'}"/>
+                                    <Label Text="{Binding hora_sali, StringFormat='Salida: {0}'}"/>
+                                </StackLayout>
+                                <ImageButton Source="pdf2.png"
+                                    WidthRequest="60"
+                                    HeightRequest="30" 
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="EndAndExpand"
+                                    Command="{Binding Source={x:Reference employeeList}, Path=BindingContext.DeleteEmployeeCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
+
     </ContentPage.Content>
 </ContentPage>
