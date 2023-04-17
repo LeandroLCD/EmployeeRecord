@@ -4,9 +4,16 @@
              x:Class="EmployeeRecord.Views.MenuPage">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="menu_boro.jpg"
+            <Image
+                Source="menu_boro.jpeg"
                 HeightRequest="400"
                 HorizontalOptions="Center"/>
+
+            <Label Text="Bienvenido Al Sistema De Registro"
+                   HorizontalOptions="Center" 
+                   FontSize="24"
+                   FontAttributes="Bold" 
+                   TextColor="#1C375C" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

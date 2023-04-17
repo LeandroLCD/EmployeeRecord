@@ -55,10 +55,13 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="Crear Empleado" 
+            <ImageButton 
+                    BackgroundColor="Transparent"
+                    Source="add_user.png"
+                    Grid.Row="2"
                     Command="{Binding CreateCommand}"
-                    WidthRequest="200" 
-                    HeightRequest="80"
+                    WidthRequest="90" 
+                    HeightRequest="70"
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="EndAndExpand"/>
         </Grid>

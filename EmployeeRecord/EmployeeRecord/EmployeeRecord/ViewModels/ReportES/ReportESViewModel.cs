@@ -70,7 +70,7 @@ namespace EmployeeRecord.ViewModels.ReportES
                 await Share.RequestAsync(new ShareFileRequest
 
                 {
-                    Title = "Elegir App para exportar reporte",
+                    Title = "Elegi una App para visualizar el reporte",
                     File = new ShareFile(path)
                 });
 
