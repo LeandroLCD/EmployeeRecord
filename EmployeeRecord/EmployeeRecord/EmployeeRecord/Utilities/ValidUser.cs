@@ -20,5 +20,12 @@ namespace EmployeeRecord.Utilities
             var errores = results.Select(r => r.ErrorMessage).ToList();
             return errores;
         }
+
+        public static byte[] Base64StringToBytes(this string text)
+        {
+            return Convert.FromBase64String(text);
+        }
     }
+
+
 }
