@@ -22,15 +22,9 @@ namespace EmployeeRecord.ViewModels
         #region Contrunctor
         public LoginViewModel()
         {
-          var PathSourse =  Reports.ToPdf("Report");
-
-            Shere(PathSourse);
 
             InicializeProperty();
         }
-        private async void Shere(string sourse)
-        {
-            await Share.RequestAsync(new ShareFileRequest
 
 
 
