@@ -1,4 +1,5 @@
-﻿using EmployeeRecord.Utilities;
+﻿using EmployeeRecord.Models.Register;
+using EmployeeRecord.Utilities;
 using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Geom;
@@ -19,7 +20,7 @@ namespace EmployeeRecord.Service.Reports
 {
     public class Reports
     {
-        public static string ToPdf(string fileName)
+        public static string ToPdf(string fileName, RegisterEventModel eventModel)
         {
             string AppFolder = $"{FileSystem.CacheDirectory}/Reports";
 
@@ -82,10 +83,12 @@ namespace EmployeeRecord.Service.Reports
             
             document.Add(HeaderTable);
             #endregion
-
+            
             document.Add(new Cell().SetHeight(14F));
 
             #region Body
+
+            #region Create Colum
             float[] ColumnWidth = { 124.5F, 124.5F, 124.5F, 124.5F };
 
             Table BodyTable = new Table(ColumnWidth).SetBorderCollapse(BorderCollapsePropertyValue.SEPARATE);
@@ -108,6 +111,7 @@ namespace EmployeeRecord.Service.Reports
                 .SetBorderTop(Border.NO_BORDER)
                 .SetFontSize(12)
                 .SetTextAlignment(TextAlignment.CENTER);
+            #endregion
 
             #region Row1
             var cellTitle = new Cell(1, 1).Add(new Paragraph("Nombre del Usuario")).AddStyle(styleBold);
@@ -122,13 +126,13 @@ namespace EmployeeRecord.Service.Reports
             cellTitle = new Cell(1, 1).Add(new Paragraph()).AddStyle(styleBold);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("UserName")).AddStyle(styleNormal);
+            cellTitle = new Cell(1, 1).Add(new Paragraph($"{eventModel.nombre} {eventModel.apellidos}")).AddStyle(styleNormal);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("EmpresaName")).AddStyle(styleNormal);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.empresa)).AddStyle(styleNormal);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("PuestoName")).AddStyle(styleNormal);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.puesto)).AddStyle(styleNormal);
             BodyTable.AddCell(cellTitle);
 
             cellTitle = new Cell(1, 1).Add(new Paragraph()).AddStyle(styleNormal);
@@ -151,16 +155,16 @@ namespace EmployeeRecord.Service.Reports
             cellTitle = new Cell(1, 1).Add(new Paragraph("Fecha de Salida")).AddStyle(styleBold).SetBackgroundColor(ColorConstants.WHITE);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("horaE")).AddStyle(styleNormal).SetBorderBottom(Border.NO_BORDER);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.hora_entra.ToString("hh:mm:ss"))).AddStyle(styleNormal).SetBorderBottom(Border.NO_BORDER);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("HoraS")).AddStyle(styleBold).SetBackgroundColor(ColorConstants.WHITE).SetBorderBottom(Border.NO_BORDER);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.hora_sali.ToString("hh:mm:ss"))).AddStyle(styleBold).SetBackgroundColor(ColorConstants.WHITE).SetBorderBottom(Border.NO_BORDER);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("FechaE")).AddStyle(styleNormal).SetBorderBottom(Border.NO_BORDER);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.hora_entra.ToString("dd/MM/yyyy"))).AddStyle(styleNormal).SetBorderBottom(Border.NO_BORDER);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph("FechaS")).AddStyle(styleBold).SetBackgroundColor(ColorConstants.WHITE).SetBorderBottom(Border.NO_BORDER);
+            cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.hora_sali.ToString("dd/MM/yyyy"))).AddStyle(styleBold).SetBackgroundColor(ColorConstants.WHITE).SetBorderBottom(Border.NO_BORDER);
             BodyTable.AddCell(cellTitle);
 
             #endregion
@@ -174,6 +178,7 @@ namespace EmployeeRecord.Service.Reports
 
             #region Footer
 
+            #region Create Table
             Table FooterTable = new Table(1, true)
                 .SetBackgroundColor(new DeviceRgb(242, 242, 242))
                 .SetBorderCollapse(BorderCollapsePropertyValue.SEPARATE)
@@ -192,11 +197,12 @@ namespace EmployeeRecord.Service.Reports
                 .SetBorderLeft(new SolidBorder(ColorConstants.BLACK, 1))
                 .SetBorderRight(new SolidBorder(ColorConstants.BLACK, 1))
                 .SetBorderTop(new SolidBorder(ColorConstants.BLACK, 1));
+            #endregion
 
             var footerName = new Cell(1, 1).Add(new Paragraph("Motivo de la Entrada")).AddStyle(styleBold).SetHeight(26.6F);
             FooterTable.AddCell(footerName);
 
-            footerName = new Cell(1, 1).Add(new Paragraph("Motivo")).AddStyle(styleNormal).SetHeight(26.6F);
+            footerName = new Cell(1, 1).Add(new Paragraph(eventModel.motivo)).AddStyle(styleNormal).SetHeight(26.6F);
             FooterTable.AddCell(footerName);
 
             FooterTable.AddCell(new Cell(1, 1).Add(new Paragraph()).AddStyle(styleNormal));
@@ -215,6 +221,7 @@ namespace EmployeeRecord.Service.Reports
             #endregion
 
             document.Close();
+
             return filePath;
 
         }

@@ -45,6 +45,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
         #region Command
         public Command<EmployeeModel> EmployeeDetailCommand { get; set; }
 
+        public Command CreateCommand { get; set; }
         public Command<EmployeeModel> DeleteEmployeeCommand { get; set; }
 
         public Command<string> SearchBarCommand { get; set; }
@@ -66,6 +67,10 @@ namespace EmployeeRecord.ViewModels.Usuarios
                     UserDetailPageViewModel.GetEmployee = employee;
                     await Shell.Current.GoToAsync(nameof(UserDetailPage));
                 }
+            });
+
+            CreateCommand = new Command(async () => {
+                await Shell.Current.GoToAsync(nameof(UserDetailPage));
             });
             SearchBarCommand = new Command<string>(SearchBarChanged);
 

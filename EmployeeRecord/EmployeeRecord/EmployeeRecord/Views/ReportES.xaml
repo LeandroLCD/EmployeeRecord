@@ -22,10 +22,10 @@
                     </SearchBar.Behaviors>
                 </SearchBar>
             </Frame>
-            <CollectionView x:Name="employeeList" 
+            <CollectionView x:Name="eventList" 
                             Margin="10,0" Grid.Row="1" 
-                            ItemsSource="{Binding GetEvents}"
-                            SelectionMode="Single">
+                            ItemsSource="{Binding GetEventsList}"
+                            SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
@@ -35,6 +35,7 @@
                                BorderColor="DarkBlue" 
                                CornerRadius="16">
                             <Grid>
+                                
                                 <StackLayout>
                                     <Label Text="{Binding nombre,StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding apellidos, StringFormat='Apellidos: {0}'}"/>
@@ -43,13 +44,15 @@
                                     <Label Text="{Binding hora_entra, StringFormat='Entrada: {0}'}"/>
                                     <Label Text="{Binding hora_sali, StringFormat='Salida: {0}'}"/>
                                 </StackLayout>
+                                
                                 <ImageButton Source="pdf2.png"
                                     WidthRequest="60"
                                     HeightRequest="30" 
                                     BackgroundColor="Transparent"
                                     HorizontalOptions="EndAndExpand"
-                                    Command="{Binding Source={x:Reference employeeList}, Path=BindingContext.DeleteEmployeeCommand}"
+                                    Command="{Binding Source={x:Reference eventList}, Path=BindingContext.ReportToPdfCommand}"
                                     CommandParameter="{Binding .}"/>
+                                
                             </Grid>
                         </Frame>
                     </DataTemplate>

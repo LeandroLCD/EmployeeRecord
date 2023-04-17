@@ -54,6 +54,13 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Button Text="Crear Empleado" 
+                    Command="{Binding CreateCommand}"
+                    WidthRequest="200" 
+                    HeightRequest="80"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"/>
         </Grid>
        
     </ContentPage.Content>

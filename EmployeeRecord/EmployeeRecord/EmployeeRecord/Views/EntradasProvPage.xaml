@@ -39,6 +39,12 @@
                    TextColor="#0C0C0C" 
                    HorizontalOptions="FillAndExpand" 
                    VerticalOptions="FillAndExpand"/>
+            <Entry Grid.Row="3"                   
+                   Text="{Binding Puesto}"
+                   Placeholder="Apellido" 
+                   TextColor="#0C0C0C" 
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand"/>
 
 
             <Picker Grid.Row="4" 

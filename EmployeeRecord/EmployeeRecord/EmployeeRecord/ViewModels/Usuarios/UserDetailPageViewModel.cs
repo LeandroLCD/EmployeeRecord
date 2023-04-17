@@ -16,7 +16,9 @@ namespace EmployeeRecord.ViewModels.Usuarios
         #region Fields
         private EmployeeModel _employeeSelected;
         public static EmployeeModel GetEmployee { get; set; }
+
         private IDataBaseService _dataBaseService;
+        private bool _isCreate;
 
         #endregion
 
@@ -30,6 +32,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
             }
             else
             {
+                App.Current.MainPage.Title = "Crear Empleado";
+                IsCreate = true;
                 EmployeeSelected = new EmployeeModel();
             }
             InicializeProperties();
@@ -45,6 +49,12 @@ namespace EmployeeRecord.ViewModels.Usuarios
         {
             get => _employeeSelected;
             set => SetProperty(ref _employeeSelected, value);
+        }
+
+        public bool IsCreate
+        {
+            get => _isCreate;
+            set=> SetProperty(ref _isCreate, value);
         }
 
         #endregion
