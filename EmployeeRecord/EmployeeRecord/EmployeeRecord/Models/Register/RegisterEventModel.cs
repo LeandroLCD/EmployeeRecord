@@ -15,6 +15,8 @@ namespace EmployeeRecord.Models.Register
 
         public string motivo { get; set; }
 
+        public string puesto { get; set; }
+
         public DateTime hora_entra { get; set; }
 
         public DateTime hora_sali { get; set; }
