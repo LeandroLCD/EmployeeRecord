@@ -1,22 +1,17 @@
-﻿using EmployeeRecord.Models.Autentication;
-using EmployeeRecord.Models.Employees;
+﻿using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Service.Interface;
-using EmployeeRecord.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.ViewModels.Usuarios
 {
-    public class UserDetailPageViewModel: BaseViewModel
+    public class UserDetailPageViewModel : BaseViewModel
     {
         #region Fields
         private EmployeeModel _employeeSelected;
         public static EmployeeModel GetEmployee { get; set; }
+
         private IDataBaseService _dataBaseService;
+        private bool _isCreate;
 
         #endregion
 
@@ -30,6 +25,8 @@ namespace EmployeeRecord.ViewModels.Usuarios
             }
             else
             {
+                App.Current.MainPage.Title = "Crear Empleado";
+                IsCreate = true;
                 EmployeeSelected = new EmployeeModel();
             }
             InicializeProperties();
@@ -47,11 +44,20 @@ namespace EmployeeRecord.ViewModels.Usuarios
             set => SetProperty(ref _employeeSelected, value);
         }
 
+        public bool IsCreate
+        {
+            get => _isCreate;
+            set => SetProperty(ref _isCreate, value);
+        }
+
         #endregion
 
         #region Command
 
         public Command<EmployeeModel> UpDateEmployeeCommand { get; set; }
+
+        //Implementar Crear empleado
+        public Command<EmployeeModel> CreateEmployeeCommand { get; set; }
 
         #endregion
 
@@ -85,7 +91,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             IsLoading = false;
         }
 
-        
+
 
         #endregion
     }

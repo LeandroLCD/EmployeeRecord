@@ -54,6 +54,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <ImageButton 
+                    Source="usuario_verde.pdg"
+                    Grid.Row="2"
+                    BackgroundColor="Transparent"
+                    Command="{Binding CreateCommand}"
+                    WidthRequest="50" 
+                    HeightRequest="50"
+                    Margin="10"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"/>
         </Grid>
        
     </ContentPage.Content>
