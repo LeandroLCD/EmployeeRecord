@@ -24,7 +24,7 @@ namespace EmployeeRecord.ViewModels
             InicializeProperty();
         }
 
-        
+
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace EmployeeRecord.ViewModels
             set => SetProperty(ref _user, value);
         }
 
-        public bool Remember 
+        public bool Remember
         {
             get => _remember;
             set => SetProperty(ref _remember, value);
@@ -86,19 +86,21 @@ namespace EmployeeRecord.ViewModels
             catch (Exception)
             {
 
-                
+
             }
-            
+
 
             #region SetCommand
             LoginCommand = new Command(LoginMethod);
 
-            ShowPwdCommand = new Command(()=> IsShowPrw = !IsShowPrw);
+            ShowPwdCommand = new Command(() => IsShowPrw = !IsShowPrw);
 
-            SyncInCommand = new Command(async()=> {
+            SyncInCommand = new Command(async () =>
+            {
                 await App.GlobalNavigation.PushAsync(new RegisterPage(), true);
             });
-            ForogotCommand = new Command(async () => {
+            ForogotCommand = new Command(async () =>
+            {
                 await App.GlobalNavigation.PushAsync(new ForgotPasswordPage());
             });
             #endregion
@@ -108,61 +110,61 @@ namespace EmployeeRecord.ViewModels
         {
             try
             {
-                   IsLoading = true;
-                   #region Validationes
-            var valid = User.DataAnotationsValid();
-            if(valid != null)
-            {
-                string errors = string.Empty;
-
-                valid.ForEach((it) =>
+                IsLoading = true;
+                #region Validationes
+                var valid = User.DataAnotationsValid();
+                if (valid != null)
                 {
-                    if (string.IsNullOrEmpty(errors))
-                        errors = it;
-                    else
-                        errors += $"\n{it}";
-                });
+                    string errors = string.Empty;
 
-                //foreach (var it in valid)
-                //{
-                //    if (string.IsNullOrEmpty(errors))
-                //        errors = it;
-                //    else
-                //        errors += $"\n{it}";
-                //}
-                await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
-                return;
-            }
-            
-            if(Remember)
-            {
-                var user = JsonConvert.SerializeObject(User);
-                Preferences.Set(nameof(User), user);
-            }
-            else
-            {
-                if(Preferences.ContainsKey(nameof(User)))
-                    Preferences.Remove(nameof(User));
-            }
+                    valid.ForEach((it) =>
+                    {
+                        if (string.IsNullOrEmpty(errors))
+                            errors = it;
+                        else
+                            errors += $"\n{it}";
+                    });
 
-            #endregion
+                    //foreach (var it in valid)
+                    //{
+                    //    if (string.IsNullOrEmpty(errors))
+                    //        errors = it;
+                    //    else
+                    //        errors += $"\n{it}";
+                    //}
+                    await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
+                    return;
+                }
 
-                   #region Login
-            var resp = await _autenticationService.Login(User);
-            if(resp.Success)
-            {
+                if (Remember)
+                {
+                    var user = JsonConvert.SerializeObject(User);
+                    Preferences.Set(nameof(User), user);
+                }
+                else
+                {
+                    if (Preferences.ContainsKey(nameof(User)))
+                        Preferences.Remove(nameof(User));
+                }
+
+                #endregion
+
+                #region Login
+                var resp = await _autenticationService.Login(User);
+                if (resp.Success)
+                {
                     //navegar al Home
                     App.Current.MainPage = new MenuAdminPage();
-                    
-                    IsLoading = false;
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Employee Record", resp.Message, "Ok");
-                IsLoading = false;
-            }
 
-            #endregion
+                    IsLoading = false;
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Employee Record", resp.Message, "Ok");
+                    IsLoading = false;
+                }
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -170,7 +172,7 @@ namespace EmployeeRecord.ViewModels
                 return;
             }
 
-           
+
         }
 
         private void RememberMothod(bool _isRemember)
