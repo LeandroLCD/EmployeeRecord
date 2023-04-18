@@ -32,7 +32,8 @@ namespace EmployeeRecord
                 DependencyService.Register<IDataBaseConection, DataBaseConection>();
                 DependencyService.Register<IAutenticationService, AutenticationService>();
                 DependencyService.Register<IDataBaseService, DataBaseService>();
-                
+                DependencyService.Register<IEmailService, EmailService>();
+
             }
             catch (Exception ex)
             {
