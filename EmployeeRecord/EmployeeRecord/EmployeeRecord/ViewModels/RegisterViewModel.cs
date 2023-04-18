@@ -100,7 +100,7 @@ namespace EmployeeRecord.ViewModels
             if(response.Success)
             { 
                 GetUserRegister = new UserRegister();
-                await App.Current.MainPage.DisplayAlert("Employee Record", "Usuario registrado, ya puedes acceder a nuestros sistema.", "Ok");
+                await App.Current.MainPage.DisplayAlert("Employee Record", "Usuario registrado exitosamente, ya puedes acceder a nuestros sistema.", "Ok");
                 await App.GlobalNavigation.PopToRootAsync();
             }
             else

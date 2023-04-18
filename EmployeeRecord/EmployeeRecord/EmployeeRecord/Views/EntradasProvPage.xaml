@@ -17,7 +17,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
@@ -39,7 +39,9 @@
                    TextColor="#0C0C0C" 
                    HorizontalOptions="FillAndExpand" 
                    VerticalOptions="FillAndExpand"/>
-            <Entry Grid.Row="3"                   
+            
+            
+            <Entry Grid.Row="4"                   
                    Text="{Binding Puesto}"
                    Placeholder="Apellido" 
                    TextColor="#0C0C0C" 
@@ -47,7 +49,7 @@
                    VerticalOptions="FillAndExpand"/>
 
 
-            <Picker Grid.Row="4" 
+            <Picker Grid.Row="5" 
                     ItemsSource="{Binding CompanyList}" 
                     SelectedItem="{Binding CompanySelected}"                     
                     ItemDisplayBinding="{Binding name}"
@@ -56,7 +58,7 @@
                     VerticalOptions="FillAndExpand"/>
             
             
-             <Picker Grid.Row="5" 
+             <Picker Grid.Row="6" 
                     ItemsSource="{Binding TasksList}" 
                     SelectedItem="{Binding TaskSelected}" 
                     ItemDisplayBinding="{Binding name}"
@@ -64,7 +66,7 @@
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand"></Picker>
 
-            <Button Grid.Row="4" 
+            <Button Grid.Row="5" 
                     Command="{Binding CreateCompanyCommand}"
                     WidthRequest="40"
                     HorizontalOptions="EndAndExpand"
@@ -73,7 +75,7 @@
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
             
-            <Button Grid.Row="5" 
+            <Button Grid.Row="6" 
                     Command="{Binding CreateTaskCommand}"
                     WidthRequest="40"
                     HorizontalOptions="EndAndExpand"
@@ -83,9 +85,10 @@
                     CornerRadius="20"/>
             
 
-            <Button                     
+            <Button 
+                    Margin="0,10" HeightRequest="10"
                     Command="{Binding RegisterCommand}"
-                    Grid.Row="6"
+                    Grid.Row="7"
                     TextColor="WhiteSmoke" 
                     Text="Registrar" 
                     BackgroundColor="#1472FA" CornerRadius="20"/>

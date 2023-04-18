@@ -32,24 +32,28 @@ namespace EmployeeRecord.ViewModels
                     {
                         var user = (UserAutentication)response.Objet;
                       var sendemail = await  _serviceEmail.SendEmail(email, "Recuperar contraseña Employee Record", 
-                            $"<p>Se solicita recuperar contraseña desde el dispositivo, </p>" +
+                            $"<p>Se solicito recuperar contraseña desde este dispositivo, </p>" +
                             $"<p>Tu contrseña de acceso es: {user.Password}</p>" +
-                            $"<p>Att el equipo de Employe Record</p>");
+                            $"<p>Att Sistema de monitoreo  y registro para el site</p>");
 
                         if(sendemail.Success)
                         {
                             //notificar al usuario correo enviado
+                            await App.Current.MainPage.DisplayAlert("Employee Record", "Contraseña enviada con exito, revisa tu correo", "Ok");
                             //limpiar el entry
+                            
                             //navegar al login
                         }
                         else
                         {
                             //notificar error al usuario
+                            await App.Current.MainPage.DisplayAlert("Employee Record", "Error Al Enviar Contraseña, Verifica el correo que introduciste", "Ok");
                         }
                     }
                     else
                     {
                         //notificar error al usuario
+                        await App.Current.MainPage.DisplayAlert("Employee Record", "Error Al Enviar Contraseña, Verifica el correo que introduciste", "Ok");
                     }
                 }
                 IsLoading = false;

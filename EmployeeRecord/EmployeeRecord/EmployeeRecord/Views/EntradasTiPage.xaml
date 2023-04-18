@@ -64,7 +64,8 @@
             </Frame>
 
 
-            <Button Grid.Row="8" 
+            <Button Margin="0,10" HeightRequest="10"
+                    Grid.Row="8" 
                     Command="{Binding RegisterCommand}"
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     TextColor="WhiteSmoke" 

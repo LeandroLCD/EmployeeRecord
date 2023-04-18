@@ -56,7 +56,7 @@
             </CollectionView>
 
             <ImageButton 
-                    Source="usuario_verde.pdg"
+                    Source="add_user.pdg"
                     Grid.Row="2"
                     BackgroundColor="Transparent"
                     Command="{Binding CreateCommand}"
