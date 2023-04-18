@@ -1,10 +1,7 @@
 ﻿using EmployeeRecord.Service.Interface;
 using EmployeeRecord.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Net.Mail;
-using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeeRecord.Service.Implementation
@@ -17,23 +14,23 @@ namespace EmployeeRecord.Service.Implementation
             {
 
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtpServer");
+                SmtpClient SmtpServer = new SmtpClient(Properties.Resources.Server);
 
-                mail.From = new MailAddress("emailFrom");
+                mail.From = new MailAddress(Properties.Resources.Email);
 
-                
+
                 mail.To.Add(to);
                 mail.Subject = subjet;
                 mail.IsBodyHtml = true;
                 mail.Body = mensaje;
-                
 
 
-                SmtpServer.Port = 20; //puerto del correo
-                SmtpServer.Host = "smtpServer";
+
+                SmtpServer.Port = int.Parse(Properties.Resources.Port); //puerto del correo
+                SmtpServer.Host = Properties.Resources.Server;
                 SmtpServer.EnableSsl = true;
                 SmtpServer.UseDefaultCredentials = false;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("emailFrom", "Password");
+                SmtpServer.Credentials = new System.Net.NetworkCredential(Properties.Resources.Email, Properties.Resources.Password);
 
                 SmtpServer.Send(mail);
 
@@ -41,7 +38,7 @@ namespace EmployeeRecord.Service.Implementation
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Authentication unsuccessful, account locked"))
+                if (ex.Message.Contains("locked"))
                 {
                     return Task.FromResult(new response { Status = 400, Message = "La cuenta de correo ha sido bloqueada por Outlook contacte al administrador.", Success = false });
                 }
@@ -53,6 +50,6 @@ namespace EmployeeRecord.Service.Implementation
             }
         }
 
-        
+
     }
 }
