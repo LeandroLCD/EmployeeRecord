@@ -43,7 +43,7 @@
             
             <Entry Grid.Row="4"                   
                    Text="{Binding Puesto}"
-                   Placeholder="Apellido" 
+                   Placeholder="Puesto" 
                    TextColor="#0C0C0C" 
                    HorizontalOptions="FillAndExpand" 
                    VerticalOptions="FillAndExpand"/>

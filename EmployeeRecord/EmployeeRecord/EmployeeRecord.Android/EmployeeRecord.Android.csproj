@@ -166,9 +166,6 @@
     <AndroidResource Include="Resources\drawable\salidas.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\menu_boro.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\planificacion.png" />
   </ItemGroup>
   <ItemGroup>
