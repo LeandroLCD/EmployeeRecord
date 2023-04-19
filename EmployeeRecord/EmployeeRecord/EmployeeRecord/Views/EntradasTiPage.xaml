@@ -57,15 +57,14 @@
                 <Picker Title="Motivo"
                         FontSize="Medium"
                         ItemsSource="{Binding TasksList}"
-                        ItemDisplayBinding="{Binding Name}"
+                        ItemDisplayBinding="{Binding name}"
                         SelectedItem="{Binding GetTasks}"
                         HorizontalTextAlignment="Center"/>
 
             </Frame>
 
 
-            <Button Margin="0,10" HeightRequest="10"
-                    Grid.Row="8" 
+            <Button Grid.Row="8" 
                     Command="{Binding RegisterCommand}"
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     TextColor="WhiteSmoke" 
