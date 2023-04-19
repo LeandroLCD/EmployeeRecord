@@ -118,23 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="db_conexion" xml:space="preserve">
-    <value>Server=192.168.11.19;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;</value>
-    <comment>Conección a la base de datos Server=192.168.0.109;Database=zmsite;Uid=root;Pwd=admin246;ConvertZeroDateTime=True;</comment>
+    <value>Server=192.168.11.249;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;</value>
+    <comment>Conección a la base de datos Server=192.168.11.249;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;</comment>
   </data>
   <data name="Email" xml:space="preserve">
-    <value />
+    <value>sistemas@zmotorscholula.com.mx</value>
     <comment>Correo Electronico</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value />
+    <value>ZmotorsCH@2015</value>
     <comment>Password del correo</comment>
   </data>
   <data name="Port" xml:space="preserve">
-    <value>587</value>
+    <value>26</value>
     <comment>puerto smtp </comment>
   </data>
   <data name="Server" xml:space="preserve">
-    <value>SMTP.Office365.com</value>
+    <value>mail.zmotorscholula.com.mx</value>
     <comment>Servidor smtp</comment>
   </data>
 </root>

@@ -61,7 +61,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=192.168.11.19;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;.
+        ///   Looks up a localized string similar to Server=192.168.11.249;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;.
         /// </summary>
         internal static string db_conexion {
             get {
@@ -70,7 +70,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to sistemas@zmotorscholula.com.mx.
         /// </summary>
         internal static string Email {
             get {
@@ -79,7 +79,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to ZmotorsCH@2015.
         /// </summary>
         internal static string Password {
             get {
@@ -88,7 +88,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 587.
+        ///   Looks up a localized string similar to 26.
         /// </summary>
         internal static string Port {
             get {
@@ -97,7 +97,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMTP.Office365.com.
+        ///   Looks up a localized string similar to mail.zmotorscholula.com.mx.
         /// </summary>
         internal static string Server {
             get {
