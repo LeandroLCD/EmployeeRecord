@@ -77,7 +77,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
         private async void UpDateEmployee(EmployeeModel employee)
         {
             IsLoading = true;
-            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de actualizar la información del usuario {employee}?", "Aceptar", "Cancelar");
+            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de adtualizar la información el usuario {employee}?", "Aceptar", "Cancelar");
             if (resp)
             {
                 var response = await _dataBaseService.UpdateEmployee(employee);
