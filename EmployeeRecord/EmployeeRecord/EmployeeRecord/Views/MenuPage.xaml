@@ -4,7 +4,7 @@
              x:Class="EmployeeRecord.Views.MenuPage">
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="menu_boro.jpeg"
+            <Image Source="menu_boroo.jpeg"
                 HeightRequest="400"
                 HorizontalOptions="Center"/>
 

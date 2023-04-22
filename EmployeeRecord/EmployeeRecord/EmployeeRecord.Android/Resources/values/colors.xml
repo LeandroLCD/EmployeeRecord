@@ -4,4 +4,5 @@
     <color name="colorPrimary">#1C375C</color>
     <color name="colorPrimaryDark">#1C375C</color>
     <color name="colorAccent">#0D719F</color>
+	<drawable name="bg_color">#3168EE</drawable>
 </resources>
