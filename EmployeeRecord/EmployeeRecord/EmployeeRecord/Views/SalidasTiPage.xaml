@@ -59,7 +59,8 @@
                 <Entry Text="{Binding DateString}" IsReadOnly="True" Placeholder="Hora de entrada" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
 
             </StackLayout>
-            <Button Command="{Binding ExitCommand}"                      
+            <Button Margin="0,10" HeightRequest="10"
+                    Command="{Binding ExitCommand}"                      
                     IsEnabled="{Binding IsEnabledButton}"
                     Grid.Row="3" TextColor="WhiteSmoke"
                     Text="Registrar" 

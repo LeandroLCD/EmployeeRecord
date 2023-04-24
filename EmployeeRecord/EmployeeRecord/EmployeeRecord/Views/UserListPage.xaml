@@ -38,7 +38,7 @@
                                CornerRadius="16">
                             <Grid>
                                 <StackLayout>
-                                    <Label Text="{Binding ., StringFormat='Nombres: {0}'}"/>
+                                    <Label Text="{Binding ., StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding puesto, StringFormat='Puesto: {0}'}"/>
                                     <Label Text="{Binding empresa, StringFormat='Empresa: {0}'}"/>
                                 </StackLayout>
@@ -54,6 +54,17 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <ImageButton 
+                    Source="add_user.pdg"
+                    Grid.Row="2"
+                    BackgroundColor="Transparent"
+                    Command="{Binding CreateCommand}"
+                    WidthRequest="50" 
+                    HeightRequest="50"
+                    Margin="10"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"/>
         </Grid>
        
     </ContentPage.Content>

@@ -21,6 +21,11 @@ namespace EmployeeRecord.Views
             App.GlobalNavigation.PopToRootAsync();
             return true;
         }
+
+        private void Clean_Clicked(object sender, EventArgs e)
+        {
+            email.Text = string.Empty;
+        }
     }
     
 }

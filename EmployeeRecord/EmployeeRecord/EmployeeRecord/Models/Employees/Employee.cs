@@ -39,5 +39,10 @@ namespace EmployeeRecord.Models.Employees
         {
             return $"{nombre} {apellidos}";
         }
+
+        public static implicit operator Employee(EmployeeModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

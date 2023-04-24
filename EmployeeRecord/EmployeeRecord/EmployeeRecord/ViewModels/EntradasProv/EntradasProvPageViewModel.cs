@@ -23,6 +23,7 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         private Company _companySelected;
         private string _lastNameProv;
         private string _nameProv;
+        private string _puesto;
         #endregion
 
         #region Constructor
@@ -55,6 +56,11 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         {
             get => _lastNameProv;
             set => SetProperty(ref _lastNameProv, value);
+        }
+        public string Puesto
+        {
+            get => _puesto;
+            set => SetProperty(ref _puesto, value);
         }
 
         public Company CompanySelected
@@ -175,6 +181,7 @@ namespace EmployeeRecord.ViewModels.EntradasProv
 
             var proveedor = new ProveedorModel
             {
+                puesto = Puesto,
                 nombre = NameProv,
                 apellidos = LastNameProv,
                 motivo = TaskSelected.name,

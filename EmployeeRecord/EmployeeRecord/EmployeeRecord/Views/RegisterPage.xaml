@@ -33,7 +33,14 @@
 
             </StackLayout>
             
-            <Button Grid.Row="3" TextColor="WhiteSmoke" Command="{Binding RegisterCommand}" Text="Registrarse" BackgroundColor="#1472FA" CornerRadius="20"></Button>
+            <Button
+                Margin="0,10" HeightRequest="10"
+                Grid.Row="3" 
+                TextColor="WhiteSmoke" 
+                Command="{Binding RegisterCommand}" 
+                Text="Registrarse" 
+                BackgroundColor="#1472FA" 
+                CornerRadius="20"></Button>
 
         </Grid>
     </ContentPage.Content>

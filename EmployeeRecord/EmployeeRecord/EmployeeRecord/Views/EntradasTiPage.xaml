@@ -15,18 +15,15 @@
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="4"></RowDefinition>
+                <RowDefinition Height="16"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0" HeightRequest="50" Margin="-20,0" Padding="20" BackgroundColor="#1C375C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Image Grid.Row="0" Source="entrada_tres.png" Aspect="AspectFit" HeightRequest="140" WidthRequest="40" VerticalOptions="CenterAndExpand"></Image>
             </StackLayout>
-            <Label HeightRequest="40" Text="Entrada TI Z Motors"  FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
+            <Label HeightRequest="40" FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
             <Frame Grid.Row="3" HeightRequest="55"
                    Padding="0"
                    BorderColor="Black"
@@ -60,20 +57,20 @@
                 <Picker Title="Motivo"
                         FontSize="Medium"
                         ItemsSource="{Binding TasksList}"
-                        ItemDisplayBinding="{Binding Name}"
+                        ItemDisplayBinding="{Binding name}"
                         SelectedItem="{Binding GetTasks}"
                         HorizontalTextAlignment="Center"/>
 
             </Frame>
 
-            <Button Grid.Row="8"
+
+            <Button Grid.Row="8" 
                     Command="{Binding RegisterCommand}"
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     TextColor="WhiteSmoke" 
                     Text="Registrar" 
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

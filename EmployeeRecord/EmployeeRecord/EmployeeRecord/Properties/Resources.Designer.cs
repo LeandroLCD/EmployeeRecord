@@ -61,9 +61,7 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-
-        ///   Looks up a localized string similar to Server=192.168.0.106;Database=zmsite;Uid=root;Pwd=admin246;ConvertZeroDateTime=True;.
-
+        ///   Looks up a localized string similar to Server=192.168.11.249;Database=zmsite;Uid=root;Pwd=;ConvertZeroDateTime=True;.
         /// </summary>
         internal static string db_conexion {
             get {
@@ -72,11 +70,38 @@ namespace EmployeeRecord.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=192.168.0.106;Database=zmsite;Uid=root;Pwd=admin246;ConvertZeroDateTime=True;.
+        ///   Looks up a localized string similar to sistemas@zmotorscholula.com.mx.
         /// </summary>
-        internal static string String1 {
+        internal static string Email {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZmotorsCH@2015.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 26.
+        /// </summary>
+        internal static string Port {
+            get {
+                return ResourceManager.GetString("Port", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mail.zmotorscholula.com.mx.
+        /// </summary>
+        internal static string Server {
+            get {
+                return ResourceManager.GetString("Server", resourceCulture);
             }
         }
     }
