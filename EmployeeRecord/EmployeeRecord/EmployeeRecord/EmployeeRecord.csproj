@@ -11,7 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="itext7" Version="7.2.5" />
     <PackageReference Include="itext7.commons" Version="7.2.5" />
     <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.2" />

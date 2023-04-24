@@ -39,7 +39,7 @@
 
             </StackLayout>
 
-            <Button Grid.Row="3" Margin="0,10" HeightRequest="10"
+            <Button Grid.Row="3" 
                     TextColor="WhiteSmoke" 
                     IsVisible="{Binding IsCreate, Converter={x:StaticResource InverseBoolConverter}}"
                     Command="{Binding UpDateEmployeeCommand}"
@@ -54,7 +54,7 @@
                     IsVisible="{Binding IsCreate}"
                     Command="{Binding CreateEmployeeCommand}"
                     CommandParameter="{Binding EmployeeSelected}"
-                    Text="Agregar Usuario" 
+                    Text="Crear" 
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
