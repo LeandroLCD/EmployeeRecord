@@ -41,5 +41,6 @@ namespace EmployeeRecord.Service.Interface
         Task<response> UpdateProvedorOut(ProveedorModel getProveedor);
 
         Task<response> SearchRegister(DateTime fecha_ini, DateTime fecha_fin);
+        Task<response> CreateEmployee(EmployeeModel employee);
     }
 }

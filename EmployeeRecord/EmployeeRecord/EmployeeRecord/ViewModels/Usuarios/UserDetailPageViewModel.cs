@@ -1,5 +1,6 @@
 ﻿using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Service.Interface;
+using System;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.ViewModels.Usuarios
@@ -71,7 +72,25 @@ namespace EmployeeRecord.ViewModels.Usuarios
 
             #region Set Command
             UpDateEmployeeCommand = new Command<EmployeeModel>(UpDateEmployee);
+            CreateEmployeeCommand = new Command<EmployeeModel>(CreateEmployee);
             #endregion
+        }
+
+        private async void CreateEmployee(EmployeeModel employee)
+        {
+            IsLoading = true;
+            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"Usuario Agregado Exitosamente {employee}", "Aceptar", "Cancelar");
+            if (resp)
+            {
+                var response = await _dataBaseService.CreateEmployee(employee);
+                if (response.Success)
+                {
+                    IsCompletet = true;
+                    MenuAdminPage.OnBackButton();
+                    return;
+                }
+            }
+            IsLoading = false;
         }
 
         private async void UpDateEmployee(EmployeeModel employee)
