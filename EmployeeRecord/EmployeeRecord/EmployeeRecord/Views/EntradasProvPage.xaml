@@ -27,8 +27,6 @@
 
             <StackLayout Grid.Row="2">
                 
-                
-            
             <Entry Text="{Binding NameProv}"
                    HeightRequest="60"
                        Placeholder="Nombre" 
