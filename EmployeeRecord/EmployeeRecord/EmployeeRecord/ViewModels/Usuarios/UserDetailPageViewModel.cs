@@ -78,6 +78,27 @@ namespace EmployeeRecord.ViewModels.Usuarios
 
         private async void CreateEmployee(EmployeeModel employee)
         {
+            /*Revision del metodo CreateEmployee
+             1. Este metodo como todo metodo debe validar el parametro que recibe por el contructor.
+                antes de enviar a realizar las acciones a la database.
+                Nota: como el modelo "EmployeeModel" que es el tipo de dato recibido desde la vista no 
+                contiene etiquetas de validacion ni metodo de extención para validarse, tienes 2 opciones para
+                realizar eso. A)se puede parcear el EmployeModel a Employe que si tiene etiquetas de validacion 
+                y metodo de extencion para validar: Ej var model = new Employe{ nombre = employee.nombre} y asi con
+                todas las propiedades y despues aplicar la validación puedes usar como ejemplo el metodo register
+                que se aplican dichas validaciones de manera correpta.
+            2. No has creado el metodo CreateEmployee en la interfaz IDataBaseService e implementarlo en DataBaseService
+                para que puedas mandar el empleado a la base de datos este metodo debe recibir un Employe que es el parametro que
+                se esta evaluando en el paso anterior. en El modelo Empoyee debes crear un metodo que retorne el Query
+                para insertar dichos datos a la base de datos. Este metodo CreateEmployee es igual que el InsertTask lo que cambia
+                en el parametro que recibe y el query. Realizando eso podras insertar de manera correpta a la base de datos.
+            3. Evaluar la respuesta como esta el if(response.Success) esta bien falta el else, para cuando falle la inserción retorne
+                el mensaje al usuario, el mensaje que estas enviando debajo del IsLoanding esta mal debes moverlo al if(response.susscee)
+                antes del IsComplet y debe quedar asi: await App.Current.MainPage.DisplayAlert("Employee Record", $"Usuario Agregado Exitosamente {employee}", "Aceptar");
+                porque un mensaje de notificacion y no de pregunat como esta hay abajo.
+             
+             
+             */
             IsLoading = true;
             var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"Usuario Agregado Exitosamente {employee}", "Aceptar", "Cancelar");
             if (resp)
