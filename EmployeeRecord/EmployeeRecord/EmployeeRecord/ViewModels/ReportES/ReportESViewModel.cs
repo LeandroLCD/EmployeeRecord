@@ -66,7 +66,7 @@ namespace EmployeeRecord.ViewModels.ReportES
         {
             if(model != null)
             {
-                var path = Reports.ToPdf($"Reporte_{model.nombre}_{model.apellidos}", model);
+                var path = Reports.ToPdf($"Reporte_{model.provedor}_{model.nombre}_{model.apellidos}", model);
                 await Share.RequestAsync(new ShareFileRequest
 
                 {
@@ -85,6 +85,7 @@ namespace EmployeeRecord.ViewModels.ReportES
                 if (!string.IsNullOrEmpty(txt))
                 {
                     GetEventsList = new ObservableCollection<RegisterEventModel>(_registerEvents.Where(c => c.nombre.ToLowerInvariant().Contains(txt.ToLowerInvariant())
+                    || c.provedor.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.apellidos.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.motivo.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.empresa.ToLowerInvariant().Contains(txt.ToLowerInvariant())

@@ -263,15 +263,15 @@ namespace EmployeeRecord.ViewModels.EntradasProv
         private async void GetProvedor()
         {
             #region Proveedores
-            var tasks = await _dataBaseService.GetProvedorList();
-            if (tasks.Success)
+            var provedor = await _dataBaseService.GetProvedorList();
+            if (provedor.Success)
             {
 
-                ProvedorList = new ObservableCollection<Proveedor>((List<Proveedor>)tasks.Objet);
+                ProvedorList = new ObservableCollection<Proveedor>((List<Proveedor>)provedor.Objet);
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Employee Record", tasks.Message, "Ok");
+                await App.Current.MainPage.DisplayAlert("Employee Record", provedor.Message, "Ok");
 
             }
             #endregion

@@ -35,11 +35,11 @@
                                BorderColor="DarkBlue" 
                                CornerRadius="16">
                             <Grid>
-                                
+
                                 <StackLayout>
-                                    <Label Text="{Binding provedor,StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding nombre,StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding apellidos, StringFormat='Apellidos: {0}'}"/>
+                                    <Label Text="{Binding provedor,StringFormat='Proveedor: {0}'}"/>
                                     <Label Text="{Binding motivo, StringFormat='Motivo de la entrada: {0}'}"/>
                                     <Label Text="{Binding empresa, StringFormat='Empresa: {0}'}"/>
                                     <Label Text="{Binding hora_entra, StringFormat='Entrada: {0}'}"/>
