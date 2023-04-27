@@ -1,5 +1,6 @@
 ﻿using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Service.Interface;
+using EmployeeRecord.Utilities;
 using System;
 using Xamarin.Forms;
 
@@ -75,13 +76,42 @@ namespace EmployeeRecord.ViewModels.Usuarios
             CreateEmployeeCommand = new Command<EmployeeModel>(CreateEmployee);
             #endregion
         }
-
-        private async void CreateEmployee(EmployeeModel employee)
+      
+        private async void CreateEmployee(EmployeeModel model)
         {
-            IsLoading = true;
-            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"Usuario Agregado Exitosamente {employee}", "Aceptar", "Cancelar");
-            if (resp)
+            var employee = new Employee()
             {
+                apellidos = model.apellidos,
+                email = model.email,
+                empresa = model.empresa,
+                nombre = model.nombre,
+                puesto = model.puesto,
+                creation_date = DateTime.Now
+            };
+            #region Validaciones
+            IsLoading = true;
+            var valid = employee.DataAnotationsValid();
+            if (valid != null)
+            {
+                string errors = string.Empty;
+
+                valid.ForEach((it) =>
+                {
+                    if (string.IsNullOrEmpty(errors))
+                        errors = it;
+                    else
+                        errors += $"\n{it}";
+                });
+
+
+                await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
+                IsLoading = false;
+                return;
+            }
+
+            #endregion
+
+             
                 var response = await _dataBaseService.CreateEmployee(employee);
                 if (response.Success)
                 {
@@ -91,14 +121,44 @@ namespace EmployeeRecord.ViewModels.Usuarios
                     return;
                    
                 }
-            }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Employee Record", response.Message, "Ok");
+
+                }
+
             IsLoading = false;
         }
 
         private async void UpDateEmployee(EmployeeModel employee)
         {
             IsLoading = true;
-            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de adtualizar la información el usuario {employee}?", "Aceptar", "Cancelar");
+
+            #region Validaciones
+            var valid = employee.DataAnotationsValid();
+            if (valid != null)
+            {
+                string errors = string.Empty;
+
+                valid.ForEach((it) =>
+                {
+                    if (string.IsNullOrEmpty(errors))
+                        errors = it;
+                    else
+                        errors += $"\n{it}";
+                });
+
+
+                await App.Current.MainPage.DisplayAlert("Employee Record", errors, "Ok");
+                IsLoading = false;
+                return;
+            }
+
+            #endregion
+
+
+
+            var resp = await App.Current.MainPage.DisplayAlert("Employee Record", $"¿Estas seguro de actualizar la información el usuario {employee}?", "Aceptar", "Cancelar");
             if (resp)
             {
                 var response = await _dataBaseService.UpdateEmployee(employee);

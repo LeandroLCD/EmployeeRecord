@@ -42,7 +42,6 @@ namespace EmployeeRecord.Service.Interface
 
         Task<response> SearchRegister(DateTime fecha_ini, DateTime fecha_fin);
 
-        Task<response> CreateEmployee(EmployeeModel employee);
-        Task CreateEmployee(Employee employee);
+        Task<response> CreateEmployee(Employee employee);
     }
 }

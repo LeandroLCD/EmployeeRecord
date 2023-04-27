@@ -11,17 +11,9 @@ namespace EmployeeRecord.Models.Employees
     {
         
         public int id { get; set; }
-
-        [Required]
         public string empresa { get; set; }
-
-        [Required]
         public string nombre { get; set; }
-
-        [Required]
         public string apellidos { get; set; }
-
-        [Required]
         public string puesto { get; set; }
 
         [Required]
@@ -38,11 +30,6 @@ namespace EmployeeRecord.Models.Employees
         public override string ToString()
         {
             return $"{nombre} {apellidos}";
-        }
-
-        internal string ToQuery()
-        {
-            return $"INSERT INTO `empleado`(`id`,`nombre`, `apellidos`, `empresa`, `puesto`, `email) VALUES ('{id}','{nombre}','{apellidos}','{empresa}','{puesto}','{email}')'";
         }
     }
 }

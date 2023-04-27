@@ -18,13 +18,13 @@ namespace EmployeeRecord.Models.Employees
         [Required]
         public string puesto { get; set; } 
 
-        [Required]
+        [Required(ErrorMessage ="El campo {0}, es requerido.")]
         public string empresa { get; set; } 
 
 
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "El campo {0}, es requerido.")]
+        [EmailAddress(ErrorMessage = "El {0}, debe tener formato correo@correo.com")]
         public string email { get; set; }
 
 
@@ -40,9 +40,9 @@ namespace EmployeeRecord.Models.Employees
             return $"{nombre} {apellidos}";
         }
 
-        internal string ToQuery()
+        internal string ToQueryInsert()
         {
-            return $"INSERT INTO `empleado`(`id`,`nombre`, `apellidos`, `empresa`, `puesto`, `email) VALUES ('{id}','{nombre}','{apellidos}','{empresa}','{puesto}','{email}')'";
+            return $"INSERT INTO `empleado`(`id`, `nombre`, `apellidos`, `puesto`, `email`, `empresa`, `creation_date`) VALUES ('{id}','{nombre}','{apellidos}','{puesto}','{email}','{empresa}','{creation_date.ToString("yyyy-MM-dd HH:mm:ss")}')";
         }
 
         public static implicit operator Employee(EmployeeModel v)

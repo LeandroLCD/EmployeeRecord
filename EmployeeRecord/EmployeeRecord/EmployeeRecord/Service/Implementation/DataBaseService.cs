@@ -566,42 +566,7 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = employee.ToQuery();
-                    using (var reader = cmd.ExecuteReader())
-                    {
-
-                        return Task.FromResult(new response
-                        {
-                            Message = "Datos Registrados Exitosamente",
-                            Status = 200,
-                            Success = true
-                        });
-
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                return Task.FromResult(new response
-                {
-                    Message = $"Se produjo un error al agregar este nuevo usuario.\nDetalles:{ex.Message}",
-                    Objet = ex,
-                    Status = ex.GetHashCode(),
-                    Success = false
-                });
-            }
-        }
-
-        public Task<response> CreateEmployee(EmployeeModel employee)
-        {
-            try
-            {
-                if (_connection.State != System.Data.ConnectionState.Open)
-                    _connection.Open();
-                using (var cmd = _connection.CreateCommand())
-                {
-                    cmd.CommandText = employee.ToQuery();
+                    cmd.CommandText = employee.ToQueryInsert();
                     using (var reader = cmd.ExecuteReader())
                     {
 
@@ -626,11 +591,6 @@ namespace EmployeeRecord.Service.Implementation
                     Success = false
                 });
             }
-        }
-
-        Task IDataBaseService.CreateEmployee(Employee employee)
-        {
-            throw new NotImplementedException();
         }
     }
 
