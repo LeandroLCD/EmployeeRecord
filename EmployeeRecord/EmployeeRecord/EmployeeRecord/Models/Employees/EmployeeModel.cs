@@ -42,7 +42,7 @@ namespace EmployeeRecord.Models.Employees
 
         internal string ToQuery()
         {
-            return $"insert into `empleado` SET `nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`email`='{email}',`empresa`='{empresa}' WHERE `id`='{id}'";
+            return $"INSERT INTO `empleado`(`id`,`nombre`, `apellidos`, `empresa`, `puesto`, `email) VALUES ('{id}','{nombre}','{apellidos}','{empresa}','{puesto}','{email}')'";
         }
     }
 }

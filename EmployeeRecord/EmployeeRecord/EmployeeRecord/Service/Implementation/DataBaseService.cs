@@ -627,6 +627,11 @@ namespace EmployeeRecord.Service.Implementation
                 });
             }
         }
+
+        Task IDataBaseService.CreateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
