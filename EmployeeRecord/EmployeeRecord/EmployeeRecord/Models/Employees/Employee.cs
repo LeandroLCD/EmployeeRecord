@@ -40,6 +40,11 @@ namespace EmployeeRecord.Models.Employees
             return $"{nombre} {apellidos}";
         }
 
+        internal string ToQuery()
+        {
+            return $"insert into `empleado` SET `nombre`='{nombre}',`apellidos`='{apellidos}',`puesto`='{puesto}',`email`='{email}',`empresa`='{empresa}' WHERE `id`='{id}'";
+        }
+
         public static implicit operator Employee(EmployeeModel v)
         {
             throw new NotImplementedException();

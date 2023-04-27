@@ -54,7 +54,7 @@
                     IsVisible="{Binding IsCreate}"
                     Command="{Binding CreateEmployeeCommand}"
                     CommandParameter="{Binding EmployeeSelected}"
-                    Text="Crear" 
+                    Text="Agregar Usuario" 
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
