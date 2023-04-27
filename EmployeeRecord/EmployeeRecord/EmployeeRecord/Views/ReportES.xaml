@@ -37,6 +37,7 @@
                             <Grid>
                                 
                                 <StackLayout>
+                                    <Label Text="{Binding provedor,StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding nombre,StringFormat='Nombre: {0}'}"/>
                                     <Label Text="{Binding apellidos, StringFormat='Apellidos: {0}'}"/>
                                     <Label Text="{Binding motivo, StringFormat='Motivo de la entrada: {0}'}"/>

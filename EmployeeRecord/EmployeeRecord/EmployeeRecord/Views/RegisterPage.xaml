@@ -22,14 +22,14 @@
             <Label HeightRequest="40" Text="Nuevo Usuario"  FontSize="24" FontAttributes="Bold" TextColor="white" HorizontalOptions="CenterAndExpand"></Label>
 
             <StackLayout Grid.Row="2">
-                <Entry  Placeholder="Ingresa tu nombre" Text="{Binding GetUserRegister.nombre}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tus apellidos" Text="{Binding GetUserRegister.apellidos}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tu Organización" Text="{Binding GetUserRegister.empresa}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tu puesto" Text="{Binding GetUserRegister.puesto}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tu correo" Text="{Binding GetUserRegister.email}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Confirma tu correo" Text="{Binding GetUserRegister.VerifieEmail}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Ingresa tu contraseña" Text="{Binding GetUserRegister.password}" TextColor="#0C0C0C " IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
-                <Entry  Placeholder="Confirma tu contraseña" TextColor="#0C0C0C " Text="{Binding GetUserRegister.VerifiePassword}" IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="Pablo" Text="{Binding GetUserRegister.nombre}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="Perez Perez" Text="{Binding GetUserRegister.apellidos}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Text="{Binding GetUserRegister.empresa}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="Administrador" Text="{Binding GetUserRegister.puesto}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="ejemplo@email.com" Text="{Binding GetUserRegister.email}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="ejemplo@email.com" Text="{Binding GetUserRegister.VerifieEmail}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="12345" Text="{Binding GetUserRegister.password}" TextColor="#0C0C0C " IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
+                <Entry  Placeholder="12345" TextColor="#0C0C0C " Text="{Binding GetUserRegister.VerifiePassword}" IsPassword="{Binding IsShowPrw}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Entry>
 
             </StackLayout>
             

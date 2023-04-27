@@ -6,7 +6,7 @@ namespace EmployeeRecord.Models.Register
 {
     public class RegisterEventModel
     {
-
+        public string provedor { get; set; }
         public string nombre { get; set; }
 
         public string apellidos { get; set; }

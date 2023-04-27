@@ -17,6 +17,8 @@ namespace EmployeeRecord.Views
         public UserDetailPage ()
 		{
 			InitializeComponent ();
+
+			Organización.Text = "Z Motors";
 		}
 
         

@@ -59,8 +59,7 @@ namespace EmployeeRecord.ViewModels.SalidasProv
                 {
                     value = new ProveedorModel()
                     {
-                        nombre = string.Empty,
-                        apellidos = string.Empty,
+                        provedor = string.Empty,
                         empresa = string.Empty,
                         motivo = string.Empty,
                     };

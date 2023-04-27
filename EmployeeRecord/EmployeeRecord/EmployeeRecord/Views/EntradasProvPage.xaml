@@ -26,22 +26,31 @@
             </StackLayout>
 
             <StackLayout Grid.Row="2">
-                
-            <Entry Text="{Binding NameProv}"
-                   HeightRequest="60"
-                       Placeholder="Nombre" 
-                       TextColor="#0C0C0C" 
-                       HorizontalOptions="FillAndExpand"/>
 
-            <Entry Text="{Binding LastNameProv}"
-                   Placeholder="Apellido" 
-                   HeightRequest="60"
-                   TextColor="#0C0C0C" 
-                   HorizontalOptions="FillAndExpand"/>
-            
-            
-            <Entry Text="{Binding Puesto}"
-                   Placeholder="Puesto" 
+                <StackLayout Orientation="Horizontal">
+                    <Picker Grid.Row="2" 
+                             HeightRequest="60"
+                    ItemsSource="{Binding ProvedorList}" 
+                    SelectedItem="{Binding ProvedorSelected}"                     
+                    ItemDisplayBinding="{Binding provedor}"
+                    Title="Selecciona un proveedor"
+                    TextColor="#0C0C0C" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"/>
+                    <Button Grid.Row="5" 
+                    Command="{Binding CreateProvedorCommand}"
+                    WidthRequest="40"
+                        HeightRequest="60"
+                    TextColor="WhiteSmoke" 
+                    Text="+" 
+                    BackgroundColor="#1472FA" 
+                    CornerRadius="20"/>
+                </StackLayout>
+
+
+                <Entry x:Name="Puesto"
+                   Text="{Binding Puesto}"
+                   Placeholder="Introduce Tu Puesto" 
                    HeightRequest="60"
                    TextColor="#0C0C0C" 
                    HorizontalOptions="FillAndExpand" />
@@ -52,6 +61,7 @@
                     ItemsSource="{Binding CompanyList}" 
                     SelectedItem="{Binding CompanySelected}"                     
                     ItemDisplayBinding="{Binding name}"
+                    Title="Selecciona una empresa"
                     TextColor="#0C0C0C" 
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"/>
@@ -70,8 +80,9 @@
                     <Picker ItemsSource="{Binding TasksList}" 
                     SelectedItem="{Binding TaskSelected}" 
                     ItemDisplayBinding="{Binding name}"
+                    Title="Selecciona una tarea"
                     TextColor="#0C0C0C" 
-                            HeightRequest="60"
+                    HeightRequest="60"
                     HorizontalOptions="FillAndExpand"/>
 
                     <Button Grid.Row="6" 

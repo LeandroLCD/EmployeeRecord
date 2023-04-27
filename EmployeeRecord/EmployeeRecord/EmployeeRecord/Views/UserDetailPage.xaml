@@ -33,18 +33,18 @@
             <StackLayout Grid.Row="2">
                 <Entry  Placeholder="Ingresa tu nombre" Text="{Binding EmployeeSelected.nombre}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                 <Entry  Placeholder="Ingresa tus apellidos" Text="{Binding EmployeeSelected.apellidos}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <Entry  Placeholder="Ingresa tu Organización" Text="{Binding EmployeeSelected.empresa}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <Entry x:Name="Organización" Placeholder="Ingresa tu Organización" Text="{Binding EmployeeSelected.empresa}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                 <Entry  Placeholder="Ingresa tu puesto" Text="{Binding EmployeeSelected.puesto}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                 <Entry  Placeholder="Ingresa tu correo" Text="{Binding EmployeeSelected.email}" TextColor="#0C0C0C" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
             </StackLayout>
 
-            <Button Grid.Row="3" 
+            <Button Grid.Row="3" Margin="0,10" HeightRequest="10"
                     TextColor="WhiteSmoke" 
                     IsVisible="{Binding IsCreate, Converter={x:StaticResource InverseBoolConverter}}"
                     Command="{Binding UpDateEmployeeCommand}"
                     CommandParameter="{Binding EmployeeSelected}"
-                    Text="Actualizar" 
+                    Text="Actualizar usuario" 
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>

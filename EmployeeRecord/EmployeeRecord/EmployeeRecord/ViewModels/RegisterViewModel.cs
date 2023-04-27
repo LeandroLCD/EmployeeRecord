@@ -20,17 +20,11 @@ namespace EmployeeRecord.ViewModels
         {
             GetUserRegister = new UserRegister()
             {
-                nombre = "Pablo",
-                apellidos = "Perez",
-                puesto = "Administrador",
-                creation_date = DateTime.Now,
-                email = "prueba@email.com",
-                VerifieEmail = "prueba@email.com",
-                password = "123456",
-                VerifiePassword = "123456"
+                empresa = "Z Motors",
+                creation_date = DateTime.Now
+               
 
-            }
-                ;
+            };
             InicializeProperties();
         }
 

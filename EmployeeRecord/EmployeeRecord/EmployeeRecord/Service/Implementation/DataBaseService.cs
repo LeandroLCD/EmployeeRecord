@@ -1,5 +1,6 @@
 ﻿using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Proveedor;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Service.Interface;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.Service.Implementation
@@ -586,6 +588,77 @@ namespace EmployeeRecord.Service.Implementation
                 return Task.FromResult(new response
                 {
                     Message = $"Se produjo un error al intentar agregar este nuevo usuario.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> GetProvedorList()
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT *  FROM `proveedor`";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<Proveedor>(reader);
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Cargados",
+                            Objet = data,
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de obtener a los proveedores.\nDetalles:{ex.Message}",
+                    Objet = ex,
+                    Status = ex.GetHashCode(),
+                    Success = false
+                });
+            }
+        }
+
+        public Task<response> InsertProvedor(Proveedor proveedor)
+        {
+            try
+            {
+                if (_connection.State != System.Data.ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = proveedor.ToQuery();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        return Task.FromResult(new response
+                        {
+                            Message = "Datos Registrados Exitosamente",
+                            Status = 200,
+                            Success = true
+                        });
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(new response
+                {
+                    Message = $"Se produjo un error al tratar de registrar al nuevo proveedor.\nDetalles:{ex.Message}",
                     Objet = ex,
                     Status = ex.GetHashCode(),
                     Success = false

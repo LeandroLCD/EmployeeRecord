@@ -1,6 +1,7 @@
 ﻿using EmployeeRecord.Models.Autentication;
 using EmployeeRecord.Models.Company;
 using EmployeeRecord.Models.Employees;
+using EmployeeRecord.Models.Proveedor;
 using EmployeeRecord.Models.Register;
 using EmployeeRecord.Models.Tasks;
 using EmployeeRecord.Utilities;
@@ -24,6 +25,10 @@ namespace EmployeeRecord.Service.Interface
         Task<response> GetCompanyList();
 
         Task<response> InsertCompany(Company company);
+
+        Task<response> GetProvedorList();
+
+        Task<response> InsertProvedor(Proveedor proveedor);
 
         Task<response> InsertRegisterIn(EmployeeRegister employee);
 

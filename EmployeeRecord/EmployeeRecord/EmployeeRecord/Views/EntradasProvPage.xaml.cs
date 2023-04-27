@@ -15,6 +15,8 @@ namespace EmployeeRecord.Views
         public EntradasProvPage()
         {
             InitializeComponent();
+
+            Puesto.Text = "Proveedor";
         }
     }
 }
