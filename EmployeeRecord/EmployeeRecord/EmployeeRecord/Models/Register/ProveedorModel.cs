@@ -28,7 +28,7 @@ namespace EmployeeRecord.Models.Register
             {
                 return $"UPDATE `regis_prov` SET `hora_sali`='{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}',`IsExcited`='1' WHERE id='{id}'";
                  }
-            return $"insert into `regis_prov`(id,provedor,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombreCompleto}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
+            return $"insert into `regis_prov`(id,nombreCompleto,puesto,empresa,motivo,hora_entra,hora_sali,IsExcited) values('{id}','{nombreCompleto}','{puesto}','{empresa}','{motivo}','{hora_entra.ToString("yyyy-MM-dd HH:mm:ss")}','{hora_sali.ToString("yyyy-MM-dd HH:mm:ss")}','0')";
 
         }
 
