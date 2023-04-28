@@ -91,6 +91,7 @@ namespace EmployeeRecord.ViewModels.SearchPage
                     if(list.Count == 0) 
                     {
                         //mensaje no existen datos para fecha de consulta
+                        await App.Current.MainPage.DisplayAlert("Employee Record", "Nose encontro ningun registro con esas fechas", "Ok","Cancelar");
                         return;
                     }
 
@@ -102,6 +103,7 @@ namespace EmployeeRecord.ViewModels.SearchPage
                 else
                 {
                     // notificar error al usuario 
+                    await App.Current.MainPage.DisplayAlert("Employee Record", "Error al buscar los eventos", "Ok", "Cancelar");
                 }
             }
         }

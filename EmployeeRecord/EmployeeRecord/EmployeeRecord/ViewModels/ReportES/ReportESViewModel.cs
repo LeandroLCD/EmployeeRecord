@@ -70,7 +70,7 @@ namespace EmployeeRecord.ViewModels.ReportES
                 await Share.RequestAsync(new ShareFileRequest
 
                 {
-                    Title = "Elegir App para exportar reporte",
+                    Title = "Elegi el App para exportar el reporte",
                     File = new ShareFile(path)
                 });
 
@@ -84,8 +84,8 @@ namespace EmployeeRecord.ViewModels.ReportES
 
                 if (!string.IsNullOrEmpty(txt))
                 {
-                    GetEventsList = new ObservableCollection<RegisterEventModel>(_registerEvents.Where(c => c.nombre.ToLowerInvariant().Contains(txt.ToLowerInvariant())
-                    || c.provedor.ToLowerInvariant().Contains(txt.ToLowerInvariant())
+                    GetEventsList = new ObservableCollection<RegisterEventModel>(_registerEvents.Where(c => c.provedor.ToLowerInvariant().Contains(txt.ToLowerInvariant())
+                    || c.nombre.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.apellidos.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.motivo.ToLowerInvariant().Contains(txt.ToLowerInvariant())
                     || c.empresa.ToLowerInvariant().Contains(txt.ToLowerInvariant())
