@@ -103,7 +103,7 @@ namespace EmployeeRecord.ViewModels.SearchPage
                 else
                 {
                     // notificar error al usuario 
-                    await App.Current.MainPage.DisplayAlert("Employee Record", "Error al buscar los eventos", "Ok", "Cancelar");
+                    await App.Current.MainPage.DisplayAlert("Employee Record", search.Message, "Ok", "Cancelar");
                 }
             }
         }

@@ -126,7 +126,7 @@ namespace EmployeeRecord.Service.Reports
             cellTitle = new Cell(1, 1).Add(new Paragraph()).AddStyle(styleBold);
             BodyTable.AddCell(cellTitle);
 
-            cellTitle = new Cell(1, 1).Add(new Paragraph($"{eventModel.nombre} {eventModel.apellidos}")).AddStyle(styleNormal);
+            cellTitle = new Cell(1, 1).Add(new Paragraph($"{eventModel.nombreCompleto}")).AddStyle(styleNormal);
             BodyTable.AddCell(cellTitle);
 
             cellTitle = new Cell(1, 1).Add(new Paragraph(eventModel.empresa)).AddStyle(styleNormal);

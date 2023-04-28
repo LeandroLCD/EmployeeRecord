@@ -524,13 +524,10 @@ namespace EmployeeRecord.Service.Implementation
                     _connection.Open();
                 using (var cmd = _connection.CreateCommand())
                 {
-                    cmd.CommandText = $@"SELECT `provedor`,`nombre`, `apellidos`, `puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited`
-                                        FROM (
-                                            SELECT `provedor`,`puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_prov`
-                                            UNION ALL
-                                            SELECT `nombre`, `apellidos`, `puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_bita`
-                                        ) as combined_data
-                                        WHERE `hora_entra` BETWEEN '{fecha_ini.Date.ToString("yyyy-MM-dd HH:mm:ss")}' AND '{fecha_fin.Date.ToString("yyyy-MM-dd")} 23:59:59';
+                    cmd.CommandText = $@"SELECT `nombreCompleto`, `puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` 
+FROM ( SELECT `nombreCompleto`, `puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_prov`
+UNION ALL SELECT CONCAT(`nombre`, ' ', `apellidos`) AS `nombreCompleto`, `puesto`, `empresa`, `motivo`, `hora_entra`, `hora_sali`, `IsExcited` FROM `regis_bita` ) 
+as combined_data WHERE `hora_entra` BETWEEN '{fecha_ini.Date.ToString("yyyy-MM-dd HH:mm:ss")}' AND '{fecha_fin.Date.ToString("yyyy-MM-dd")} 23:59:59';
 
                                         ";
                     using (var reader = cmd.ExecuteReader())

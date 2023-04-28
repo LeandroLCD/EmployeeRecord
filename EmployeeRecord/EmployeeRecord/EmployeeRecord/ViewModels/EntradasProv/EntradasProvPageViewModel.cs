@@ -201,7 +201,7 @@ namespace EmployeeRecord.ViewModels.EntradasProv
             var proveedor = new ProveedorModel
             {
                 puesto = Puesto,
-                provedor = ProvedorSelected.provedor,
+                nombreCompleto = ProvedorSelected.provedor,
                 motivo = TaskSelected.name,
                 empresa = CompanySelected.name,
                 hora_entra = DateTime.Now,
