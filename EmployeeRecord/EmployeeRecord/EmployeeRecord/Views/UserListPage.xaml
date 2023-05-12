@@ -56,13 +56,12 @@
             </CollectionView>
 
             <ImageButton 
-                    Source="add_user.pdg"
-                    Grid.Row="2"
                     BackgroundColor="Transparent"
+                    Source="add_user.png"
+                    Grid.Row="2"
                     Command="{Binding CreateCommand}"
-                    WidthRequest="50" 
-                    HeightRequest="50"
-                    Margin="10"
+                    WidthRequest="90" 
+                    HeightRequest="70"
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="EndAndExpand"/>
         </Grid>

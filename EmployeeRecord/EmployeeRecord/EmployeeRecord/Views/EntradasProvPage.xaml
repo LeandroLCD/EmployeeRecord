@@ -17,7 +17,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="20" Padding="20,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="80"></RowDefinition>
             </Grid.RowDefinitions>
@@ -39,25 +39,36 @@
                    Placeholder="Apellido" 
                    HeightRequest="60"
                    TextColor="#0C0C0C" 
-                   HorizontalOptions="FillAndExpand"/>
+                   HorizontalOptions="FillAndExpand" 
+                   VerticalOptions="FillAndExpand"/>
             
-            
-            <Entry Text="{Binding Puesto}"
+            <Entry Grid.Row="4"                   
+                   Text="{Binding Puesto}"
                    Placeholder="Puesto" 
-                   HeightRequest="60"
                    TextColor="#0C0C0C" 
                    HorizontalOptions="FillAndExpand" />
 
-                <StackLayout Orientation="Horizontal">
-                     <Picker Grid.Row="5" 
-                             HeightRequest="60"
+
+            <Picker Grid.Row="5" 
                     ItemsSource="{Binding CompanyList}" 
                     SelectedItem="{Binding CompanySelected}"                     
                     ItemDisplayBinding="{Binding name}"
                     TextColor="#0C0C0C" 
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"/>
-                <Button Grid.Row="5" 
+
+            
+            
+             <Picker Grid.Row="6" 
+                    ItemsSource="{Binding TasksList}" 
+                    SelectedItem="{Binding TaskSelected}" 
+                    ItemDisplayBinding="{Binding name}"
+                    TextColor="#0C0C0C" 
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"></Picker>
+
+            <Button Grid.Row="5" 
+
                     Command="{Binding CreateCompanyCommand}"
                     WidthRequest="40"
                         HeightRequest="60"
@@ -65,18 +76,9 @@
                     Text="+" 
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
-                </StackLayout>
-               
 
-                <StackLayout Orientation="Horizontal">
-                    <Picker ItemsSource="{Binding TasksList}" 
-                    SelectedItem="{Binding TaskSelected}" 
-                    ItemDisplayBinding="{Binding name}"
-                    TextColor="#0C0C0C" 
-                            HeightRequest="60"
-                    HorizontalOptions="FillAndExpand"/>
-
-                    <Button Grid.Row="6" 
+            
+            <Button Grid.Row="6" 
                     Command="{Binding CreateTaskCommand}"
                     WidthRequest="40"
                      HeightRequest="60"
@@ -85,17 +87,11 @@
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"/>
 
-                </StackLayout>
 
-                
-            
-            
-            </StackLayout>
-
-            <Button 
-                    Margin="0,10" HeightRequest="10"
+            <Button Margin="0,10" HeightRequest="10"
                     Command="{Binding RegisterCommand}"
-                    Grid.Row="3"
+                    Grid.Row="7"
+
                     TextColor="WhiteSmoke" 
                     Text="Registrar" 
                     BackgroundColor="#1472FA" CornerRadius="20"/>
