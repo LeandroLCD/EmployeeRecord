@@ -154,6 +154,51 @@ namespace EmployeeRecord.Service.Implementation
         {
             _connection.Close();
         }
-        
+
+        public Task<response> GetUserByEmail(string email)
+        {
+            try
+            {
+                if (_connection.State != ConnectionState.Open)
+                    _connection.Open();
+                using (var cmd = _connection.CreateCommand())
+                {
+                    cmd.CommandText = $"SELECT * FROM `login` WHERE email = '{email}';"; 
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var data = DataReader.MapToList<UserAutentication>(reader);
+                        if (data.Count > 0)
+                        {
+                            return Task.FromResult(new response
+                            {
+                                Success = true,
+                                Status = 200,
+                                Message = $"Email encontrado",
+                                Objet = data.FirstOrDefault(u => u.email == email)
+                            });
+                        }
+                        else
+                        {
+                            return Task.FromResult(new response()
+                            {
+                                Success = false,
+                                Message = $"Usuario no registrado.",
+                                Status = 300
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _connection.Close();
+                return Task.FromResult(new response()
+                {
+                    Success = false,
+                    Message = $"Se produjo una excepción al intentar solicitar datos al sistema \nDetalles:{ex.Message}",
+                    Status = ex.GetHashCode()
+                });
+            }
+        }
     }
 }

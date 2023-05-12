@@ -58,7 +58,7 @@
                 <Picker Title="Motivo"
                         FontSize="Medium"
                         ItemsSource="{Binding TasksList}"
-                        ItemDisplayBinding="{Binding Name}"
+                        ItemDisplayBinding="{Binding name}"
                         SelectedItem="{Binding GetTasks}"
                         HorizontalTextAlignment="Center"/>
 

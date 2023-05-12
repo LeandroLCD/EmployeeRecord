@@ -40,6 +40,7 @@
                     BackgroundColor="#1472FA" 
                     CornerRadius="20"></Button>
 
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

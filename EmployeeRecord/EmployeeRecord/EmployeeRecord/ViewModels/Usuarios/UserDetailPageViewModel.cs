@@ -1,17 +1,10 @@
-﻿using EmployeeRecord.Models.Autentication;
-using EmployeeRecord.Models.Employees;
+﻿using EmployeeRecord.Models.Employees;
 using EmployeeRecord.Service.Interface;
-using EmployeeRecord.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace EmployeeRecord.ViewModels.Usuarios
 {
-    public class UserDetailPageViewModel: BaseViewModel
+    public class UserDetailPageViewModel : BaseViewModel
     {
         #region Fields
         private EmployeeModel _employeeSelected;
@@ -54,7 +47,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
         public bool IsCreate
         {
             get => _isCreate;
-            set=> SetProperty(ref _isCreate, value);
+            set => SetProperty(ref _isCreate, value);
         }
 
         #endregion
@@ -62,6 +55,9 @@ namespace EmployeeRecord.ViewModels.Usuarios
         #region Command
 
         public Command<EmployeeModel> UpDateEmployeeCommand { get; set; }
+
+        //Implementar Crear empleado
+        public Command<EmployeeModel> CreateEmployeeCommand { get; set; }
 
         #endregion
 
@@ -95,7 +91,7 @@ namespace EmployeeRecord.ViewModels.Usuarios
             IsLoading = false;
         }
 
-        
+
 
         #endregion
     }
